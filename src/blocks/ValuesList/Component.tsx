@@ -15,7 +15,7 @@ export const ValuesList = (props: ValuesListProps) => {
           {values &&
             values.map((item, i) => (
               <li key={i} className="flex gap-4 text-muted-foreground items-start">
-                <BadgeCheckIcon className="size-5 shrink-0 mt-1" />
+                <BadgeCheckIcon className="size-5 shrink-0 mt-1 text-accent" />
                 <span className="text-muted-foreground leading-relaxed">{item.value}</span>
               </li>
             ))}

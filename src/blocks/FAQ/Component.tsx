@@ -19,7 +19,7 @@ export const FAQ: React.FC<FAQProps> = ({ heading, items }) => {
           <Accordion type="single" collapsible className="w-full">
             {items.map((faq, i) => (
               <AccordionItem key={i} value={`item-${i}`} className="border-border">
-                <AccordionTrigger className="text-left text-foreground hover:no-underline hover:text-primary transition-colors text-md">
+                <AccordionTrigger className="text-left text-foreground hover:no-underline hover:text-accent transition-colors text-md">
                   {faq.question}
                 </AccordionTrigger>
                 <AccordionContent>

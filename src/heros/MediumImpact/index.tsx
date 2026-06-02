@@ -43,15 +43,8 @@ export const MediumImpactHero: React.FC<Page['hero']> = ({
                   //   <CMSLink {...link} />
                   // </li>
                   <div key={i} className="mt-8">
-                    <Button
-                      asChild
-                      size="lg"
-                      className="rounded-full bg-primary px-8 text-primary-foreground hover:bg-primary/90"
-                    >
-                      <CMSLink
-                        {...link}
-                        className="rounded-full bg-primary px-8 text-primary-foreground hover:bg-primary/90"
-                      />
+                    <Button asChild size="lg" className="rounded-full px-8">
+                      <CMSLink {...link} className="" />
                     </Button>
                   </div>
                 )

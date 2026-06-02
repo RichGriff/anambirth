@@ -47,7 +47,7 @@ export const OfferingSummary: React.FC<OfferingSummaryProps> = ({
                   <h3 className="font-(family-name:--font-cormorant) text-2xl font-light text-foreground">
                     {item.title}
                   </h3>
-                  <p className="mt-1 text-sm italic text-primary">{item.subtitle}</p>
+                  <p className="mt-1 text-sm italic text-accent">{item.subtitle}</p>
                 </div>
                 <p className="text-muted-foreground leading-relaxed">{item.description}</p>
                 <div className="mt-6 flex items-center justify-between">
@@ -55,12 +55,7 @@ export const OfferingSummary: React.FC<OfferingSummaryProps> = ({
                     From £{item.priceFrom}
                   </span>
                   {item.links?.[0]?.link && (
-                    <Button
-                      asChild
-                      variant="ghost"
-                      size="sm"
-                      className="text-primary hover:text-primary/80 hover:bg-background"
-                    >
+                    <Button asChild variant="link" size="sm" className="">
                       <Link href={getHref(item.links[0].link)}>
                         Learn more
                         <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-1" />

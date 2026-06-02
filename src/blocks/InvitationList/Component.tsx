@@ -12,7 +12,7 @@ export const InvitationList: React.FC<InvitationListProps> = ({ title, items }) 
           {items &&
             items.map((item, i) => (
               <li key={i} className="flex gap-4 text-muted-foreground">
-                <span className="mt-1.5 h-2 w-2 shrink-0 rounded-full bg-primary/40" />
+                <span className="mt-1.5 h-2 w-2 shrink-0 rounded-full bg-accent" />
                 <span className="leading-relaxed">{item.text}</span>
               </li>
             ))}

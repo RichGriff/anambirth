@@ -15,16 +15,20 @@ export const HeaderNav: React.FC<{ data: HeaderType }> = ({ data }) => {
   return (
     <nav className="flex gap-6 items-center">
       {navItems.map(({ link }, i) => {
-        return <CMSLink key={i} {...link} appearance="link" className="hover:no-underline" />
+        return (
+          <CMSLink
+            key={i}
+            {...link}
+            appearance="link"
+            className="hover:no-underline text-primary/80 hover:text-primary transition-colors"
+          />
+        )
       })}
       {/* <Link href="/search">
         <span className="sr-only">Search</span>
         <SearchIcon className="w-5 text-primary" />
       </Link> */}
-      <Button
-        asChild
-        className="bg-accent hover:bg-accent/90 text-accent-foreground rounded-full px-6"
-      >
+      <Button asChild className="rounded-full px-6 transition-colors">
         <Link href="/#connection">Connection Call</Link>
       </Button>
     </nav>

@@ -18,7 +18,7 @@ export const CallToAction: React.FC<CallToActionProps> = ({ heading, description
           {!!links?.length && (
             <div className="mt-10 flex items-center justify-center gap-x-6">
               {links.map(({ link }, i) => (
-                <CMSLink key={i} size="lg" className="w-full sm:w-auto" {...link} />
+                <CMSLink key={i} size="lg" className="w-full sm:w-auto rounded-full" {...link} />
               ))}
             </div>
           )}

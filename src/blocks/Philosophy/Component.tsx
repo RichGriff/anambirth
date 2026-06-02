@@ -20,8 +20,8 @@ export const Philosophy: React.FC<PhilosophyProps> = ({ heading, subtitle, links
             <p className="mx-auto mt-6 max-w-2xl text-lg text-muted-foreground">{subtitle}</p>
           )}
           {aboutLink && (
-            <div className="mt-8">
-              <Button asChild variant="outline">
+            <div className="mt-8 group">
+              <Button asChild variant="link">
                 <Link
                   href={
                     aboutLink.type === 'custom'
@@ -33,7 +33,8 @@ export const Philosophy: React.FC<PhilosophyProps> = ({ heading, subtitle, links
                         : ''
                   }
                 >
-                  {aboutLink.label || 'Read More'} <ArrowRight className="ml-2 h-4 w-4" />
+                  {aboutLink.label || 'Read More'}{' '}
+                  <ArrowRight className=" h-4 w-4 group-hover:translate-x-1 transition-transform" />
                 </Link>
               </Button>
             </div>
@@ -43,7 +44,7 @@ export const Philosophy: React.FC<PhilosophyProps> = ({ heading, subtitle, links
         {/* Principles List */}
         {principles && principles.length > 0 && (
           <div className="mt-16">
-            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
               {principles.map((principle, index) => (
                 <div key={index} className="relative p-2 flex flex-col items-start justify-start">
                   {principle.image && (
@@ -55,11 +56,11 @@ export const Philosophy: React.FC<PhilosophyProps> = ({ heading, subtitle, links
                       />
                     </div>
                   )}
-                  <h3 className="font-(family-name:--font-cormorant) text-2xl font-light text-foreground mb-3">
+                  <h3 className="font-(family-name:--font-cormorant) text-3xl font-light text-foreground mb-3">
                     {principle.title}
                   </h3>
                   {principle.description && (
-                    <p className="text-sm text-muted-foreground leading-relaxed">
+                    <p className="text-base text-muted-foreground leading-relaxed">
                       {principle.description}
                     </p>
                   )}

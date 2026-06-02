@@ -17,7 +17,7 @@ export const IncludedItems: React.FC<IncludedItemsProps> = ({ title, items }) =>
                 {(() => {
                   const Icon = includedItemIcons[item.icon ?? defaultIncludedItemIcon]
 
-                  return <Icon className="mt-0.5 h-5 w-5 shrink-0 text-primary/60" />
+                  return <Icon className="mt-0.5 h-5 w-5 shrink-0 text-accent" />
                 })()}
                 <span className="text-muted-foreground leading-relaxed">{item.text}</span>
               </li>
