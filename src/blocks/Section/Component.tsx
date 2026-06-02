@@ -21,8 +21,8 @@ export const Section = (props: SectionProps) => {
   const resolvedColumns = columns ?? legacy.column
 
   const bgColorVariants = {
-    primary: 'bg-background dark:bg-background text-black dark:text-white',
-    secondary: 'bg-blue-50 dark:bg-blue-950 text-blue-950 dark:text-blue-200',
+    primary: 'bg-background text-black',
+    secondary: 'bg-blue-50 text-blue-950',
     black: 'bg-gray-800 text-gray-50',
     white: 'bg-secondary text-gray-950',
   }
