@@ -1,5 +1,9 @@
 /** @type {import('tailwindcss').Config} */
 const config = {
+  content: [
+    './src/**/*.{js,ts,jsx,tsx,mdx}',
+    './node_modules/@payloadcms/**/*.{js,ts,jsx,tsx}', // add this
+  ],
   theme: {
     extend: {
       typography: {

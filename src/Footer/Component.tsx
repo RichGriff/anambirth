@@ -12,7 +12,7 @@ export async function Footer() {
   const navItems = footerData?.navItems || []
 
   return (
-    <footer className="mt-auto border-t border-border bg-background dark:bg-card text-black">
+    <footer className="mt-auto border-t border-border bg-background text-black">
       <div className="container py-8 gap-8 flex flex-col md:flex-row md:justify-between">
         <p className="text-sm text-muted-foreground">© 2026 All rights reserved.</p>
         {/* <Link className="flex items-center" href="/">
