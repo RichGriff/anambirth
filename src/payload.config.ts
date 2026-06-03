@@ -32,6 +32,7 @@ import { CallToAction } from './blocks/CallToAction/config'
 import { OfferingSummary } from './blocks/OfferingSummary/config'
 import { TestimonialsBlock } from './blocks/TestimonialsBlock/config'
 import { Philosophy } from './blocks/Philosophy/config'
+import { Settings } from './Settings/config'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -41,10 +42,14 @@ export default buildConfig({
     components: {
       // The `BeforeLogin` component renders a message that you see while logging into your admin panel.
       // Feel free to delete this at any time. Simply remove the line below.
-      beforeLogin: ['@/components/BeforeLogin'],
+      // beforeLogin: ['@/components/BeforeLogin'],
       // The `BeforeDashboard` component renders the 'welcome' block that you see after logging into your admin panel.
       // Feel free to delete this at any time. Simply remove the line below.
-      beforeDashboard: ['@/components/BeforeDashboard'],
+      // beforeDashboard: ['@/components/BeforeDashboard'],
+      graphics: {
+        Logo: '/graphics/Logo/index.tsx#Logos',
+        Icon: '/graphics/Icon/index.tsx#Icons',
+      },
     },
     importMap: {
       baseDir: path.resolve(dirname),
@@ -100,7 +105,7 @@ export default buildConfig({
     Philosophy,
   ],
   cors: [getServerSideURL()].filter(Boolean),
-  globals: [Header, Footer],
+  globals: [Header, Footer, Settings],
   plugins,
   secret: process.env.PAYLOAD_SECRET,
   sharp,
