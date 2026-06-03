@@ -44,9 +44,12 @@ export const Philosophy: React.FC<PhilosophyProps> = ({ heading, subtitle, links
         {/* Principles List */}
         {principles && principles.length > 0 && (
           <div className="mt-16">
-            <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+            <div className="grid gap-8 grid-cols-2 lg:grid-cols-3">
               {principles.map((principle, index) => (
-                <div key={index} className="relative p-2 flex flex-col items-start justify-start">
+                <div
+                  key={index}
+                  className="relative p-2 flex flex-col sm:items-start sm:justify-start"
+                >
                   {principle.image && (
                     <div className="w-16 h-16 mb-4">
                       <Media

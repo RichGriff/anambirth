@@ -15,7 +15,7 @@ export const FAQ: React.FC<FAQProps> = ({ heading, items }) => {
           Common Questions
         </h2>
 
-        <div>
+        <div className="px-3">
           <Accordion type="single" collapsible className="w-full">
             {items.map((faq, i) => (
               <AccordionItem key={i} value={`item-${i}`} className="border-border">

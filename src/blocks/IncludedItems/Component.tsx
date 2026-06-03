@@ -5,7 +5,7 @@ import { defaultIncludedItemIcon, includedItemIcons } from './icons'
 export const IncludedItems: React.FC<IncludedItemsProps> = ({ title, items }) => {
   return (
     <div className="container">
-      <div className="rounded-2xl bg-card p-8 md:p-12">
+      <div className="rounded-2xl bg-card p-8 my-4 md:p-12">
         <h3 className="mb-8 font-(family-name:--font-cormorant) text-2xl font-medium text-foreground md:text-3xl">
           {title}
         </h3>

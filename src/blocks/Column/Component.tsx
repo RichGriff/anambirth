@@ -17,7 +17,7 @@ export const Column = (props: ColumnProps) => {
 
   return (
     <div
-      className={`flex w-full flex-col basis-full ${basisVariant[columnWidth]} p-4 my-4 lg:my-3`}
+      className={`flex w-full flex-col basis-full ${basisVariant[columnWidth]} px-4 sm:px-4 my-2 sm:my-4 lg:my-3`}
     >
       <RenderBlocks blocks={content} />
     </div>

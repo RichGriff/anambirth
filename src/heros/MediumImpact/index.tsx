@@ -16,7 +16,7 @@ export const MediumImpactHero: React.FC<Page['hero']> = ({
 }) => {
   return (
     <div className="container">
-      <div className="grid grid-cols-2 gap-8 md:gap-16 mb-12 justify-center items-center">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 md:gap-16 mb-12 justify-center items-center">
         <div className="mb-8">
           {eyebrowHeading && (
             <div className="mb-4 text-sm uppercase tracking-[0.3em] text-muted-foreground">
@@ -58,7 +58,7 @@ export const MediumImpactHero: React.FC<Page['hero']> = ({
               <Media
                 className=""
                 // imgClassName="object-cover object-middle h-[300px] md:h-[400px] 2xl:h-[500px] rounded-t-4xl"
-                imgClassName="object-cover object-middle h-[600px] rounded-3xl z-10"
+                imgClassName="object-cover object-middle h-[300px] sm:h-[600px] rounded-3xl z-10"
                 priority
                 resource={media}
               />
