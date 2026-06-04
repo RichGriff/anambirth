@@ -38,6 +38,28 @@ export const FormBlock: Block = {
       },
       label: 'Intro Heading',
     },
+    {
+      name: 'introDescription',
+      type: 'text',
+      admin: {
+        condition: (_, { enableIntro }) => Boolean(enableIntro),
+      },
+      label: 'Intro Description',
+    },
+    {
+      name: 'introList',
+      type: 'array',
+      fields: [
+        {
+          name: 'item',
+          type: 'text',
+        },
+      ],
+      admin: {
+        condition: (_, { enableIntro }) => Boolean(enableIntro),
+      },
+      label: 'Intro List',
+    },
     // {
     //   name: 'introContent',
     //   type: 'richText',

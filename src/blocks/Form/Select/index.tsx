@@ -9,22 +9,38 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
+import { cn } from '@/utilities/ui'
 import React from 'react'
 import { Controller } from 'react-hook-form'
 
 import { Error } from '../Error'
+import type { FormFieldStyleProps } from '../fields'
 import { Width } from '../Width'
 
 export const Select: React.FC<
   SelectField & {
     control: Control
     errors: Partial<FieldErrorsImpl>
-  }
-> = ({ name, control, errors, label, options, required, width, defaultValue }) => {
+  } & FormFieldStyleProps
+> = ({
+  name,
+  control,
+  errors,
+  label,
+  options,
+  required,
+  width,
+  defaultValue,
+  fieldBgClassName,
+  fieldLabelClassName,
+}) => {
   return (
     <Width width={width}>
       <Label
-        className="mb-2 block text-[0.72rem] font-medium uppercase tracking-[0.18em] text-muted-foreground"
+        className={cn(
+          'mb-2 block text-[0.72rem] font-medium uppercase tracking-[0.18em] text-muted-foreground',
+          fieldLabelClassName,
+        )}
         htmlFor={name}
       >
         {label}
@@ -45,7 +61,10 @@ export const Select: React.FC<
             <SelectComponent onValueChange={(val) => onChange(val)} value={controlledValue?.value}>
               <SelectTrigger
                 aria-invalid={Boolean(errors[name])}
-                className="h-12 w-full rounded-lg border-border/70 bg-background/70 px-4 text-sm shadow-none"
+                className={cn(
+                  'h-12 w-full rounded-lg border-border/70 px-4 text-sm shadow-none',
+                  fieldBgClassName || 'bg-background/70',
+                )}
                 id={name}
               >
                 <SelectValue placeholder={'Select an option'} />

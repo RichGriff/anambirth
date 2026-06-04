@@ -8,6 +8,11 @@ import { State } from './State'
 import { Text } from './Text'
 import { Textarea } from './Textarea'
 
+export type FormFieldStyleProps = {
+  fieldBgClassName?: string
+  fieldLabelClassName?: string
+}
+
 export const fields = {
   checkbox: Checkbox,
   country: Country,

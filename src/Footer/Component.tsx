@@ -14,7 +14,7 @@ export async function Footer() {
   const legalLinks = footerData?.legalLinks || []
 
   return (
-    <footer className="mt-auto border-t border-border bg-[#062225] text-foreground-light px-4">
+    <footer className="mt-auto bg-[#062225] text-foreground-light px-4">
       <div className="container py-16 grid gap-8 grid-cols-2 md:grid-cols-12 md:gap-6">
         {/* Footer Logo */}
         <Link className="hidden sm:flex items-start md:col-span-3" href="/">

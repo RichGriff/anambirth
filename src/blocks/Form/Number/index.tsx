@@ -3,20 +3,35 @@ import type { FieldErrorsImpl, FieldValues, UseFormRegister } from 'react-hook-f
 
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
+import { cn } from '@/utilities/ui'
 import React from 'react'
 
 import { Error } from '../Error'
+import type { FormFieldStyleProps } from '../fields'
 import { Width } from '../Width'
 export const Number: React.FC<
   TextField & {
     errors: Partial<FieldErrorsImpl>
     register: UseFormRegister<FieldValues>
-  }
-> = ({ name, defaultValue, errors, label, register, required, width }) => {
+  } & FormFieldStyleProps
+> = ({
+  name,
+  defaultValue,
+  errors,
+  label,
+  register,
+  required,
+  width,
+  fieldBgClassName,
+  fieldLabelClassName,
+}) => {
   return (
     <Width width={width}>
       <Label
-        className="mb-2 block text-[0.72rem] font-medium uppercase tracking-[0.18em] text-muted-foreground"
+        className={cn(
+          'mb-2 block text-[0.72rem] font-medium uppercase tracking-[0.18em] text-muted-foreground',
+          fieldLabelClassName,
+        )}
         htmlFor={name}
       >
         {label}
@@ -29,7 +44,10 @@ export const Number: React.FC<
       </Label>
       <Input
         aria-invalid={Boolean(errors[name])}
-        className="h-12 rounded-xl border-border/70 bg-background/70 px-4 shadow-none"
+        className={cn(
+          'h-12 rounded-xl border-border/70 px-4 shadow-none',
+          fieldBgClassName || 'bg-background/70',
+        )}
         defaultValue={defaultValue}
         id={name}
         type="number"

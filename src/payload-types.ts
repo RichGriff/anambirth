@@ -780,6 +780,13 @@ export interface FormBlock {
   enableIntro?: boolean | null;
   introEyebrowHeading?: string | null;
   introHeading?: string | null;
+  introDescription?: string | null;
+  introList?:
+    | {
+        item?: string | null;
+        id?: string | null;
+      }[]
+    | null;
   id?: string | null;
   blockName?: string | null;
   blockType: 'formBlock';
@@ -1508,6 +1515,13 @@ export interface FormBlockSelect<T extends boolean = true> {
   enableIntro?: T;
   introEyebrowHeading?: T;
   introHeading?: T;
+  introDescription?: T;
+  introList?:
+    | T
+    | {
+        item?: T;
+        id?: T;
+      };
   id?: T;
   blockName?: T;
 }

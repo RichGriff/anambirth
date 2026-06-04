@@ -3,9 +3,11 @@ import type { FieldErrorsImpl, FieldValues, UseFormRegister } from 'react-hook-f
 
 import { Label } from '@/components/ui/label'
 import { Textarea as TextAreaComponent } from '@/components/ui/textarea'
+import { cn } from '@/utilities/ui'
 import React from 'react'
 
 import { Error } from '../Error'
+import type { FormFieldStyleProps } from '../fields'
 import { Width } from '../Width'
 
 export const Textarea: React.FC<
@@ -14,12 +16,27 @@ export const Textarea: React.FC<
     register: UseFormRegister<FieldValues>
     rows?: number
     placeholder?: string
-  }
-> = ({ name, defaultValue, errors, label, placeholder, register, required, rows = 3, width }) => {
+  } & FormFieldStyleProps
+> = ({
+  name,
+  defaultValue,
+  errors,
+  label,
+  placeholder,
+  register,
+  required,
+  rows = 3,
+  width,
+  fieldBgClassName,
+  fieldLabelClassName,
+}) => {
   return (
     <Width width={width}>
       <Label
-        className="mb-2 block text-[0.72rem] font-medium uppercase tracking-[0.18em] text-muted-foreground"
+        className={cn(
+          'mb-2 block text-[0.72rem] font-medium uppercase tracking-[0.18em] text-muted-foreground',
+          fieldLabelClassName,
+        )}
         htmlFor={name}
       >
         {label}
@@ -33,7 +50,10 @@ export const Textarea: React.FC<
 
       <TextAreaComponent
         aria-invalid={Boolean(errors[name])}
-        className="min-h-32 rounded-lg border-border/70 bg-background/70 px-4 py-3 shadow-none"
+        className={cn(
+          'min-h-32 rounded-lg border-border/70 px-4 py-3 shadow-none',
+          fieldBgClassName || 'bg-background/70',
+        )}
         defaultValue={defaultValue}
         id={name}
         placeholder={placeholder}
