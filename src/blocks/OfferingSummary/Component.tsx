@@ -4,6 +4,7 @@ import { ArrowRight } from 'lucide-react'
 
 import type { OfferingSummary as OfferingSummaryProps } from '@/payload-types'
 import { Button } from '@/components/ui/button'
+import { InViewFade, StaggerInView, StaggerItem } from '@/components/animations/InView'
 
 type OfferingSummaryLink = NonNullable<
   NonNullable<OfferingSummaryProps['items']>[number]['links']
@@ -30,16 +31,18 @@ export const OfferingSummary: React.FC<OfferingSummaryProps> = ({
     <section className="px-6 py-24 bg-[#F6F3EC]">
       <div className="mx-auto max-w-5xl">
         <div className="text-center">
-          <h2 className="font-(family-name:--font-cormorant) text-3xl font-light md:text-4xl text-foreground">
-            {heading}
-          </h2>
-          <p className="mx-auto mt-4 max-w-2xl text-muted-foreground">{description}</p>
+          <InViewFade>
+            <h2 className="font-(family-name:--font-cormorant) text-3xl font-light md:text-4xl text-foreground">
+              {heading}
+            </h2>
+            <p className="mx-auto mt-4 max-w-2xl text-muted-foreground">{description}</p>
+          </InViewFade>
         </div>
 
         {items && (
-          <div className="mt-16 grid gap-8 md:grid-cols-2">
+          <StaggerInView staggerChildren={0.12} className="mt-16 grid gap-8 md:grid-cols-2">
             {items.map((item, index) => (
-              <div
+              <StaggerItem
                 key={index}
                 className="group relative overflow-hidden rounded-2xl border border-border/50 bg-card p-8 transition-all hover:border-primary/30"
               >
@@ -63,9 +66,9 @@ export const OfferingSummary: React.FC<OfferingSummaryProps> = ({
                     </Button>
                   )}
                 </div>
-              </div>
+              </StaggerItem>
             ))}
-          </div>
+          </StaggerInView>
         )}
       </div>
     </section>

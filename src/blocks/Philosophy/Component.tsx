@@ -4,6 +4,7 @@ import { ArrowRight } from 'lucide-react'
 import type { Philosophy as PhilosophyProps } from '@/payload-types'
 import { Button } from '@/components/ui/button'
 import { Media } from '@/components/Media'
+import { InViewFade } from '@/components/animations/InView'
 
 export const Philosophy: React.FC<PhilosophyProps> = ({ heading, subtitle, links, principles }) => {
   const aboutLink = links?.[0]?.link
@@ -12,7 +13,7 @@ export const Philosophy: React.FC<PhilosophyProps> = ({ heading, subtitle, links
     <section className="px-6 py-24 bg-[#FCF9F2]">
       <div className="mx-auto max-w-5xl">
         {/* Header */}
-        <div className="mb-16 text-center">
+        <InViewFade className="mb-16 text-center">
           <h2 className="font-(family-name:--font-cormorant) text-4xl font-light md:text-5xl text-foreground">
             {heading}
           </h2>
@@ -34,24 +35,25 @@ export const Philosophy: React.FC<PhilosophyProps> = ({ heading, subtitle, links
                   }
                 >
                   {aboutLink.label || 'Read More'}{' '}
-                  <ArrowRight className=" h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                  <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                 </Link>
               </Button>
             </div>
           )}
-        </div>
+        </InViewFade>
 
-        {/* Principles List */}
-        {principles && principles.length > 0 && (
+        {Array.isArray(principles) && principles.length > 0 && (
           <div className="mt-16">
             <div className="grid gap-8 grid-cols-2 lg:grid-cols-3">
               {principles.map((principle, index) => (
-                <div
+                <InViewFade
                   key={index}
-                  className="relative p-2 flex flex-col sm:items-start sm:justify-start"
+                  delay={(index % 3) * 0.04}
+                  amount={0.7}
+                  className="relative flex flex-col p-2 sm:items-start sm:justify-start"
                 >
                   {principle.image && (
-                    <div className="w-16 h-16 mb-4">
+                    <div className="mb-4 h-16 w-16">
                       <Media
                         resource={principle.image}
                         fill
@@ -59,15 +61,15 @@ export const Philosophy: React.FC<PhilosophyProps> = ({ heading, subtitle, links
                       />
                     </div>
                   )}
-                  <h3 className="font-(family-name:--font-cormorant) text-3xl font-light text-foreground mb-3">
+                  <h3 className="mb-3 font-(family-name:--font-cormorant) text-3xl font-light text-foreground">
                     {principle.title}
                   </h3>
                   {principle.description && (
-                    <p className="text-base text-muted-foreground leading-relaxed">
+                    <p className="text-base leading-relaxed text-muted-foreground">
                       {principle.description}
                     </p>
                   )}
-                </div>
+                </InViewFade>
               ))}
             </div>
           </div>

@@ -1,4 +1,5 @@
 import { Media } from '@/components/Media'
+import { InViewFade, StaggerInView, StaggerItem } from '@/components/animations/InView'
 import type { TestimonialBlock as TestimonialsBlockProps } from '@/payload-types'
 import { isPopulatedRelationship } from '@/utilities/isPopulatedRelationship'
 import { User2Icon } from 'lucide-react'
@@ -10,17 +11,17 @@ export const TestimonialsBlock = (props: TestimonialsBlockProps) => {
   return (
     <section className="bg-secondary px-6 py-24">
       <div className="mx-auto max-w-5xl">
-        <div className="text-center">
+        <InViewFade className="text-center">
           <h2 className="font-(family-name:--font-cormorant) text-3xl font-light md:text-4xl text-foreground">
             {heading}
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-muted-foreground italic">{description}</p>
-        </div>
+        </InViewFade>
 
         {selectedTestimonials.length > 0 && (
-          <div className="mt-16 grid gap-8 md:grid-cols-3">
+          <StaggerInView className="mt-16 grid gap-8 md:grid-cols-3" staggerChildren={0.12}>
             {selectedTestimonials.map((testimonial, index) => (
-              <div key={index} className="relative rounded-2xl bg-background p-8">
+              <StaggerItem key={index} className="relative rounded-2xl bg-background p-8">
                 <blockquote className="relative">
                   <p className="text-muted-foreground leading-relaxed italic">
                     &ldquo;{testimonial.quote}&rdquo;
@@ -44,9 +45,9 @@ export const TestimonialsBlock = (props: TestimonialsBlockProps) => {
                     </div>
                   </footer>
                 </blockquote>
-              </div>
+              </StaggerItem>
             ))}
-          </div>
+          </StaggerInView>
         )}
       </div>
     </section>
