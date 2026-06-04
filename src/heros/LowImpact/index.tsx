@@ -11,7 +11,7 @@ export const LowImpactHero: React.FC<Page['hero']> = ({
   links,
 }) => {
   return (
-    <div className="container w-full flex flex-col justify-center items-center text-center min-h-[calc(100svh-14rem)]">
+    <div className="container w-full flex flex-col justify-center items-center text-center min-h-[calc(100svh-24rem)]">
       <div className="max-w-3xl">
         {eyebrowHeading && (
           <div className="mb-4 text-sm uppercase tracking-[0.3em] text-muted-foreground">

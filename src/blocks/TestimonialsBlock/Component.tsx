@@ -9,7 +9,7 @@ export const TestimonialsBlock = (props: TestimonialsBlockProps) => {
   const selectedTestimonials = (testimonials || []).filter(isPopulatedRelationship)
 
   return (
-    <section className="bg-secondary px-6 py-24">
+    <section className="bg-[#FCF9F2] px-6 py-24">
       <div className="mx-auto max-w-5xl">
         <InViewFade className="text-center">
           <h2 className="font-(family-name:--font-cormorant) text-3xl font-light md:text-4xl text-foreground">
@@ -21,7 +21,7 @@ export const TestimonialsBlock = (props: TestimonialsBlockProps) => {
         {selectedTestimonials.length > 0 && (
           <StaggerInView className="mt-16 grid gap-8 md:grid-cols-3" staggerChildren={0.12}>
             {selectedTestimonials.map((testimonial, index) => (
-              <StaggerItem key={index} className="relative rounded-2xl bg-background p-8">
+              <StaggerItem key={index} className="relative rounded-2xl bg-card p-8">
                 <blockquote className="relative">
                   <p className="text-muted-foreground leading-relaxed italic">
                     &ldquo;{testimonial.quote}&rdquo;
