@@ -3,7 +3,15 @@ import { Column } from '../Column/Component'
 
 type LegacySectionShape = {
   column?: SectionProps extends { column?: infer T } ? T : never
-  bg?: 'bg-primary' | 'bg-secondary' | 'bg-black' | 'bg-white' | null
+  bg?:
+    | 'bg-primary'
+    | 'bg-secondary'
+    | 'bg-black'
+    | 'bg-white'
+    | 'bg-light'
+    | 'bg-lighter'
+    | 'bg-dark'
+    | null
 }
 
 type SectionShape = SectionProps & {
@@ -12,7 +20,15 @@ type SectionShape = SectionProps & {
     : SectionProps extends { column?: infer U }
       ? U
       : never
-  backgroundColor?: 'primary' | 'secondary' | 'black' | 'white' | null
+  backgroundColor?:
+    | 'primary'
+    | 'secondary'
+    | 'black'
+    | 'white'
+    | 'light'
+    | 'lighter'
+    | 'dark'
+    | null
 }
 
 export const Section = (props: SectionProps) => {
@@ -25,6 +41,9 @@ export const Section = (props: SectionProps) => {
     secondary: 'bg-blue-50 text-blue-950',
     black: 'bg-gray-800 text-gray-50',
     white: 'bg-secondary text-gray-950',
+    light: 'bg-[#F6F3EC] text-primary',
+    lighter: 'bg-[#FCF9F2] text-primary',
+    dark: 'bg-primary text-foreground-light',
   }
 
   const legacyBg = legacy.bg ? legacy.bg.replace('bg-', '') : undefined
@@ -32,7 +51,7 @@ export const Section = (props: SectionProps) => {
     backgroundColor ?? (legacyBg as keyof typeof bgColorVariants | undefined) ?? 'white'
 
   return (
-    <section className={`${bgColorVariants[resolvedBackground]} py-8`}>
+    <section className={`${bgColorVariants[resolvedBackground]} py-16`}>
       <div className="container">
         <div className="-mx-4 flex flex-wrap items-start lg:px-8">
           {resolvedColumns?.map((column) => (

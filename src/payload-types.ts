@@ -566,7 +566,7 @@ export interface Page {
          * Add one or more columns, then choose each column width and its content blocks.
          */
         column: Column[];
-        bg: 'bg-primary' | 'bg-secondary' | 'bg-black' | 'bg-white';
+        bg: 'bg-primary' | 'bg-secondary' | 'bg-black' | 'bg-light' | 'bg-lighter' | 'bg-dark' | 'bg-white';
         showDivider?: boolean | null;
         id?: string | null;
         blockName?: string | null;
@@ -990,7 +990,7 @@ export interface Section {
    * Add one or more columns, then choose each column width and its content blocks.
    */
   column: Column[];
-  bg: 'bg-primary' | 'bg-secondary' | 'bg-black' | 'bg-white';
+  bg: 'bg-primary' | 'bg-secondary' | 'bg-black' | 'bg-light' | 'bg-lighter' | 'bg-dark' | 'bg-white';
   showDivider?: boolean | null;
   id?: string | null;
   blockName?: string | null;

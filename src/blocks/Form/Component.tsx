@@ -126,7 +126,10 @@ export const FormBlock: React.FC<
   )
 
   return (
-    <div className="bg-primary py-16 bg-[radial-gradient(120%_120%_at_100%_100%,color-mix(in_oklab,var(--color-accent)_20%,transparent)_0%,transparent_58%)] md:bg-[radial-gradient(120%_120%_at_100%_0%,color-mix(in_oklab,var(--color-accent)_40%,transparent)_0%,transparent_58%)]">
+    <div
+      id="connection"
+      className="bg-primary py-16 bg-[radial-gradient(120%_120%_at_100%_100%,color-mix(in_oklab,var(--color-accent)_20%,transparent)_0%,transparent_58%)] md:bg-[radial-gradient(120%_120%_at_100%_0%,color-mix(in_oklab,var(--color-accent)_40%,transparent)_0%,transparent_58%)]"
+    >
       <div className="grid grid-cols-1 px-3 md:grid-cols-2 gap-16 items-center max-w-7xl mx-auto py-6 md:py-16 text-white">
         {enableIntro && (introEyebrowHeading || introHeading) && !hasSubmitted && (
           <div className="px-4">

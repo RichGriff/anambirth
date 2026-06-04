@@ -6,13 +6,13 @@ import { CMSLink } from '@/components/Link'
 
 export const CallToAction: React.FC<CallToActionProps> = ({ heading, description, links }) => {
   return (
-    <div className="relative isolate overflow-hidden bg-background">
+    <div className="relative isolate overflow-hidden">
       <div className="px-6 py-24 sm:py-32 lg:px-8">
         <div className="mx-auto max-w-2xl text-center">
-          <h2 className="font-(family-name:--font-cormorant) text-4xl font-light leading-tight tracking-tight md:text-5xl lg:text-5xl text-foreground text-balance">
+          <h2 className="font-(family-name:--font-cormorant) text-4xl font-light leading-tight tracking-tight md:text-5xl lg:text-5xl text-balance">
             {heading}
           </h2>
-          <p className="mt-6 text-lg leading-relaxed text-muted-foreground md:text-xl lg:mx-0 mx-auto w-full">
+          <p className="mt-6 text-lg leading-relaxed opacity-50 md:text-xl lg:mx-0 mx-auto w-full">
             {description}
           </p>
           {!!links?.length && (
