@@ -1,9 +1,12 @@
 declare global {
   namespace NodeJS {
     interface ProcessEnv {
+      ALLOW_INDEXING?: 'true' | 'false'
+      APP_ENV?: 'production' | 'staging' | 'development'
       PAYLOAD_SECRET: string
       DATABASE_URL: string
       NEXT_PUBLIC_SERVER_URL: string
+      VERCEL_ENV?: 'production' | 'preview' | 'development'
       VERCEL_PROJECT_PRODUCTION_URL: string
     }
   }

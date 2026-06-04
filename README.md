@@ -2,6 +2,75 @@
 
 This is the official [Payload Website Template](https://github.com/payloadcms/payload/blob/3.x/templates/website). Use it to power websites, blogs, or portfolios from small to enterprise. This repo includes a fully-working backend, enterprise-grade admin panel, and a beautifully designed, production-ready website.
 
+## What this app is
+
+This project is a Payload CMS website running on Next.js. It includes:
+
+- a public website
+- a Payload admin area for managing content
+- draft and live preview support
+- SEO, redirects, and search features
+
+In practice, you run one app and get both the website and the CMS admin together.
+
+## Quick run guide
+
+To run the app locally:
+
+1. Copy the example environment file:
+
+```bash
+cp .env.example .env
+```
+
+1. Update the values in `.env`, especially:
+
+- `DATABASE_URL`
+- `PAYLOAD_SECRET`
+- `PREVIEW_SECRET`
+- `CRON_SECRET`
+- `NEXT_PUBLIC_SERVER_URL`
+
+1. Install dependencies:
+
+```bash
+pnpm install
+```
+
+1. Start the app:
+
+```bash
+pnpm dev
+```
+
+1. Open `http://localhost:3000`
+
+The admin area is served from `/admin` on the same app.
+
+## Coolify staging and production
+
+If you deploy this repo to two separate Coolify apps, use explicit environment variables so only production can be indexed by search engines.
+
+Production app:
+
+- `APP_ENV=production`
+- `ALLOW_INDEXING=true`
+- `NEXT_PUBLIC_SERVER_URL=https://your-production-domain.com`
+
+Staging app:
+
+- `APP_ENV=staging`
+- `ALLOW_INDEXING=false`
+- `NEXT_PUBLIC_SERVER_URL=https://your-staging-domain.com`
+
+When indexing is disabled, the app:
+
+- serves a `robots.txt` policy that blocks all crawling
+- omits sitemap references for that environment
+- sends an `X-Robots-Tag: noindex, nofollow, noarchive` header on responses
+
+This means staging can still be reached directly by people who know the URL, but search engines should not index it.
+
 This template is right for you if you are working on:
 
 - A personal or enterprise-grade website, blog, or portfolio

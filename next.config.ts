@@ -11,6 +11,14 @@ const NEXT_PUBLIC_SERVER_URL = process.env.VERCEL_PROJECT_PRODUCTION_URL
   ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
   : process.env.__NEXT_PRIVATE_ORIGIN || 'http://localhost:3000'
 
+const allowIndexing = process.env.ALLOW_INDEXING
+const isProductionDeployment =
+  allowIndexing === 'true'
+    ? true
+    : allowIndexing === 'false'
+      ? false
+      : process.env.APP_ENV === 'production' || process.env.VERCEL_ENV === 'production'
+
 const nextConfig: NextConfig = {
   // Temporarily required on Windows until Next.js fixes Turbopack Sass resolution.
   // See: https://github.com/vercel/next.js/issues/86431
@@ -46,6 +54,23 @@ const nextConfig: NextConfig = {
   },
   reactStrictMode: true,
   redirects,
+  headers: async () => {
+    if (isProductionDeployment) {
+      return []
+    }
+
+    return [
+      {
+        source: '/:path*',
+        headers: [
+          {
+            key: 'X-Robots-Tag',
+            value: 'noindex, nofollow, noarchive',
+          },
+        ],
+      },
+    ]
+  },
   turbopack: {
     root: path.resolve(dirname),
   },
