@@ -1,6 +1,6 @@
 import React from 'react'
 import Link from 'next/link'
-import { ArrowRight } from 'lucide-react'
+import { ArrowRight, MoveRightIcon } from 'lucide-react'
 
 import type { OfferingSummary as OfferingSummaryProps } from '@/payload-types'
 import { Button } from '@/components/ui/button'
@@ -47,21 +47,32 @@ export const OfferingSummary: React.FC<OfferingSummaryProps> = ({
                 className="group relative overflow-hidden rounded-2xl border border-border/50 bg-card p-8 transition-all hover:border-primary/30"
               >
                 <div className="mb-4">
-                  <h3 className="font-(family-name:--font-cormorant) text-2xl font-light text-foreground">
+                  <h3 className="font-(family-name:--font-cormorant) text-3xl font-light text-foreground">
                     {item.title}
                   </h3>
                   <p className="mt-1 text-sm italic text-accent">{item.subtitle}</p>
                 </div>
                 <p className="text-muted-foreground leading-relaxed">{item.description}</p>
-                <div className="mt-6 flex items-center justify-between">
-                  <span className="text-sm font-medium text-foreground">
-                    From £{item.priceFrom}
-                  </span>
+                <div className="mt-6 flex items-center justify-between border-t border-border pt-4">
+                  <div className="flex flex-col">
+                    <span className="text-[10px] uppercase font-light text-muted-foreground letter-spacing-wide">
+                      Investment
+                    </span>
+                    <p className="font-(family-name:--font-cormorant) text-2xl font-medium text-foreground">
+                      From £{item.priceFrom}
+                    </p>
+                  </div>
                   {item.links?.[0]?.link && (
-                    <Button asChild variant="link" size="sm" className="">
+                    <Button
+                      asChild
+                      variant="secondary"
+                      size="icon"
+                      className="rounded-full flex justify-center items-center"
+                    >
                       <Link href={getHref(item.links[0].link)}>
-                        Learn more
-                        <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-1" />
+                        {/* Learn more
+                        <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-1" /> */}
+                        <MoveRightIcon className="h-5 w-5 text-foreground-light transition-transform" />
                       </Link>
                     </Button>
                   )}
