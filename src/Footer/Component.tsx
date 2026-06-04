@@ -17,8 +17,13 @@ export async function Footer() {
     <footer className="mt-auto border-t border-border bg-[#062225] text-foreground-light">
       <div className="container py-16 grid gap-8 md:grid-cols-12 md:gap-6">
         {/* Logo */}
-        <Link className="flex items-center md:col-span-3" href="/">
-          <Logo loading="eager" priority="high" />
+        <Link className="flex items-start md:col-span-3" href="/">
+          <Logo
+            loading="eager"
+            priority="high"
+            imagePath="/logo-icon-dark.svg"
+            className="w-26.25"
+          />
         </Link>
 
         {/* Navigation */}
@@ -26,7 +31,13 @@ export async function Footer() {
           <h4 className="text-xs font-semibold uppercase text-accent">Socials</h4>
           <nav className="flex flex-col gap-4">
             {socialLinks.map(({ link }, i) => {
-              return <CMSLink className="text-white" key={i} {...link} />
+              return (
+                <CMSLink
+                  className="hover:underline text-secondary/80 hover:text-secondary transition-colors"
+                  key={i}
+                  {...link}
+                />
+              )
             })}
           </nav>
         </div>
@@ -35,7 +46,13 @@ export async function Footer() {
           <h4 className="text-xs font-semibold uppercase text-accent">Navigation</h4>
           <nav className="flex flex-col gap-4">
             {navItems.map(({ link }, i) => {
-              return <CMSLink className="text-white" key={i} {...link} />
+              return (
+                <CMSLink
+                  className="hover:underline text-secondary/80 hover:text-secondary transition-colors"
+                  key={i}
+                  {...link}
+                />
+              )
             })}
           </nav>
         </div>
@@ -44,7 +61,13 @@ export async function Footer() {
           <h4 className="text-xs font-semibold uppercase text-accent">Legal</h4>
           <nav className="flex flex-col gap-4">
             {legalLinks.map(({ link }, i) => {
-              return <CMSLink className="text-white" key={i} {...link} />
+              return (
+                <CMSLink
+                  className="hover:underline text-secondary/80 hover:text-secondary transition-colors"
+                  key={i}
+                  {...link}
+                />
+              )
             })}
           </nav>
         </div>
