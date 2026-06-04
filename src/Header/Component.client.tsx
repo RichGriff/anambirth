@@ -16,6 +16,7 @@ interface HeaderClientProps {
 export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
   /* Storing the value in a useState to avoid hydration errors */
   const [theme, setTheme] = useState<string | null>(null)
+  const [isScrolled, setIsScrolled] = useState(false)
   const { headerTheme, setHeaderTheme } = useHeaderTheme()
   const pathname = usePathname()
 
@@ -29,14 +30,31 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [headerTheme])
 
+  useEffect(() => {
+    const onScroll = () => {
+      setIsScrolled(window.scrollY > 10)
+    }
+
+    onScroll()
+    window.addEventListener('scroll', onScroll, { passive: true })
+
+    return () => {
+      window.removeEventListener('scroll', onScroll)
+    }
+  }, [])
+
   return (
     <header
-      className={`sticky top-0 z-50 bg-background/95 backdrop-blur-sm border-b border-primary/10`}
+      className={`sticky top-0 z-50 bg-primary backdrop-blur-sm border-b border-primary/10`}
       {...(theme ? { 'data-theme': theme } : {})}
     >
       <div className="py-6 flex justify-between container">
         <Link href="/">
-          <Logo loading="eager" priority="high" />
+          <Logo
+            loading="eager"
+            priority="high"
+            className={`transition-[width] duration-300 ease-out ${isScrolled ? 'w-40' : 'w-52'}`}
+          />
         </Link>
         <HeaderNav data={data} />
       </div>

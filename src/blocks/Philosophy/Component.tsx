@@ -9,7 +9,7 @@ export const Philosophy: React.FC<PhilosophyProps> = ({ heading, subtitle, links
   const aboutLink = links?.[0]?.link
 
   return (
-    <section className="px-6 py-24 bg-secondary">
+    <section className="px-6 py-24 bg-[#FCF9F2]">
       <div className="mx-auto max-w-5xl">
         {/* Header */}
         <div className="mb-16 text-center">

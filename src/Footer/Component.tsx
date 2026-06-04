@@ -10,23 +10,56 @@ export async function Footer() {
   const footerData = await getCachedGlobal('footer', 1)()
 
   const navItems = footerData?.navItems || []
+  const socialLinks = footerData?.socialLinks || []
+  const legalLinks = footerData?.legalLinks || []
 
   return (
-    <footer className="mt-auto border-t border-border bg-background text-black">
-      <div className="container py-8 gap-8 flex flex-col md:flex-row md:justify-between">
-        <p className="text-sm text-muted-foreground">© 2026 All rights reserved.</p>
-        {/* <Link className="flex items-center" href="/">
-          <Logo />
-        </Link> */}
+    <footer className="mt-auto border-t border-border bg-[#062225] text-foreground-light">
+      <div className="container py-16 grid gap-8 md:grid-cols-12 md:gap-6">
+        {/* Logo */}
+        <Link className="flex items-center md:col-span-3" href="/">
+          <Logo loading="eager" priority="high" />
+        </Link>
 
-        {/* <div className="flex flex-col-reverse items-start md:flex-row gap-4 md:items-center">
-          <ThemeSelector />
-          <nav className="flex flex-col md:flex-row gap-4">
+        {/* Navigation */}
+        <div className="flex flex-col items-start gap-3 md:col-span-3 ">
+          <h4 className="text-xs font-semibold uppercase text-accent">Socials</h4>
+          <nav className="flex flex-col gap-4">
+            {socialLinks.map(({ link }, i) => {
+              return <CMSLink className="text-white" key={i} {...link} />
+            })}
+          </nav>
+        </div>
+
+        <div className="flex flex-col items-start gap-3 md:col-span-3 ">
+          <h4 className="text-xs font-semibold uppercase text-accent">Navigation</h4>
+          <nav className="flex flex-col gap-4">
             {navItems.map(({ link }, i) => {
               return <CMSLink className="text-white" key={i} {...link} />
             })}
           </nav>
-        </div> */}
+        </div>
+
+        <div className="flex flex-col items-start gap-3 md:col-span-3 ">
+          <h4 className="text-xs font-semibold uppercase text-accent">Legal</h4>
+          <nav className="flex flex-col gap-4">
+            {legalLinks.map(({ link }, i) => {
+              return <CMSLink className="text-white" key={i} {...link} />
+            })}
+          </nav>
+        </div>
+      </div>
+
+      <div className="border-t border-border/10 py-4 container flex flex-col md:flex-row items-center justify-between gap-4">
+        <p className="text-sm text-muted-foreground-light">© 2026 All rights reserved.</p>
+        <p className="text-sm text-muted-foreground-light">
+          Built by{' '}
+          <a href="https://richgriffiths.me.uk/" className="underline">
+            Rich Griffiths
+          </a>
+          .
+        </p>
+        {/* <ThemeSelector /> */}
       </div>
     </footer>
   )

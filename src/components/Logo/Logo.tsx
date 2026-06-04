@@ -17,13 +17,13 @@ export const Logo = (props: Props) => {
     /* eslint-disable @next/next/no-img-element */
     <img
       alt="Anam Birth Logo"
-      width={180}
+      width={200}
       height={34}
       loading={loading}
       fetchPriority={priority}
       decoding="async"
-      // className={clsx('max-w-37.5 w-full', className)}
-      src="/logo-light.svg"
+      className={clsx('block h-auto', className)}
+      src="/logo-dark.svg"
     />
   )
 }

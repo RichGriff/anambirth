@@ -27,7 +27,7 @@ export const OfferingSummary: React.FC<OfferingSummaryProps> = ({
   items,
 }) => {
   return (
-    <section className="px-6 py-24">
+    <section className="px-6 py-24 bg-[#F6F3EC]">
       <div className="mx-auto max-w-5xl">
         <div className="text-center">
           <h2 className="font-(family-name:--font-cormorant) text-3xl font-light md:text-4xl text-foreground">

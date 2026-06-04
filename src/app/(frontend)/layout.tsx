@@ -35,7 +35,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${cormorant.variable} bg-background`}
+      className={`${geistSans.variable} ${cormorant.variable} bg-primary`}
       suppressHydrationWarning
     >
       <head>
