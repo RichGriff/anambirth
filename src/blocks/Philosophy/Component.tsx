@@ -44,13 +44,13 @@ export const Philosophy: React.FC<PhilosophyProps> = ({ heading, subtitle, links
 
         {Array.isArray(principles) && principles.length > 0 && (
           <div className="mt-16">
-            <div className="grid gap-8 grid-cols-2 lg:grid-cols-3">
+            <div className="grid gap-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
               {principles.map((principle, index) => (
                 <InViewFade
                   key={index}
                   delay={(index % 3) * 0.04}
                   amount={0.7}
-                  className="relative flex flex-col p-2 sm:items-start sm:justify-start"
+                  className="relative flex flex-col p-2 text-center items-center justify-start sm:items-start sm:justify-start sm:text-left"
                 >
                   {principle.image && (
                     <div className="mb-4 h-16 w-16">

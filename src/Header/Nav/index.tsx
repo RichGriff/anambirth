@@ -43,13 +43,13 @@ export const HeaderNav: React.FC<{ data: HeaderType }> = ({ data }) => {
       {/* Mobile Hamburger Button */}
       <button
         onClick={() => setIsMenuOpen(!isMenuOpen)}
-        className="md:hidden p-2 hover:bg-primary/10 rounded-lg transition-colors"
+        className="md:hidden p-2 hover:bg-accent/10 hover:cursor-pointer rounded-lg transition-colors"
         aria-label="Toggle navigation menu"
       >
         {isMenuOpen ? (
-          <X className="w-6 h-6 text-primary" />
+          <X className="w-6 h-6 text-secondary" />
         ) : (
-          <Menu className="w-6 h-6 text-primary" />
+          <Menu className="w-6 h-6 text-secondary" />
         )}
       </button>
 

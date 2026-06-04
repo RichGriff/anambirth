@@ -16,7 +16,7 @@ export const MediumImpactHero: React.FC<Page['hero']> = ({
   subHeading,
 }) => {
   return (
-    <div className="bg-primary py-20">
+    <div className="bg-primary py-20 px-2 sm:px-0">
       <div className="container">
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 md:gap-16 mb-12 justify-center items-center">
           <div className="mb-8">
@@ -29,7 +29,7 @@ export const MediumImpactHero: React.FC<Page['hero']> = ({
             )}
             {heading && (
               <InViewFade delay={0.04}>
-                <h1 className="font-(family-name:--font-cormorant) text-4xl font-light leading-tight tracking-tight md:text-5xl lg:text-6xl text-foreground-light text-balance">
+                <h1 className="font-(family-name:--font-cormorant) text-5xl font-light leading-tight tracking-tight md:text-5xl lg:text-6xl text-foreground-light text-balance">
                   {heading}
                 </h1>
               </InViewFade>
