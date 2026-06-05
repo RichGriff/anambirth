@@ -6,7 +6,7 @@ import type { Header as HeaderType } from '@/payload-types'
 
 import { CMSLink } from '@/components/Link'
 import Link from 'next/link'
-import { SearchIcon, Menu, X } from 'lucide-react'
+import { SearchIcon, Menu, X, MoveRightIcon } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 
 export const HeaderNav: React.FC<{ data: HeaderType }> = ({ data }) => {
@@ -65,7 +65,7 @@ export const HeaderNav: React.FC<{ data: HeaderType }> = ({ data }) => {
 
           {/* Slide-out Panel */}
           <nav
-            className="fixed top-0 right-0 h-screen w-64 bg-background shadow-lg z-50 md:hidden flex flex-col overflow-y-auto"
+            className="fixed top-0 right-0 h-screen w-64 bg-primary shadow-lg z-50 md:hidden flex flex-col overflow-y-auto"
             style={{
               animation: 'slideIn 0.3s ease-out',
             }}
@@ -77,28 +77,29 @@ export const HeaderNav: React.FC<{ data: HeaderType }> = ({ data }) => {
                 className="p-2 hover:bg-primary/10 rounded-lg transition-colors"
                 aria-label="Close navigation menu"
               >
-                <X className="w-6 h-6 text-primary" />
+                <X className="w-6 h-6 text-foreground-light" />
               </button>
             </div>
 
             {/* Navigation Items */}
-            <div className="flex flex-col p-4 gap-6">
+            <div className="flex flex-col p-4 gap-3">
               {navItems.map(({ link }, i) => {
                 return (
-                  <CMSLink
-                    key={i}
-                    {...link}
-                    appearance="link"
-                    className="hover:no-underline text-primary/80 hover:text-primary transition-colors text-lg"
-                    onClick={handleNavClick}
-                  />
+                  <React.Fragment key={i}>
+                    <CMSLink
+                      {...link}
+                      appearance="link"
+                      className="block w-full rounded-none px-4 py-3 text-base font-medium text-foreground-light/90"
+                      onClick={handleNavClick}
+                    />
+                  </React.Fragment>
                 )
               })}
 
               {/* CTA Button with Links */}
               <Button
                 asChild
-                className="rounded-full px-6 transition-colors w-full mt-2"
+                className="rounded-full px-6 transition-colors w-full mt-6"
                 onClick={handleNavClick}
               >
                 <Link href="/#connection">Connection Call</Link>
