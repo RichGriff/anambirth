@@ -82,6 +82,7 @@ export interface Config {
     offeringSummary: OfferingSummary;
     testimonialBlock: TestimonialBlock;
     philosophy: Philosophy;
+    latestPost: LatestPost;
   };
   collections: {
     pages: Page;
@@ -652,6 +653,7 @@ export interface Page {
         blockName?: string | null;
         blockType: 'philosophy';
       }
+    | LatestPost
   )[];
   meta?: {
     title?: string | null;
@@ -986,6 +988,18 @@ export interface Testimonial {
   avatar?: (number | null) | Media;
   updatedAt: string;
   createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "LatestPost".
+ */
+export interface LatestPost {
+  tagline?: string | null;
+  heading?: string | null;
+  limit: number;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'latestPost';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1497,6 +1511,7 @@ export interface PagesSelect<T extends boolean = true> {
               id?: T;
               blockName?: T;
             };
+        latestPost?: T | LatestPostSelect<T>;
       };
   meta?:
     | T
@@ -1528,6 +1543,17 @@ export interface FormBlockSelect<T extends boolean = true> {
         item?: T;
         id?: T;
       };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "LatestPost_select".
+ */
+export interface LatestPostSelect<T extends boolean = true> {
+  tagline?: T;
+  heading?: T;
+  limit?: T;
   id?: T;
   blockName?: T;
 }

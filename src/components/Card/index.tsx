@@ -22,6 +22,7 @@ export const Card: React.FC<{
   doc?: CardPostData
   relationTo?: 'posts'
   showCategories?: boolean
+  block?: boolean
   title?: string
   excerpt?: string
 }> = (props) => {
@@ -34,6 +35,7 @@ export const Card: React.FC<{
     title: titleFromProps,
     excerpt: excerptFromProps,
     index,
+    block,
   } = props
 
   const { slug, categories, meta, title, heroImage, excerpt } = doc || {}
@@ -67,7 +69,7 @@ export const Card: React.FC<{
             <Media
               resource={heroImage}
               size="33vw"
-              imgClassName="object-cover min-h-[28rem] max-h-[28rem] rounded-lg"
+              imgClassName={`object-cover ${block ? 'min-h-[20rem] max-h-[20rem]' : 'min-h-[28rem] max-h-[28rem]'} rounded-lg`}
             />
           )}
         </div>
@@ -109,7 +111,7 @@ export const Card: React.FC<{
           )}
           {excerptToUse && (
             <div
-              className={`my-6 leading-relaxed text-foreground lg:mx-0 mx-auto w-full ${!isFeatured ? 'line-clamp-3' : 'line-clamp-6'}`}
+              className={`my-6 leading-relaxed text-muted-foreground lg:mx-0 mx-auto w-full ${!isFeatured ? 'line-clamp-3' : 'line-clamp-6'}`}
             >
               {excerptToUse && <p>{excerptToUse}</p>}
             </div>

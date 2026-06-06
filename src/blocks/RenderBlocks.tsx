@@ -36,6 +36,7 @@ import { OfferingSummary } from './OfferingSummary/Component'
 import { TestimonialsBlock } from './TestimonialsBlock/Component'
 import { Philosophy } from '@/blocks/Philosophy/Component'
 import { CallToAction } from '@/blocks/CallToAction/Component'
+import { LatestPost } from '@/blocks/LatestPost/Component'
 
 const blockComponents = {
   section: Section,
@@ -54,6 +55,7 @@ const blockComponents = {
   offeringSummary: OfferingSummary,
   testimonialBlock: TestimonialsBlock,
   philosophy: Philosophy,
+  latestPost: LatestPost,
 }
 
 const isBlockComponentKey = (key: unknown): key is keyof typeof blockComponents =>

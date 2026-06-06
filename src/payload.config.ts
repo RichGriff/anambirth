@@ -32,6 +32,7 @@ import { CallToAction } from './blocks/CallToAction/config'
 import { OfferingSummary } from './blocks/OfferingSummary/config'
 import { TestimonialsBlock } from './blocks/TestimonialsBlock/config'
 import { Philosophy } from './blocks/Philosophy/config'
+import { LatestPost } from './blocks/LatestPost/config'
 import { Settings } from './Settings/config'
 
 const filename = fileURLToPath(import.meta.url)
@@ -103,6 +104,7 @@ export default buildConfig({
     OfferingSummary,
     TestimonialsBlock,
     Philosophy,
+    LatestPost,
   ],
   cors: [getServerSideURL()].filter(Boolean),
   globals: [Header, Footer, Settings],

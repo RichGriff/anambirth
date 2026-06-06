@@ -20,6 +20,7 @@ import { Section } from '@/blocks/Section/config'
 import { OfferingSummary } from '@/blocks/OfferingSummary/config'
 import { TestimonialsBlock } from '@/blocks/TestimonialsBlock/config'
 import { Philosophy } from '@/blocks/Philosophy/config'
+import { LatestPost } from '@/blocks/LatestPost/config'
 
 export const Pages: CollectionConfig<'pages'> = {
   slug: 'pages',
@@ -73,7 +74,14 @@ export const Pages: CollectionConfig<'pages'> = {
               name: 'content',
               label: 'Page Sections',
               type: 'blocks',
-              blocks: [Section, FormBlock, OfferingSummary, TestimonialsBlock, Philosophy],
+              blocks: [
+                Section,
+                FormBlock,
+                OfferingSummary,
+                TestimonialsBlock,
+                Philosophy,
+                LatestPost,
+              ],
               required: true,
               admin: {
                 description:
