@@ -694,6 +694,10 @@ export interface Post {
     };
     [k: string]: unknown;
   };
+  /**
+   * A short summary of the post, used in previews and SEO.
+   */
+  excerpt?: string | null;
   relatedPosts?: (number | Post)[] | null;
   categories?: (number | Category)[] | null;
   meta?: {
@@ -1535,6 +1539,7 @@ export interface PostsSelect<T extends boolean = true> {
   title?: T;
   heroImage?: T;
   content?: T;
+  excerpt?: T;
   relatedPosts?: T;
   categories?: T;
   meta?:
@@ -2106,10 +2111,19 @@ export interface Footer {
 export interface Setting {
   id: number;
   siteName?: string | null;
-  lightModeIcon?: (number | null) | Media;
-  darkModeIcon?: (number | null) | Media;
-  lightModeLogo?: (number | null) | Media;
-  darkModeLogo?: (number | null) | Media;
+  headerLogo?: (number | null) | Media;
+  footerLogo?: (number | null) | Media;
+  adminLogos?: {
+    lightModeIcon?: (number | null) | Media;
+    darkModeIcon?: (number | null) | Media;
+    lightModeLogo?: (number | null) | Media;
+    darkModeLogo?: (number | null) | Media;
+  };
+  postPageHeading?: {
+    eyebrowHeading?: string | null;
+    mainHeading?: string | null;
+    subHeading?: string | null;
+  };
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -2193,10 +2207,23 @@ export interface FooterSelect<T extends boolean = true> {
  */
 export interface SettingsSelect<T extends boolean = true> {
   siteName?: T;
-  lightModeIcon?: T;
-  darkModeIcon?: T;
-  lightModeLogo?: T;
-  darkModeLogo?: T;
+  headerLogo?: T;
+  footerLogo?: T;
+  adminLogos?:
+    | T
+    | {
+        lightModeIcon?: T;
+        darkModeIcon?: T;
+        lightModeLogo?: T;
+        darkModeLogo?: T;
+      };
+  postPageHeading?:
+    | T
+    | {
+        eyebrowHeading?: T;
+        mainHeading?: T;
+        subHeading?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

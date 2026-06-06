@@ -10,7 +10,10 @@ import { Media } from '@/components/Media'
 import { hero } from '@/heros/config'
 import { ImageIcon, MoveRightIcon } from 'lucide-react'
 
-export type CardPostData = Pick<Post, 'slug' | 'categories' | 'meta' | 'title' | 'heroImage'>
+export type CardPostData = Pick<
+  Post,
+  'slug' | 'categories' | 'meta' | 'title' | 'heroImage' | 'excerpt'
+>
 
 export const Card: React.FC<{
   index?: number
@@ -20,15 +23,25 @@ export const Card: React.FC<{
   relationTo?: 'posts'
   showCategories?: boolean
   title?: string
+  excerpt?: string
 }> = (props) => {
   const { card, link } = useClickableCard({})
-  const { className, doc, relationTo, showCategories, title: titleFromProps, index } = props
+  const {
+    className,
+    doc,
+    relationTo,
+    showCategories,
+    title: titleFromProps,
+    excerpt: excerptFromProps,
+    index,
+  } = props
 
-  const { slug, categories, meta, title, heroImage } = doc || {}
+  const { slug, categories, meta, title, heroImage, excerpt } = doc || {}
   const { description, image: metaImage } = meta || {}
 
   const hasCategories = categories && Array.isArray(categories) && categories.length > 0
   const titleToUse = titleFromProps || title
+  const excerptToUse = excerptFromProps || excerpt
   const sanitizedDescription = description?.replace(/\s/g, ' ') // replace non-breaking space with white space
   const href = `/${relationTo}/${slug}`
   const isFeatured = index === 0
@@ -81,7 +94,12 @@ export const Card: React.FC<{
           )}
           {titleToUse && (
             <div className="prose">
-              <h3 className="font-(family-name:--font-cormorant) text-3xl font-light leading-tight text-foreground">
+              <h3
+                className={cn(
+                  'font-(family-name:--font-cormorant)  font-light leading-tight text-foreground',
+                  isFeatured ? 'text-4xl' : 'text-3xl',
+                )}
+              >
                 {titleToUse}
                 {/* <Link className="not-prose" href={href} ref={link.ref}>
                 {titleToUse}
@@ -89,11 +107,11 @@ export const Card: React.FC<{
               </h3>
             </div>
           )}
-          {description && (
+          {excerptToUse && (
             <div
-              className={`my-6 leading-relaxed text-foreground lg:mx-0 mx-auto w-full ${!isFeatured ? 'line-clamp-2' : 'line-clamp-6'}`}
+              className={`my-6 leading-relaxed text-foreground lg:mx-0 mx-auto w-full ${!isFeatured ? 'line-clamp-3' : 'line-clamp-6'}`}
             >
-              {description && <p>{sanitizedDescription}</p>}
+              {excerptToUse && <p>{excerptToUse}</p>}
             </div>
           )}
           {/* <Link href={href} ref={link.ref}>

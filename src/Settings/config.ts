@@ -4,28 +4,81 @@ export const Settings: GlobalConfig = {
   slug: 'settings',
   fields: [
     {
-      name: 'siteName',
-      type: 'text',
-    },
-    {
-      name: 'lightModeIcon',
-      type: 'upload',
-      relationTo: 'media',
-    },
-    {
-      name: 'darkModeIcon',
-      type: 'upload',
-      relationTo: 'media',
-    },
-    {
-      name: 'lightModeLogo',
-      type: 'upload',
-      relationTo: 'media',
-    },
-    {
-      name: 'darkModeLogo',
-      type: 'upload',
-      relationTo: 'media',
+      type: 'tabs',
+      tabs: [
+        {
+          label: 'Site',
+          fields: [
+            {
+              name: 'siteName',
+              type: 'text',
+            },
+            {
+              label: 'Header Logo',
+              name: 'headerLogo',
+              type: 'upload',
+              relationTo: 'media',
+            },
+            {
+              label: 'Footer Logo',
+              name: 'footerLogo',
+              type: 'upload',
+              relationTo: 'media',
+            },
+            {
+              type: 'group',
+              name: 'adminLogos',
+              label: 'Admin Logos',
+              fields: [
+                {
+                  name: 'lightModeIcon',
+                  type: 'upload',
+                  relationTo: 'media',
+                },
+                {
+                  name: 'darkModeIcon',
+                  type: 'upload',
+                  relationTo: 'media',
+                },
+                {
+                  name: 'lightModeLogo',
+                  type: 'upload',
+                  relationTo: 'media',
+                },
+                {
+                  name: 'darkModeLogo',
+                  type: 'upload',
+                  relationTo: 'media',
+                },
+              ],
+            },
+          ],
+        },
+        {
+          label: 'Posts',
+          fields: [
+            {
+              type: 'group',
+              name: 'postPageHeading',
+              label: 'Page Heading',
+              fields: [
+                {
+                  name: 'eyebrowHeading',
+                  type: 'text',
+                },
+                {
+                  name: 'mainHeading',
+                  type: 'text',
+                },
+                {
+                  name: 'subHeading',
+                  type: 'textarea',
+                },
+              ],
+            },
+          ],
+        },
+      ],
     },
   ],
 }

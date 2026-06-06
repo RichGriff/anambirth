@@ -11,14 +11,20 @@ import { HeaderNav } from './Nav'
 
 interface HeaderClientProps {
   data: Header
+  siteSettings: {
+    headerLogo?: string
+    siteName?: string
+  }
 }
 
-export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
+export const HeaderClient: React.FC<HeaderClientProps> = ({ data, siteSettings }) => {
   /* Storing the value in a useState to avoid hydration errors */
   const [theme, setTheme] = useState<string | null>(null)
   const [isScrolled, setIsScrolled] = useState(false)
   const { headerTheme, setHeaderTheme } = useHeaderTheme()
   const pathname = usePathname()
+
+  const { headerLogo, siteName } = siteSettings || {}
 
   useEffect(() => {
     setHeaderTheme(null)
@@ -51,6 +57,8 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
       <div className="py-6 flex justify-between container">
         <Link href="/">
           <Logo
+            logo={headerLogo}
+            siteName={siteName}
             loading="eager"
             priority="high"
             className={`transition-[width] duration-300 ease-out ${isScrolled ? 'w-40' : 'w-52'}`}

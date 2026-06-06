@@ -44,6 +44,7 @@ export const Posts: CollectionConfig<'posts'> = {
     title: true,
     slug: true,
     categories: true,
+    excerpt: true,
     meta: {
       image: true,
       description: true,
@@ -108,6 +109,14 @@ export const Posts: CollectionConfig<'posts'> = {
         },
         {
           fields: [
+            {
+              name: 'excerpt',
+              type: 'textarea',
+              maxLength: 500,
+              admin: {
+                description: 'A short summary of the post, used in previews and SEO.',
+              },
+            },
             {
               name: 'relatedPosts',
               type: 'relationship',

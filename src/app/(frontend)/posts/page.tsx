@@ -25,6 +25,16 @@ export default async function Page() {
       categories: true,
       meta: true,
       heroImage: true,
+      excerpt: true,
+    },
+  })
+
+  const postHeading = await payload.findGlobal({
+    slug: 'settings',
+    depth: 1,
+    overrideAccess: true,
+    select: {
+      postPageHeading: true,
     },
   })
 
@@ -36,14 +46,14 @@ export default async function Page() {
         <div className="container w-full flex flex-col justify-center items-center text-center min-h-[calc(100svh-24rem)]">
           <div className="max-w-3xl mb-12">
             <div className="uppercase text-xs text-accent mb-4 flex justify-center items-center gap-2">
-              Storytelling & Reflection
+              {postHeading?.postPageHeading?.eyebrowHeading || 'Storytelling & Reflection'}
             </div>
             <h1 className="font-(family-name:--font-cormorant) text-4xl font-light leading-tight tracking-tight md:text-5xl lg:text-6xl text-foreground text-balance">
-              The Journel
+              {postHeading?.postPageHeading?.mainHeading || 'Blog & Stories'}
             </h1>
             <p className="mt-6 text-lg leading-relaxed text-muted-foreground md:text-xl lg:mx-0 mx-auto w-full">
-              A sacred space for sharing stories of birth, transition, and wholeness. Here, we honor
-              the raw edges and the radiant moments of the human experience.
+              {postHeading?.postPageHeading?.subHeading ||
+                'A sacred space for sharing stories of birth, transition, and wholeness. Here, we honor the raw edges and the radiant moments of the human experience.'}
             </p>
           </div>
         </div>
