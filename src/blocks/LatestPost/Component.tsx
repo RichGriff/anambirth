@@ -38,7 +38,7 @@ export const LatestPost = async ({ heading, limit = 3, tagline }: LatestPostProp
   if (!posts?.length) return null
 
   return (
-    <section className="bg-[#F6F3EC] py-8">
+    <section className="bg-[#FCF9F2] pb-8 pt-20">
       <div className={cn('container pb-16')}>
         <div className="flex justify-between items-center">
           <div className="flex flex-col">
