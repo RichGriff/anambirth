@@ -1,5 +1,11 @@
 import { Block } from 'payload'
-import { lexicalEditor } from '@payloadcms/richtext-lexical'
+import {
+  FixedToolbarFeature,
+  InlineToolbarFeature,
+  OrderedListFeature,
+  UnorderedListFeature,
+  lexicalEditor,
+} from '@payloadcms/richtext-lexical'
 
 export const Text: Block = {
   slug: 'textBlock',
@@ -8,7 +14,17 @@ export const Text: Block = {
       type: 'richText',
       name: 'text',
       required: true,
-      editor: lexicalEditor({}),
+      editor: lexicalEditor({
+        features: ({ rootFeatures }) => {
+          return [
+            ...rootFeatures,
+            UnorderedListFeature(),
+            OrderedListFeature(),
+            FixedToolbarFeature(),
+            InlineToolbarFeature(),
+          ]
+        },
+      }),
     },
   ],
 }

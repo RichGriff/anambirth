@@ -76,11 +76,12 @@ export default function RichText(props: Props) {
     <ConvertRichText
       converters={jsxConverters}
       className={cn(
-        'payload-richtext',
+        'payload-richtext richtext-site',
         {
           container: enableGutter,
           'max-w-none': !enableGutter,
-          'mx-auto prose md:prose-md': enableProse,
+          'mx-auto prose md:prose-md prose-headings:text-foreground prose-p:text-muted-foreground':
+            enableProse,
         },
         className,
       )}

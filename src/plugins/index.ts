@@ -8,7 +8,13 @@ import { Plugin } from 'payload'
 import { deepMergeWithSourceArrays } from 'payload'
 import { revalidateRedirects } from '@/hooks/revalidateRedirects'
 import { GenerateTitle, GenerateURL } from '@payloadcms/plugin-seo/types'
-import { FixedToolbarFeature, HeadingFeature, lexicalEditor } from '@payloadcms/richtext-lexical'
+import {
+  FixedToolbarFeature,
+  HeadingFeature,
+  OrderedListFeature,
+  UnorderedListFeature,
+  lexicalEditor,
+} from '@payloadcms/richtext-lexical'
 import { searchFields } from '@/search/fieldOverrides'
 import { beforeSyncWithSearch } from '@/search/beforeSync'
 
@@ -103,6 +109,8 @@ export const plugins: Plugin[] = [
                     ...rootFeatures,
                     FixedToolbarFeature(),
                     HeadingFeature({ enabledHeadingSizes: ['h1', 'h2', 'h3', 'h4'] }),
+                    UnorderedListFeature(),
+                    OrderedListFeature(),
                   ]
                 },
               }),

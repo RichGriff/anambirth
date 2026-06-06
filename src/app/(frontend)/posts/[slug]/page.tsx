@@ -14,6 +14,10 @@ import { PostHero } from '@/heros/PostHero'
 import { generateMeta } from '@/utilities/generateMeta'
 import PageClient from './page.client'
 import { LivePreviewListener } from '@/components/LivePreviewListener'
+import { Separator } from '@radix-ui/react-select'
+import Image from 'next/image'
+import { Media } from '@/components/Media'
+import { BookmarkIcon, Share2Icon } from 'lucide-react'
 
 export async function generateStaticParams() {
   const payload = await getPayload({ config: configPromise })
@@ -26,6 +30,7 @@ export async function generateStaticParams() {
     select: {
       slug: true,
     },
+    depth: 3,
   })
 
   const params = posts.docs.map(({ slug }) => {
@@ -51,6 +56,8 @@ export default async function Post({ params: paramsPromise }: Args) {
 
   if (!post) return <PayloadRedirects url={url} />
 
+  console.log('Post page render', { authors: post.populatedAuthors })
+
   return (
     <article className="pt-16 pb-16">
       <PageClient />
@@ -64,10 +71,46 @@ export default async function Post({ params: paramsPromise }: Args) {
 
       <div className="flex flex-col items-center gap-4 pt-8">
         <div className="container">
-          <RichText className="max-w-[48rem] mx-auto" data={post.content} enableGutter={false} />
+          <RichText className="max-w-3xl mx-auto" data={post.content} enableGutter={false} />
+
+          <div className="mx-auto mt-12 mb-8 h-px max-w-3xl bg-primary/10" />
+
+          <div className="max-w-3xl mx-auto flex justify-between items-start text-center text-sm text-muted-foreground">
+            <div className="flex items-center gap-4">
+              <Media
+                className=""
+                imgClassName="w-10 h-10 rounded-full bg-primary/10 mx-auto ring-2 ring-offset-4 ring-accent"
+                priority
+                resource={post.populatedAuthors?.[0]?.avatar}
+              />
+
+              <div className="flex flex-col justify-start items-left text-left">
+                <div className="font-medium text-foreground">
+                  Written by {post.populatedAuthors?.[0]?.name || 'Unknown'}
+                </div>
+                <div className="text-xs text-muted-foreground">
+                  Published on{' '}
+                  {post.publishedAt
+                    ? new Date(post.publishedAt).toLocaleDateString(undefined, {
+                        dateStyle: 'long',
+                      })
+                    : 'Unknown'}
+                </div>
+              </div>
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="font-medium text-foreground bg-accent/10 hover:bg-accent/30 hover:cursor-pointer p-2 rounded-full flex items-center gap-2">
+                <Share2Icon className="size-5 text-primary" />
+              </div>
+              <div className="font-medium text-foreground bg-accent/10 hover:bg-accent/30 hover:cursor-pointer p-2 rounded-full flex items-center gap-2">
+                <BookmarkIcon className="size-5 text-primary" />
+              </div>
+            </div>
+          </div>
+
           {post.relatedPosts && post.relatedPosts.length > 0 && (
             <RelatedPosts
-              className="mt-12 max-w-[52rem] lg:grid lg:grid-cols-subgrid col-start-1 col-span-3 grid-rows-[2fr]"
+              className="mt-12 max-w-208 lg:grid lg:grid-cols-subgrid col-start-1 col-span-3 grid-rows-[2fr]"
               docs={post.relatedPosts.filter((post) => typeof post === 'object')}
             />
           )}
