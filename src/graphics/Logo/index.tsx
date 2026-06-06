@@ -7,8 +7,8 @@ import Image from 'next/image'
 export const Logos: React.FC = async () => {
   const payload = await getPayload({ config })
   const settings = await payload.findGlobal({ slug: 'settings' })
-  const lightModeLogo = settings.lightModeLogo as Media
-  const darkModeLogo = settings.darkModeLogo as Media
+  const lightModeLogo = settings.adminLogos?.lightModeLogo as Media
+  const darkModeLogo = settings.adminLogos?.darkModeLogo as Media
 
   return (
     <>
