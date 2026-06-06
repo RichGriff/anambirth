@@ -17,7 +17,7 @@ import { LivePreviewListener } from '@/components/LivePreviewListener'
 import { Separator } from '@radix-ui/react-select'
 import Image from 'next/image'
 import { Media } from '@/components/Media'
-import { BookmarkIcon, Share2Icon } from 'lucide-react'
+import { BookmarkIcon, Share2Icon, User2Icon } from 'lucide-react'
 
 export async function generateStaticParams() {
   const payload = await getPayload({ config: configPromise })
@@ -77,12 +77,18 @@ export default async function Post({ params: paramsPromise }: Args) {
 
           <div className="max-w-3xl mx-auto flex justify-between items-start text-center text-sm text-muted-foreground">
             <div className="flex items-center gap-4">
-              <Media
-                className=""
-                imgClassName="w-10 h-10 rounded-full bg-primary/10 mx-auto ring-2 ring-offset-4 ring-accent"
-                priority
-                resource={post.populatedAuthors?.[0]?.avatar}
-              />
+              {post.populatedAuthors?.[0]?.avatar ? (
+                <Media
+                  className=""
+                  imgClassName="w-10 h-10 rounded-full bg-primary/10 mx-auto ring-2 ring-offset-4 ring-accent"
+                  priority
+                  resource={post.populatedAuthors?.[0]?.avatar}
+                />
+              ) : (
+                <div className="w-10 h-10 rounded-full bg-primary/10 mx-auto ring-2 ring-offset-4 ring-accent flex justify-center items-center">
+                  <User2Icon className="size-5 text-primary mx-auto" />
+                </div>
+              )}
 
               <div className="flex flex-col justify-start items-left text-left">
                 <div className="font-medium text-foreground">

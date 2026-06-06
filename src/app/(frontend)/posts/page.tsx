@@ -55,21 +55,23 @@ export default async function Page() {
         </div>
       </div> */}
 
-      <div className="container mb-8">
-        <PageRange
-          collection="posts"
-          currentPage={posts.page}
-          limit={12}
-          totalDocs={posts.totalDocs}
-        />
-      </div>
+      <div className="bg-[#F6F3EC] py-8">
+        {/* <div className="container">
+          <PageRange
+            collection="posts"
+            currentPage={posts.page}
+            limit={12}
+            totalDocs={posts.totalDocs}
+          />
+        </div> */}
 
-      <CollectionArchive posts={posts.docs} />
+        <CollectionArchive posts={posts.docs} />
 
-      <div className="container">
-        {posts.totalPages > 1 && posts.page && (
-          <Pagination page={posts.page} totalPages={posts.totalPages} />
-        )}
+        <div className="container">
+          {posts.totalPages > 1 && posts.page && (
+            <Pagination page={posts.page} totalPages={posts.totalPages} />
+          )}
+        </div>
       </div>
     </div>
   )

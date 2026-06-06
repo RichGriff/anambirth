@@ -46,24 +46,19 @@ export const PostHero: React.FC<{
             to hold space for yourself during the transition.
           </p>
         </div>
-        <div className="relative min-h-[70vh] max-w-6xl select-none mb-8">
-          {heroImage && typeof heroImage !== 'string' && (
-            // <Media
-            //   fill
-            //   priority
-            //   imgClassName="object-cover shadow-2xl rounded-xl"
-            //   resource={heroImage}
-            // />
+        {heroImage && typeof heroImage !== 'string' && (
+          <div className="relative min-h-[70vh] max-w-6xl select-none mb-8">
             <Media
               className=""
+              alt={title || 'Post hero image'}
               // imgClassName="object-cover object-middle h-[300px] md:h-[400px] 2xl:h-[500px] rounded-t-4xl"
               imgClassName="object-cover object-middle h-[300px] sm:h-[600px] rounded-3xl z-10"
               priority
               resource={heroImage}
             />
-          )}
-          <div className="rounded-xl absolute pointer-events-none left-0 bottom-0 w-full h-1/2 bg-linear-to-t from-black to-transparent" />
-        </div>
+            <div className="rounded-3xl absolute pointer-events-none left-0 top-0 w-full h-75 sm:h-150 bg-linear-to-t from-black/40 to-transparent" />
+          </div>
+        )}
       </div>
     </div>
     // <div className="relative mt-[-10.4rem] flex items-end bg-primary">

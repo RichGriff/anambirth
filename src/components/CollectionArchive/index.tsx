@@ -2,7 +2,6 @@ import { cn } from '@/utilities/ui'
 import React from 'react'
 
 import { Card, CardPostData } from '@/components/Card'
-import { Media } from '@/collections/Media'
 
 export type Props = {
   posts: CardPostData[]
@@ -10,7 +9,6 @@ export type Props = {
 
 export const CollectionArchive: React.FC<Props> = (props) => {
   const { posts } = props
-  console.log('Posts', { posts })
 
   return (
     <div className={cn('container pb-16')}>
@@ -19,8 +17,17 @@ export const CollectionArchive: React.FC<Props> = (props) => {
           {posts?.map((post, index) => {
             if (typeof post === 'object' && post !== null) {
               return (
-                <div className="col-span-4" key={index}>
-                  <Card className="h-full" doc={post} relationTo="posts" showCategories />
+                <div
+                  className={cn(index === 0 ? 'col-span-full' : 'col-span-4')}
+                  key={post.slug || index}
+                >
+                  <Card
+                    index={index}
+                    className="h-full"
+                    doc={post}
+                    relationTo="posts"
+                    showCategories
+                  />
                 </div>
               )
             }
