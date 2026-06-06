@@ -10,8 +10,8 @@ const config = {
         DEFAULT: {
           css: [
             {
-              '--tw-prose-body': 'var(--color-muted-foreground)',
-              '--tw-prose-headings': 'var(--color-foreground)',
+              // '--tw-prose-body': 'var(--color-muted-foreground)',
+              // '--tw-prose-headings': 'var(--color-foreground)',
               h1: {
                 fontWeight: 'normal',
                 marginBottom: '0.25em',

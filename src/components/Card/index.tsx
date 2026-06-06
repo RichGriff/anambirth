@@ -8,8 +8,9 @@ import type { Post } from '@/payload-types'
 
 import { Media } from '@/components/Media'
 import { hero } from '@/heros/config'
+import { MoveRightIcon } from 'lucide-react'
 
-export type CardPostData = Pick<Post, 'slug' | 'categories' | 'meta' | 'title'>
+export type CardPostData = Pick<Post, 'slug' | 'categories' | 'meta' | 'title' | 'heroImage'>
 
 export const Card: React.FC<{
   alignItems?: 'center'
@@ -33,7 +34,7 @@ export const Card: React.FC<{
   return (
     <article
       className={cn(
-        'border border-border rounded-lg overflow-hidden bg-card hover:cursor-pointer',
+        // 'border border-border rounded-lg overflow-hidden bg-card hover:cursor-pointer',
         className,
       )}
       ref={card.ref}
@@ -44,26 +45,24 @@ export const Card: React.FC<{
           <Media
             resource={heroImage}
             size="33vw"
-            imgClassName="object-cover apply-ratio aspect-video"
+            imgClassName="object-cover min-h-[28rem] max-h-[28rem] rounded-lg"
           />
         )}
       </div>
-      <div className="p-4">
+      <div className="py-4">
         {showCategories && hasCategories && (
-          <div className="uppercase text-sm mb-4">
+          <div className="uppercase text-xs mb-1">
             {categories?.map((category, index) => {
               if (typeof category === 'object') {
                 const { title: titleFromCategory } = category
-
                 const categoryTitle = titleFromCategory || 'Untitled category'
-
                 const isLast = index === categories.length - 1
 
                 return (
-                  <Fragment key={index}>
+                  <div key={index} className="text-accent inline-block">
                     {categoryTitle}
-                    {!isLast && <Fragment>, &nbsp;</Fragment>}
-                  </Fragment>
+                    {!isLast && <span>, &nbsp;</span>}
+                  </div>
                 )
               }
 
@@ -73,14 +72,20 @@ export const Card: React.FC<{
         )}
         {titleToUse && (
           <div className="prose">
-            <h3>
-              <Link className="not-prose" href={href} ref={link.ref}>
+            <h3 className="font-(family-name:--font-cormorant) text-3xl font-light leading-tight text-foreground">
+              {titleToUse}
+              {/* <Link className="not-prose" href={href} ref={link.ref}>
                 {titleToUse}
-              </Link>
+              </Link> */}
             </h3>
           </div>
         )}
-        {description && <div className="mt-2">{description && <p>{sanitizedDescription}</p>}</div>}
+        {description && (
+          <div className="my-6 leading-relaxed text-foreground lg:mx-0 mx-auto w-full">
+            {description && <p>{sanitizedDescription}</p>}
+          </div>
+        )}
+        <p className="text-xs text-accent uppercase">Read Story</p>
       </div>
     </article>
   )

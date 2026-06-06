@@ -29,13 +29,31 @@ export default async function Page() {
   })
 
   return (
-    <div className="pt-24 pb-24">
+    <div className="">
       <PageClient />
-      <div className="container mb-16">
+
+      <div className="bg-[#FCF9F2]">
+        <div className="container w-full flex flex-col justify-center items-center text-center min-h-[calc(100svh-24rem)]">
+          <div className="max-w-3xl mb-12">
+            <div className="uppercase text-xs text-accent mb-4 flex justify-center items-center gap-2">
+              Storytelling & Reflection
+            </div>
+            <h1 className="font-(family-name:--font-cormorant) text-4xl font-light leading-tight tracking-tight md:text-5xl lg:text-6xl text-foreground text-balance">
+              The Journel
+            </h1>
+            <p className="mt-6 text-lg leading-relaxed text-muted-foreground md:text-xl lg:mx-0 mx-auto w-full">
+              A sacred space for sharing stories of birth, transition, and wholeness. Here, we honor
+              the raw edges and the radiant moments of the human experience.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      {/* <div className="container mb-16">
         <div className="prose dark:prose-invert max-w-none">
           <h1>Posts</h1>
         </div>
-      </div>
+      </div> */}
 
       <div className="container mb-8">
         <PageRange

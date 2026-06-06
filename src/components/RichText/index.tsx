@@ -80,7 +80,8 @@ export default function RichText(props: Props) {
         {
           container: enableGutter,
           'max-w-none': !enableGutter,
-          'mx-auto prose md:prose-md prose-headings:text-foreground prose-p:text-muted-foreground':
+          'mx-auto prose md:prose-md':
+            // 'mx-auto prose md:prose-md prose-headings:text-foreground prose-p:text-muted-foreground':
             enableProse,
         },
         className,

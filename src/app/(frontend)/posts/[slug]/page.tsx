@@ -59,7 +59,7 @@ export default async function Post({ params: paramsPromise }: Args) {
   console.log('Post page render', { authors: post.populatedAuthors })
 
   return (
-    <article className="pt-16 pb-16">
+    <article className="pt-16">
       <PageClient />
 
       {/* Allows redirects for valid pages too */}
@@ -69,7 +69,7 @@ export default async function Post({ params: paramsPromise }: Args) {
 
       <PostHero post={post} />
 
-      <div className="flex flex-col items-center gap-4 pt-8">
+      <div className="flex flex-col items-center gap-4 pt-8 pb-16 bg-[#F6F3EC]">
         <div className="container">
           <RichText className="max-w-3xl mx-auto" data={post.content} enableGutter={false} />
 
