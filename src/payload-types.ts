@@ -606,6 +606,7 @@ export interface Page {
               id?: string | null;
             }[]
           | null;
+        bg: 'bg-light' | 'bg-lighter' | 'bg-dark' | 'bg-white';
         id?: string | null;
         blockName?: string | null;
         blockType: 'offeringSummary';
@@ -614,6 +615,7 @@ export interface Page {
         heading?: string | null;
         description?: string | null;
         testimonials?: (number | Testimonial)[] | null;
+        bg: 'bg-light' | 'bg-lighter' | 'bg-dark' | 'bg-white';
         id?: string | null;
         blockName?: string | null;
         blockType: 'testimonialBlock';
@@ -621,6 +623,7 @@ export interface Page {
     | {
         heading: string;
         subtitle?: string | null;
+        bg: 'bg-light' | 'bg-lighter' | 'bg-dark' | 'bg-white';
         links?:
           | {
               link: {
@@ -797,6 +800,7 @@ export interface FormBlock {
         id?: string | null;
       }[]
     | null;
+  bg: 'bg-light' | 'bg-lighter' | 'bg-dark' | 'bg-white';
   id?: string | null;
   blockName?: string | null;
   blockType: 'formBlock';
@@ -999,6 +1003,7 @@ export interface LatestPost {
   tagline?: string | null;
   heading?: string | null;
   limit: number;
+  bg: 'bg-light' | 'bg-lighter' | 'bg-dark' | 'bg-white';
   id?: string | null;
   blockName?: string | null;
   blockType: 'latestPost';
@@ -1065,6 +1070,7 @@ export interface OfferingSummary {
         id?: string | null;
       }[]
     | null;
+  bg: 'bg-light' | 'bg-lighter' | 'bg-dark' | 'bg-white';
   id?: string | null;
   blockName?: string | null;
   blockType: 'offeringSummary';
@@ -1077,6 +1083,7 @@ export interface TestimonialBlock {
   heading?: string | null;
   description?: string | null;
   testimonials?: (number | Testimonial)[] | null;
+  bg: 'bg-light' | 'bg-lighter' | 'bg-dark' | 'bg-white';
   id?: string | null;
   blockName?: string | null;
   blockType: 'testimonialBlock';
@@ -1088,6 +1095,7 @@ export interface TestimonialBlock {
 export interface Philosophy {
   heading: string;
   subtitle?: string | null;
+  bg: 'bg-light' | 'bg-lighter' | 'bg-dark' | 'bg-white';
   links?:
     | {
         link: {
@@ -1471,6 +1479,7 @@ export interface PagesSelect<T extends boolean = true> {
                         };
                     id?: T;
                   };
+              bg?: T;
               id?: T;
               blockName?: T;
             };
@@ -1480,6 +1489,7 @@ export interface PagesSelect<T extends boolean = true> {
               heading?: T;
               description?: T;
               testimonials?: T;
+              bg?: T;
               id?: T;
               blockName?: T;
             };
@@ -1488,6 +1498,7 @@ export interface PagesSelect<T extends boolean = true> {
           | {
               heading?: T;
               subtitle?: T;
+              bg?: T;
               links?:
                 | T
                 | {
@@ -1545,6 +1556,7 @@ export interface FormBlockSelect<T extends boolean = true> {
         item?: T;
         id?: T;
       };
+  bg?: T;
   id?: T;
   blockName?: T;
 }
@@ -1556,6 +1568,7 @@ export interface LatestPostSelect<T extends boolean = true> {
   tagline?: T;
   heading?: T;
   limit?: T;
+  bg?: T;
   id?: T;
   blockName?: T;
 }

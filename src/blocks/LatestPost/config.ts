@@ -1,3 +1,4 @@
+import { backgroundColorField } from '@/fields/backgroundColor'
 import type { Block } from 'payload'
 
 export const LatestPost: Block = {
@@ -23,6 +24,7 @@ export const LatestPost: Block = {
       max: 12,
       required: true,
     },
+    backgroundColorField(),
   ],
   labels: {
     singular: 'Latest Post',

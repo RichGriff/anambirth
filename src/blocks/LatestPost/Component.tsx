@@ -6,14 +6,17 @@ import configPromise from '@payload-config'
 import { getPayload } from 'payload'
 import Link from 'next/link'
 import { MoveRightIcon } from 'lucide-react'
+import { SectionBackground } from '../Section/SectionBackground'
+import { BackgroundColorValue } from '@/fields/backgroundColor'
 
 type LatestPostProps = {
   heading?: string | null
   limit?: number | null
   tagline?: string | null
+  bg: BackgroundColorValue
 }
 
-export const LatestPost = async ({ heading, limit = 3, tagline }: LatestPostProps) => {
+export const LatestPost = async ({ heading, limit = 3, tagline, bg }: LatestPostProps) => {
   const payload = await getPayload({ config: configPromise })
 
   const latestPosts = await payload.find({
@@ -40,7 +43,7 @@ export const LatestPost = async ({ heading, limit = 3, tagline }: LatestPostProp
   if (!posts?.length) return null
 
   return (
-    <section className="bg-[#FCF9F2] pb-8 pt-20">
+    <SectionBackground bg={bg} className="px-6 py-24">
       <div className={cn('container pb-16')}>
         <div className="flex justify-between items-center">
           <div className="flex flex-col">
@@ -87,6 +90,6 @@ export const LatestPost = async ({ heading, limit = 3, tagline }: LatestPostProp
           })}
         </div>
       </div>
-    </section>
+    </SectionBackground>
   )
 }

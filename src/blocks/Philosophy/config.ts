@@ -1,3 +1,4 @@
+import { backgroundColorField } from '@/fields/backgroundColor'
 import { linkGroup } from '@/fields/linkGroup'
 import { Block } from 'payload'
 
@@ -13,6 +14,7 @@ export const Philosophy: Block = {
       name: 'subtitle',
       type: 'textarea',
     },
+    backgroundColorField(),
     linkGroup({
       appearances: false,
       overrides: {

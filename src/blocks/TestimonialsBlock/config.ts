@@ -1,3 +1,4 @@
+import { backgroundColorField } from '@/fields/backgroundColor'
 import { Block } from 'payload'
 
 export const TestimonialsBlock: Block = {
@@ -17,5 +18,6 @@ export const TestimonialsBlock: Block = {
       relationTo: 'testimonials',
       hasMany: true,
     },
+    backgroundColorField(),
   ],
 }

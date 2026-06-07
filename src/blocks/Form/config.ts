@@ -6,6 +6,7 @@ import {
   InlineToolbarFeature,
   lexicalEditor,
 } from '@payloadcms/richtext-lexical'
+import { backgroundColorField } from '@/fields/backgroundColor'
 
 export const FormBlock: Block = {
   slug: 'formBlock',
@@ -60,6 +61,7 @@ export const FormBlock: Block = {
       },
       label: 'Intro List',
     },
+    backgroundColorField(),
     // {
     //   name: 'introContent',
     //   type: 'richText',

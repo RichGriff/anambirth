@@ -3,13 +3,14 @@ import { InViewFade, StaggerInView, StaggerItem } from '@/components/animations/
 import type { TestimonialBlock as TestimonialsBlockProps } from '@/payload-types'
 import { isPopulatedRelationship } from '@/utilities/isPopulatedRelationship'
 import { User2Icon } from 'lucide-react'
+import { SectionBackground } from '../Section/SectionBackground'
 
 export const TestimonialsBlock = (props: TestimonialsBlockProps) => {
-  const { heading, description, testimonials } = props
+  const { heading, description, testimonials, bg } = props
   const selectedTestimonials = (testimonials || []).filter(isPopulatedRelationship)
 
   return (
-    <section className="bg-[#F6F3EC] px-6 py-24">
+    <SectionBackground bg={bg} className="px-6 py-24">
       <div className="mx-auto max-w-5xl">
         <InViewFade className="text-center">
           <h2 className="font-(family-name:--font-cormorant) text-3xl font-light md:text-4xl text-foreground">
@@ -50,6 +51,6 @@ export const TestimonialsBlock = (props: TestimonialsBlockProps) => {
           </StaggerInView>
         )}
       </div>
-    </section>
+    </SectionBackground>
   )
 }

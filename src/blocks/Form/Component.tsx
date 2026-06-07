@@ -11,6 +11,8 @@ import type { DefaultTypedEditorState } from '@payloadcms/richtext-lexical'
 import { fields } from './fields'
 import { getClientSideURL } from '@/utilities/getURL'
 import { CheckCircle2Icon, CheckIcon, ClockIcon } from 'lucide-react'
+import { SectionBackground } from '../Section/SectionBackground'
+import { BackgroundColorValue } from '@/fields/backgroundColor'
 
 export type FormBlockType = {
   blockName?: string
@@ -22,6 +24,7 @@ export type FormBlockType = {
   introHeading?: string
   introDescription?: string
   introList?: { item: string }[]
+  bg: BackgroundColorValue
 }
 
 export const FormBlock: React.FC<
@@ -38,6 +41,7 @@ export const FormBlock: React.FC<
     introHeading,
     introDescription,
     introList,
+    bg,
   } = props
 
   const formMethods = useForm({
@@ -126,8 +130,9 @@ export const FormBlock: React.FC<
   )
 
   return (
-    <div
+    <SectionBackground
       id="connection"
+      bg={bg}
       className="bg-primary py-16 bg-[radial-gradient(120%_120%_at_100%_100%,color-mix(in_oklab,var(--color-accent)_20%,transparent)_0%,transparent_58%)] md:bg-[radial-gradient(120%_120%_at_100%_0%,color-mix(in_oklab,var(--color-accent)_40%,transparent)_0%,transparent_58%)]"
     >
       <div className="grid grid-cols-1 px-3 md:grid-cols-2 gap-16 items-center max-w-7xl mx-auto py-6 md:py-16 text-white">
@@ -233,6 +238,6 @@ export const FormBlock: React.FC<
           </div>
         </div>
       </div>
-    </div>
+    </SectionBackground>
   )
 }

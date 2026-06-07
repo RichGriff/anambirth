@@ -5,12 +5,19 @@ import type { Philosophy as PhilosophyProps } from '@/payload-types'
 import { Button } from '@/components/ui/button'
 import { Media } from '@/components/Media'
 import { InViewFade } from '@/components/animations/InView'
+import { SectionBackground } from '../Section/SectionBackground'
 
-export const Philosophy: React.FC<PhilosophyProps> = ({ heading, subtitle, links, principles }) => {
+export const Philosophy: React.FC<PhilosophyProps> = ({
+  heading,
+  subtitle,
+  links,
+  principles,
+  bg,
+}) => {
   const aboutLink = links?.[0]?.link
 
   return (
-    <section className="px-6 py-24 bg-[#FCF9F2]">
+    <SectionBackground bg={bg} className="px-6 py-24">
       <div className="mx-auto max-w-5xl">
         {/* Header */}
         <InViewFade className="mb-16 text-center">
@@ -75,6 +82,6 @@ export const Philosophy: React.FC<PhilosophyProps> = ({ heading, subtitle, links
           </div>
         )}
       </div>
-    </section>
+    </SectionBackground>
   )
 }

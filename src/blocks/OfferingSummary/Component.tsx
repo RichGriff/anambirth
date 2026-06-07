@@ -5,6 +5,7 @@ import { ArrowRight, MoveRightIcon } from 'lucide-react'
 import type { OfferingSummary as OfferingSummaryProps } from '@/payload-types'
 import { Button } from '@/components/ui/button'
 import { InViewFade, StaggerInView, StaggerItem } from '@/components/animations/InView'
+import { SectionBackground } from '../Section/SectionBackground'
 
 type OfferingSummaryLink = NonNullable<
   NonNullable<OfferingSummaryProps['items']>[number]['links']
@@ -26,9 +27,10 @@ export const OfferingSummary: React.FC<OfferingSummaryProps> = ({
   heading,
   description,
   items,
+  bg,
 }) => {
   return (
-    <section className="px-6 py-24 bg-[#F6F3EC]">
+    <SectionBackground bg={bg} className="px-6">
       <div className="mx-auto max-w-5xl">
         <div className="text-center">
           <InViewFade>
@@ -82,6 +84,6 @@ export const OfferingSummary: React.FC<OfferingSummaryProps> = ({
           </StaggerInView>
         )}
       </div>
-    </section>
+    </SectionBackground>
   )
 }

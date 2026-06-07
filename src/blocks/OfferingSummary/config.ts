@@ -1,4 +1,5 @@
 import { linkGroup } from '@/fields/linkGroup'
+import { backgroundColorField } from '@/fields/backgroundColor'
 import { Block } from 'payload'
 
 export const OfferingSummary: Block = {
@@ -44,5 +45,6 @@ export const OfferingSummary: Block = {
       minRows: 2,
       maxRows: 4,
     },
+    backgroundColorField(),
   ],
 }

@@ -1,3 +1,4 @@
+import { backgroundColorField } from '@/fields/backgroundColor'
 import { Block } from 'payload' // import the Block type from 'payload'
 
 export const Section: Block = {
@@ -18,22 +19,9 @@ export const Section: Block = {
         initCollapsed: true,
       },
     },
-    {
-      name: 'bg',
-      type: 'select', // and will have the select type
-      label: 'Background Color', // and will have a label of 'Background Color' to make it clear what it's for
-      options: [
-        { value: 'bg-primary', label: 'Primary Color' },
-        { value: 'bg-secondary', label: 'Secondary Color' },
-        { value: 'bg-black', label: 'Black' },
-        { value: 'bg-light', label: 'Light' },
-        { value: 'bg-lighter', label: 'Lighter' },
-        { value: 'bg-dark', label: 'Dark' },
-        { value: 'bg-white', label: 'White' },
-      ],
-      defaultValue: 'bg-white',
-      required: true,
-    },
+    backgroundColorField({
+      includeBrandColors: true,
+    }),
     {
       name: 'showDivider',
       type: 'checkbox',
