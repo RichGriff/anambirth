@@ -21,6 +21,7 @@ export default async function Page() {
     overrideAccess: false,
     select: {
       title: true,
+      subTitle: true,
       slug: true,
       categories: true,
       meta: true,
@@ -48,7 +49,7 @@ export default async function Page() {
       <div className="bg-[#FCF9F2]">
         <div className="container w-full flex flex-col justify-center items-center text-center min-h-[calc(100svh-24rem)]">
           <div className="max-w-3xl mb-12">
-            <div className="uppercase text-xs text-accent mb-4 flex justify-center items-center gap-2">
+            <div className="mb-4 text-sm uppercase tracking-[0.3em] text-accent">
               {postHeading?.postPageHeading?.eyebrowHeading || 'Storytelling & Reflection'}
             </div>
             <h1 className="font-(family-name:--font-cormorant) text-4xl font-light leading-tight tracking-tight md:text-5xl lg:text-6xl text-foreground text-balance">

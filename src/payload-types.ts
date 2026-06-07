@@ -693,6 +693,7 @@ export interface Page {
 export interface Post {
   id: number;
   title: string;
+  subTitle?: string | null;
   heroImage?: (number | null) | Media;
   guestBlog?: boolean | null;
   guestBlogUrl?: string | null;
@@ -1611,6 +1612,7 @@ export interface LatestPostSelect<T extends boolean = true> {
  */
 export interface PostsSelect<T extends boolean = true> {
   title?: T;
+  subTitle?: T;
   heroImage?: T;
   guestBlog?: T;
   guestBlogUrl?: T;

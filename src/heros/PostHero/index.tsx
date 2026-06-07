@@ -9,7 +9,7 @@ import { formatAuthors } from '@/utilities/formatAuthors'
 export const PostHero: React.FC<{
   post: Post
 }> = ({ post }) => {
-  const { categories, heroImage, populatedAuthors, publishedAt, title } = post
+  const { categories, heroImage, populatedAuthors, publishedAt, title, subTitle } = post
 
   const hasAuthors =
     populatedAuthors && populatedAuthors.length > 0 && formatAuthors(populatedAuthors) !== ''
@@ -42,8 +42,7 @@ export const PostHero: React.FC<{
             </h1>
           )}
           <p className="mt-6 text-lg leading-relaxed text-muted-foreground md:text-xl lg:mx-0 mx-auto w-full">
-            Exploring the emotional and spiritual landscape of labor as a rite of passage, and how
-            to hold space for yourself during the transition.
+            {subTitle}
           </p>
         </div>
         {heroImage && typeof heroImage !== 'string' && (
