@@ -47,7 +47,7 @@ export const PostHero: React.FC<{
           </p>
         </div>
         {heroImage && typeof heroImage !== 'string' && (
-          <div className="relative min-h-[70vh] max-w-6xl select-none mb-8">
+          <div className="relative min-h-auto md:min-h-[70vh] max-w-6xl select-none mb-2 md:mb-8">
             <Media
               className=""
               alt={title || 'Post hero image'}
