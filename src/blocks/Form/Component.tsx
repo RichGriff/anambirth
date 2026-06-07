@@ -131,7 +131,7 @@ export const FormBlock: React.FC<
       className="bg-primary py-16 bg-[radial-gradient(120%_120%_at_100%_100%,color-mix(in_oklab,var(--color-accent)_20%,transparent)_0%,transparent_58%)] md:bg-[radial-gradient(120%_120%_at_100%_0%,color-mix(in_oklab,var(--color-accent)_40%,transparent)_0%,transparent_58%)]"
     >
       <div className="grid grid-cols-1 px-3 md:grid-cols-2 gap-16 items-center max-w-7xl mx-auto py-6 md:py-16 text-white">
-        {enableIntro && (introEyebrowHeading || introHeading) && !hasSubmitted && (
+        {enableIntro && (introEyebrowHeading || introHeading) && (
           <div className="px-4">
             {introEyebrowHeading && (
               <div className="mb-4 flex items-center text-sm uppercase tracking-[0.3em] text-foreground-light before:mr-3 before:block before:h-px before:w-8 before:bg-current">
@@ -167,11 +167,11 @@ export const FormBlock: React.FC<
           <div className="rounded-2xl bg-[hsla(0,0%,100%,0.03)] p-6 shadow-sm md:p-8 lg:p-10 col-span-6">
             <FormProvider {...formMethods}>
               {!isLoading && hasSubmitted && confirmationType === 'message' && (
-                <div className="rounded-2xl border border-primary/15 bg-primary/5 p-6 md:p-8">
-                  <p className="mb-3 text-[0.72rem] uppercase tracking-[0.22em] text-primary">
-                    Submission received
+                <div className="rounded-xl p-6 md:p-8">
+                  <p className="mb-3 text-[0.72rem] uppercase tracking-[0.22em] text-accent text-center">
+                    Contact Form Submitted!
                   </p>
-                  <RichText data={confirmationMessage} />
+                  <RichText data={confirmationMessage} className="text-foreground-light" />
                 </div>
               )}
               {isLoading && !hasSubmitted && (

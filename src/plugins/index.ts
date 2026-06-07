@@ -20,6 +20,7 @@ import { beforeSyncWithSearch } from '@/search/beforeSync'
 
 import { Page, Post } from '@/payload-types'
 import { getServerSideURL } from '@/utilities/getURL'
+import { sendConfirmationEmail } from '@/email/sendConfirmation'
 
 const generateTitle: GenerateTitle<Post | Page> = ({ doc }) => {
   return doc?.title ? `${doc.title} | Anam Birth` : 'Anam Birth'
@@ -120,33 +121,20 @@ export const plugins: Plugin[] = [
         })
       },
     },
+    // redirectRelationships: ['pages'],
+    defaultToEmail: 'hello@anambirth.com',
+    formSubmissionOverrides: {
+      hooks: {
+        afterOperation: [
+          async ({ operation, result, req }) => {
+            if (operation === 'create') {
+              await sendConfirmationEmail(req.payload, result.submissionData)
+            }
+          },
+        ],
+      },
+    },
   }),
-  // formBuilderPlugin({
-  //   fields: {
-  //     payment: false,
-  //   },
-  //   formOverrides: {
-  //     fields: ({ defaultFields }) => {
-  //       return defaultFields.map((field) => {
-  //         if ('name' in field && field.name === 'confirmationMessage') {
-  //           return {
-  //             ...field,
-  //             editor: lexicalEditor({
-  //               features: ({ rootFeatures }) => {
-  //                 return [
-  //                   ...rootFeatures,
-  //                   FixedToolbarFeature(),
-  //                   HeadingFeature({ enabledHeadingSizes: ['h1', 'h2', 'h3', 'h4'] }),
-  //                 ]
-  //               },
-  //             }),
-  //           }
-  //         }
-  //         return field
-  //       })
-  //     },
-  //   },
-  // }),
   searchPlugin({
     collections: ['posts'],
     beforeSync: beforeSyncWithSearch,

@@ -34,6 +34,7 @@ import { TestimonialsBlock } from './blocks/TestimonialsBlock/config'
 import { Philosophy } from './blocks/Philosophy/config'
 import { LatestPost } from './blocks/LatestPost/config'
 import { Settings } from './Settings/config'
+import { nodemailerAdapter } from '@payloadcms/email-nodemailer'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -132,4 +133,17 @@ export default buildConfig({
     },
     tasks: [],
   },
+  email: nodemailerAdapter({
+    defaultFromAddress: 'hello@anambirth.com',
+    defaultFromName: 'Anam Birth',
+    transportOptions: {
+      host: 'smtp.hostinger.com',
+      port: 465,
+      secure: true, // true for port 465, false for 587
+      auth: {
+        user: process.env.SMTP_USER,
+        pass: process.env.SMTP_PASS,
+      },
+    },
+  }),
 })
