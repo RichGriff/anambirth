@@ -12,7 +12,15 @@ import { ImageIcon, MoveRightIcon } from 'lucide-react'
 
 export type CardPostData = Pick<
   Post,
-  'slug' | 'categories' | 'meta' | 'title' | 'heroImage' | 'excerpt'
+  | 'slug'
+  | 'categories'
+  | 'meta'
+  | 'title'
+  | 'heroImage'
+  | 'excerpt'
+  | 'guestBlog'
+  | 'publishedAt'
+  | 'guestBlogUrl'
 >
 
 export const Card: React.FC<{
@@ -38,18 +46,29 @@ export const Card: React.FC<{
     block,
   } = props
 
-  const { slug, categories, meta, title, heroImage, excerpt } = doc || {}
+  const {
+    slug,
+    categories,
+    meta,
+    title,
+    heroImage,
+    excerpt,
+    guestBlog,
+    publishedAt,
+    guestBlogUrl,
+  } = doc || {}
   const { description, image: metaImage } = meta || {}
 
   const hasCategories = categories && Array.isArray(categories) && categories.length > 0
   const titleToUse = titleFromProps || title
   const excerptToUse = excerptFromProps || excerpt
   const sanitizedDescription = description?.replace(/\s/g, ' ') // replace non-breaking space with white space
-  const href = `/${relationTo}/${slug}`
+  const defaultHref = `/${relationTo}/${slug}`
+  const href = guestBlog ? (guestBlogUrl ?? defaultHref) : defaultHref
   const isFeatured = index === 0
 
   return (
-    <Link href={href} ref={link.ref}>
+    <Link href={href} ref={link.ref} target={guestBlog ? '_blank' : '_self'}>
       <article
         className={cn(
           // 'border border-border rounded-lg overflow-hidden bg-card hover:cursor-pointer',
@@ -60,6 +79,11 @@ export const Card: React.FC<{
         ref={card.ref}
       >
         <div className={cn('relative w-full', isFeatured && 'md:col-span-7')}>
+          {guestBlog && (
+            <span className="absolute top-4 right-4 bg-accent border border-accent text-accent-foreground px-3 py-1 rounded-full text-xs uppercase">
+              Guest Blog
+            </span>
+          )}
           {!heroImage && (
             <div className="flex justify-center items-center bg-accent/10 min-h-112 max-h-112 rounded-lg w-full">
               <ImageIcon className="size-10 text-accent" />

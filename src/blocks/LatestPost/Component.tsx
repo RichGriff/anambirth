@@ -29,7 +29,9 @@ export const LatestPost = async ({ heading, limit = 3, tagline }: LatestPostProp
       meta: true,
       heroImage: true,
       excerpt: true,
+      guestBlog: true,
       publishedAt: true,
+      guestBlogUrl: true,
     },
   })
 

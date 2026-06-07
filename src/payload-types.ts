@@ -681,7 +681,9 @@ export interface Post {
   id: number;
   title: string;
   heroImage?: (number | null) | Media;
-  content: {
+  guestBlog?: boolean | null;
+  guestBlogUrl?: string | null;
+  content?: {
     root: {
       type: string;
       children: {
@@ -695,7 +697,7 @@ export interface Post {
       version: number;
     };
     [k: string]: unknown;
-  };
+  } | null;
   /**
    * A short summary of the post, used in previews and SEO.
    */
@@ -1564,6 +1566,8 @@ export interface LatestPostSelect<T extends boolean = true> {
 export interface PostsSelect<T extends boolean = true> {
   title?: T;
   heroImage?: T;
+  guestBlog?: T;
+  guestBlogUrl?: T;
   content?: T;
   excerpt?: T;
   relatedPosts?: T;

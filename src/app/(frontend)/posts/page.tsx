@@ -26,6 +26,9 @@ export default async function Page() {
       meta: true,
       heroImage: true,
       excerpt: true,
+      guestBlog: true,
+      publishedAt: true,
+      guestBlogUrl: true,
     },
   })
 

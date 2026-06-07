@@ -85,6 +85,26 @@ export const Posts: CollectionConfig<'posts'> = {
               relationTo: 'media',
             },
             {
+              name: 'guestBlog',
+              type: 'checkbox',
+              label: 'Is this a guest blog post?',
+            },
+            {
+              name: 'guestBlogUrl',
+              type: 'text',
+              label: 'Guest Blog URL',
+              required: false,
+              validate: (value: any, { data }: any) => {
+                if (data.guestBlog && !value) {
+                  return 'Guest Blog URL is required when guest blog is enabled'
+                }
+                return true
+              },
+              admin: {
+                condition: (data) => !!data.guestBlog,
+              },
+            },
+            {
               name: 'content',
               type: 'richText',
               editor: lexicalEditor({
@@ -101,6 +121,11 @@ export const Posts: CollectionConfig<'posts'> = {
                   ]
                 },
               }),
+              admin: {
+                condition: (data) => {
+                  return !data.guestBlog // show when NOT a guest blog
+                },
+              },
               label: false,
               required: true,
             },
