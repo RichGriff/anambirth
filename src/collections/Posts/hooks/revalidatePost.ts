@@ -7,6 +7,7 @@ import type { Post } from '../../../payload-types'
 const revalidatePostsListing = () => {
   revalidatePath('/posts')
   revalidatePath('/posts/page/[pageNumber]', 'page')
+  revalidatePath('/')
 }
 
 export const revalidatePost: CollectionAfterChangeHook<Post> = ({
