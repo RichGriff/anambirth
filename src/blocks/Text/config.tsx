@@ -1,5 +1,6 @@
 import { Block } from 'payload'
 import {
+  BlockquoteFeature,
   FixedToolbarFeature,
   InlineToolbarFeature,
   OrderedListFeature,
@@ -22,6 +23,7 @@ export const Text: Block = {
             OrderedListFeature(),
             FixedToolbarFeature(),
             InlineToolbarFeature(),
+            BlockquoteFeature(),
           ]
         },
       }),

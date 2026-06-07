@@ -83,6 +83,7 @@ export interface Config {
     testimonialBlock: TestimonialBlock;
     philosophy: Philosophy;
     latestPost: LatestPost;
+    featuredQuote: FeaturedQuote;
   };
   collections: {
     pages: Page;
@@ -657,6 +658,15 @@ export interface Page {
         blockType: 'philosophy';
       }
     | LatestPost
+    | {
+        quote: string;
+        author?: string | null;
+        source?: string | null;
+        bg: 'bg-light' | 'bg-lighter' | 'bg-dark' | 'bg-white';
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'featuredQuote';
+      }
   )[];
   meta?: {
     title?: string | null;
@@ -1130,6 +1140,19 @@ export interface Philosophy {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "featuredQuote".
+ */
+export interface FeaturedQuote {
+  quote: string;
+  author?: string | null;
+  source?: string | null;
+  bg: 'bg-light' | 'bg-lighter' | 'bg-dark' | 'bg-white';
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'featuredQuote';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "redirects".
  */
 export interface Redirect {
@@ -1525,6 +1548,16 @@ export interface PagesSelect<T extends boolean = true> {
               blockName?: T;
             };
         latestPost?: T | LatestPostSelect<T>;
+        featuredQuote?:
+          | T
+          | {
+              quote?: T;
+              author?: T;
+              source?: T;
+              bg?: T;
+              id?: T;
+              blockName?: T;
+            };
       };
   meta?:
     | T

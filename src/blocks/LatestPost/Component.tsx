@@ -43,9 +43,9 @@ export const LatestPost = async ({ heading, limit = 3, tagline, bg }: LatestPost
   if (!posts?.length) return null
 
   return (
-    <SectionBackground bg={bg} className="px-6 py-24">
-      <div className={cn('container pb-16')}>
-        <div className="flex justify-between items-center">
+    <SectionBackground bg={bg} className="px-2">
+      <div className="container py-3 md:py-6">
+        <div className="flex flex-col justify-start items-start md:flex-row md:justify-between md:items-center mb-8">
           <div className="flex flex-col">
             {tagline && (
               <div className="uppercase text-xs text-accent mb-2 flex justify-start items-start gap-2">
@@ -54,7 +54,7 @@ export const LatestPost = async ({ heading, limit = 3, tagline, bg }: LatestPost
             )}
 
             {heading && (
-              <div className="mb-8">
+              <div className="mb-2">
                 <h2 className="font-(family-name:--font-cormorant) text-3xl font-light md:text-4xl text-foreground">
                   {heading}
                 </h2>

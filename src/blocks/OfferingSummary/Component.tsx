@@ -31,7 +31,7 @@ export const OfferingSummary: React.FC<OfferingSummaryProps> = ({
 }) => {
   return (
     <SectionBackground bg={bg} className="px-6">
-      <div className="mx-auto max-w-5xl">
+      <div className="mx-auto max-w-5xl pb-12">
         <div className="text-center">
           <InViewFade>
             <h2 className="font-(family-name:--font-cormorant) text-3xl font-light md:text-4xl text-foreground">

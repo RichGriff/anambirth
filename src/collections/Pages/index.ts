@@ -21,6 +21,7 @@ import { OfferingSummary } from '@/blocks/OfferingSummary/config'
 import { TestimonialsBlock } from '@/blocks/TestimonialsBlock/config'
 import { Philosophy } from '@/blocks/Philosophy/config'
 import { LatestPost } from '@/blocks/LatestPost/config'
+import { FeaturedQuote } from '@/blocks/FeaturedQuote/config'
 
 export const Pages: CollectionConfig<'pages'> = {
   slug: 'pages',
@@ -81,6 +82,7 @@ export const Pages: CollectionConfig<'pages'> = {
                 TestimonialsBlock,
                 Philosophy,
                 LatestPost,
+                FeaturedQuote,
               ],
               required: true,
               admin: {

@@ -35,6 +35,7 @@ import { Philosophy } from './blocks/Philosophy/config'
 import { LatestPost } from './blocks/LatestPost/config'
 import { Settings } from './Settings/config'
 import { nodemailerAdapter } from '@payloadcms/email-nodemailer'
+import { FeaturedQuote } from './blocks/FeaturedQuote/config'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -106,6 +107,7 @@ export default buildConfig({
     TestimonialsBlock,
     Philosophy,
     LatestPost,
+    FeaturedQuote,
   ],
   cors: [getServerSideURL()].filter(Boolean),
   globals: [Header, Footer, Settings],
