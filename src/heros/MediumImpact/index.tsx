@@ -16,7 +16,7 @@ export const MediumImpactHero: React.FC<Page['hero']> = ({
   subHeading,
 }) => {
   return (
-    <div className="bg-primary py-20 px-2 sm:px-0">
+    <div className="bg-primary py-20 px-2 sm:px-0 md:bg-[radial-gradient(120%_120%_at_0%_100%,color-mix(in_oklab,var(--color-accent)_40%,transparent)_0%,transparent_58%)]">
       <div className="container">
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 md:gap-16 mb-12 justify-center items-center">
           <div className="mb-8">

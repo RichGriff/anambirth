@@ -71,7 +71,10 @@ export default async function Post({ params: paramsPromise }: Args) {
 
       <div className="flex flex-col items-center gap-4 pt-8 pb-16 bg-[#F6F3EC]">
         <div className="container">
-          <RichText className="max-w-3xl mx-auto" data={post.content} enableGutter={false} />
+          {/* <RichText className="max-w-3xl mx-auto" data={post.content} enableGutter={false} /> */}
+          {!post.guestBlog && post.content && (
+            <RichText className="max-w-3xl mx-auto" data={post.content} enableGutter={false} />
+          )}
 
           <div className="mx-auto mt-12 mb-8 h-px max-w-3xl bg-primary/10" />
 
