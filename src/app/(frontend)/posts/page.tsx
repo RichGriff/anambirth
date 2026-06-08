@@ -100,11 +100,13 @@ export async function generateMetadata(): Promise<Metadata> {
     overrideAccess: true,
   })) as any
 
+  const baseTitle = settings?.postPageMeta?.title || 'Anam Birth Posts'
+
   return generateMeta({
     doc: {
       slug: 'posts',
       meta: {
-        title: settings?.postPageMeta?.title || 'Anam Birth Posts',
+        title: baseTitle,
         description: settings?.postPageMeta?.description,
         image: settings?.postPageMeta?.image,
       },

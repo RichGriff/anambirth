@@ -5,18 +5,22 @@ import type { Media, Page, Post, Config } from '../payload-types'
 import { mergeOpenGraph } from './mergeOpenGraph'
 import { getServerSideURL } from './getURL'
 
-const getImageURL = (image?: Media | Config['db']['defaultIDType'] | null) => {
+const getImageURL = (image?: Media | Config['db']['defaultIDType'] | null): string => {
   const serverUrl = getServerSideURL()
-
-  let url = serverUrl + '/website-template-OG.webp'
 
   if (image && typeof image === 'object' && 'url' in image) {
     const ogUrl = image.sizes?.og?.url
+    const url = ogUrl ?? image.url
 
-    url = ogUrl ? serverUrl + ogUrl : serverUrl + image.url
+    if (!url) return `${serverUrl}/website-template-OG.webp`
+
+    // Already absolute (S3, CDN, etc.)
+    if (url.startsWith('http')) return url
+
+    return `${serverUrl}${url}`
   }
 
-  return url
+  return `${serverUrl}/website-template-OG.webp`
 }
 
 export const generateMeta = async (args: {
