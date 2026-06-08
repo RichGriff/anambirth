@@ -107,17 +107,11 @@ export default async function Post({ params: paramsPromise }: Args) {
               </div>
             </div>
             <div className="flex items-center gap-2">
-              {/* <div className="font-medium text-foreground bg-accent/10 hover:bg-accent/30 hover:cursor-pointer p-2 rounded-full flex items-center gap-2">
-                <Share2Icon className="size-5 text-primary" />
-              </div> */}
               <ShareButton
                 title={post.meta?.title || 'Check out this post!'}
                 text={post.meta?.description ?? ''}
                 className="font-medium text-primary! bg-accent/10 hover:bg-accent/30 hover:cursor-pointer p-2 rounded-full flex items-center gap-2"
               />
-              <div className="font-medium text-foreground bg-accent/10 hover:bg-accent/30 hover:cursor-pointer p-2 rounded-full flex items-center gap-2">
-                <BookmarkIcon className="size-5 text-primary" />
-              </div>
             </div>
           </div>
 

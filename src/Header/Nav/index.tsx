@@ -8,6 +8,7 @@ import { CMSLink } from '@/components/Link'
 import Link from 'next/link'
 import { SearchIcon, Menu, X, MoveRightIcon } from 'lucide-react'
 import { Button } from '@/components/ui/button'
+import ShareButton from '@/components/ui/share-button'
 
 export const HeaderNav: React.FC<{ data: HeaderType }> = ({ data }) => {
   const navItems = data?.navItems || []
@@ -21,16 +22,18 @@ export const HeaderNav: React.FC<{ data: HeaderType }> = ({ data }) => {
     <>
       {/* Desktop Navigation */}
       <nav className="hidden md:flex gap-6 items-center">
-        {navItems.map(({ link }, i) => {
-          return (
-            <CMSLink
-              key={i}
-              {...link}
-              appearance="link"
-              className="hover:no-underline text-secondary/80 hover:text-secondary transition-colors"
-            />
-          )
-        })}
+        <div className="md:flex gap-6 items-center pr-4">
+          {navItems.map(({ link }, i) => {
+            return (
+              <CMSLink
+                key={i}
+                {...link}
+                appearance="link"
+                className="hover:no-underline text-secondary/80 hover:text-secondary transition-colors"
+              />
+            )
+          })}
+        </div>
         {/* <Link href="/search">
           <span className="sr-only">Search</span>
           <SearchIcon className="w-5 text-primary" />
