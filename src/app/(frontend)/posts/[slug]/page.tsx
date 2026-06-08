@@ -18,6 +18,7 @@ import { Separator } from '@radix-ui/react-select'
 import Image from 'next/image'
 import { Media } from '@/components/Media'
 import { BookmarkIcon, Share2Icon, User2Icon } from 'lucide-react'
+import ShareButton from '@/components/ui/share-button'
 
 export async function generateStaticParams() {
   const payload = await getPayload({ config: configPromise })
@@ -55,8 +56,6 @@ export default async function Post({ params: paramsPromise }: Args) {
   const post = await queryPostBySlug({ slug: decodedSlug })
 
   if (!post) return <PayloadRedirects url={url} />
-
-  console.log('Post page render', { authors: post.populatedAuthors })
 
   return (
     <article className="pt-16">
@@ -108,9 +107,14 @@ export default async function Post({ params: paramsPromise }: Args) {
               </div>
             </div>
             <div className="flex items-center gap-2">
-              <div className="font-medium text-foreground bg-accent/10 hover:bg-accent/30 hover:cursor-pointer p-2 rounded-full flex items-center gap-2">
+              {/* <div className="font-medium text-foreground bg-accent/10 hover:bg-accent/30 hover:cursor-pointer p-2 rounded-full flex items-center gap-2">
                 <Share2Icon className="size-5 text-primary" />
-              </div>
+              </div> */}
+              <ShareButton
+                title={post.meta?.title || 'Check out this post!'}
+                text={post.meta?.description ?? ''}
+                className="font-medium text-primary! bg-accent/10 hover:bg-accent/30 hover:cursor-pointer p-2 rounded-full flex items-center gap-2"
+              />
               <div className="font-medium text-foreground bg-accent/10 hover:bg-accent/30 hover:cursor-pointer p-2 rounded-full flex items-center gap-2">
                 <BookmarkIcon className="size-5 text-primary" />
               </div>

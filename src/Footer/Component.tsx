@@ -6,6 +6,7 @@ import { ThemeSelector } from '@/providers/Theme/ThemeSelector'
 import { CMSLink } from '@/components/Link'
 import { Logo } from '@/components/Logo/Logo'
 import { BookmarkIcon, Share2Icon } from 'lucide-react'
+import ShareButton from '@/components/ui/share-button'
 
 export async function Footer() {
   const footerData = await getCachedGlobal('footer', 1)()
@@ -81,7 +82,11 @@ export async function Footer() {
         </Link>
         <p className="text-sm text-muted-foreground-light">© 2026 All rights reserved.</p>
         <div className="flex items-center gap-4 py-2">
-          <Share2Icon className="w-5 h-5 text-secondary/80 hover:text-secondary transition-colors cursor-pointer" />
+          {/* <Share2Icon className="w-5 h-5 text-secondary/80 hover:text-secondary transition-colors cursor-pointer" /> */}
+          <ShareButton
+            title="Anam Birth | Soul-led Doula Support"
+            text="Grounded, soulful support for your journey"
+          />
           <BookmarkIcon className="w-5 h-5 text-secondary/80 hover:text-secondary transition-colors cursor-pointer" />
         </div>
         {/* <p className="text-sm text-muted-foreground-light">
