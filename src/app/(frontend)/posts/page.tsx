@@ -3,6 +3,7 @@ import type { Metadata } from 'next/types'
 import { CollectionArchive } from '@/components/CollectionArchive'
 import { PageRange } from '@/components/PageRange'
 import { Pagination } from '@/components/Pagination'
+import { generateMeta } from '@/utilities/generateMeta'
 import configPromise from '@payload-config'
 import { getPayload } from 'payload'
 import React from 'react'
@@ -91,8 +92,22 @@ export default async function Page() {
   )
 }
 
-export function generateMetadata(): Metadata {
-  return {
-    title: `Anam Birth Posts`,
-  }
+export async function generateMetadata(): Promise<Metadata> {
+  const payload = await getPayload({ config: configPromise })
+  const settings = (await payload.findGlobal({
+    slug: 'settings',
+    depth: 1,
+    overrideAccess: true,
+  })) as any
+
+  return generateMeta({
+    doc: {
+      slug: 'posts',
+      meta: {
+        title: settings?.postPageMeta?.title || 'Anam Birth Posts',
+        description: settings?.postPageMeta?.description,
+        image: settings?.postPageMeta?.image,
+      },
+    } as any,
+  })
 }

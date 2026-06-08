@@ -2253,6 +2253,20 @@ export interface Setting {
     mainHeading?: string | null;
     subHeading?: string | null;
   };
+  postPageMeta?: {
+    /**
+     * Custom title used for /posts metadata.
+     */
+    title?: string | null;
+    /**
+     * Custom description used for /posts metadata.
+     */
+    description?: string | null;
+    /**
+     * Used as the Open Graph/Twitter image for /posts.
+     */
+    image?: (number | null) | Media;
+  };
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -2352,6 +2366,13 @@ export interface SettingsSelect<T extends boolean = true> {
         eyebrowHeading?: T;
         mainHeading?: T;
         subHeading?: T;
+      };
+  postPageMeta?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        image?: T;
       };
   updatedAt?: T;
   createdAt?: T;

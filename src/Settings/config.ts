@@ -76,6 +76,36 @@ export const Settings: GlobalConfig = {
                 },
               ],
             },
+            {
+              type: 'group',
+              name: 'postPageMeta',
+              label: 'Page SEO',
+              fields: [
+                {
+                  name: 'title',
+                  type: 'text',
+                  admin: {
+                    description: 'Custom title used for /posts metadata.',
+                  },
+                },
+                {
+                  name: 'description',
+                  type: 'textarea',
+                  admin: {
+                    description: 'Custom description used for /posts metadata.',
+                  },
+                },
+                {
+                  name: 'image',
+                  label: 'Social Share Image',
+                  type: 'upload',
+                  relationTo: 'media',
+                  admin: {
+                    description: 'Used as the Open Graph/Twitter image for /posts.',
+                  },
+                },
+              ],
+            },
           ],
         },
       ],

@@ -3,6 +3,7 @@ import type { Metadata } from 'next/types'
 import { CollectionArchive } from '@/components/CollectionArchive'
 import { PageRange } from '@/components/PageRange'
 import { Pagination } from '@/components/Pagination'
+import { generateMeta } from '@/utilities/generateMeta'
 import configPromise from '@payload-config'
 import { getPayload } from 'payload'
 import React from 'react'
@@ -65,9 +66,25 @@ export default async function Page({ params: paramsPromise }: Args) {
 
 export async function generateMetadata({ params: paramsPromise }: Args): Promise<Metadata> {
   const { pageNumber } = await paramsPromise
-  return {
-    title: `Anam Birth Posts Page ${pageNumber || ''}`,
-  }
+  const payload = await getPayload({ config: configPromise })
+  const settings = (await payload.findGlobal({
+    slug: 'settings',
+    depth: 1,
+    overrideAccess: true,
+  })) as any
+
+  const baseTitle = settings?.postPageMeta?.title || 'Anam Birth Posts'
+
+  return generateMeta({
+    doc: {
+      slug: `posts/page/${pageNumber}`,
+      meta: {
+        title: `${baseTitle} Page ${pageNumber || ''}`,
+        description: settings?.postPageMeta?.description,
+        image: settings?.postPageMeta?.image,
+      },
+    } as any,
+  })
 }
 
 export async function generateStaticParams() {
