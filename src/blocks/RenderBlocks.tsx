@@ -19,6 +19,7 @@ import {
   TestimonialBlock as TestimonialsBlockProps,
   Philosophy as PhilosophyProps,
   FeaturedQuote as FeaturedQuoteProps,
+  Accreditation as AccreditationProps,
 } from '@/payload-types'
 
 import { Section } from '@/blocks/Section/Component'
@@ -39,6 +40,7 @@ import { Philosophy } from '@/blocks/Philosophy/Component'
 import { CallToAction } from '@/blocks/CallToAction/Component'
 import { LatestPost } from '@/blocks/LatestPost/Component'
 import { FeaturedQuote } from './FeaturedQuote/Component'
+import { Accreditation } from './Accreditation/Component'
 
 const blockComponents = {
   section: Section,
@@ -59,6 +61,7 @@ const blockComponents = {
   philosophy: Philosophy,
   latestPost: LatestPost,
   featuredQuote: FeaturedQuote,
+  accreditation: Accreditation,
 }
 
 const isBlockComponentKey = (key: unknown): key is keyof typeof blockComponents =>
@@ -90,6 +93,7 @@ export const RenderBlocks: React.FC<{
     | TestimonialsBlockProps['blockType']
     | PhilosophyProps['blockType']
     | FeaturedQuoteProps['blockType']
+    | AccreditationProps['blockType']
 }> = (props) => {
   const { blocks } = props
 

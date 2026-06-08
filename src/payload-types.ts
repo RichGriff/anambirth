@@ -84,6 +84,7 @@ export interface Config {
     philosophy: Philosophy;
     latestPost: LatestPost;
     featuredQuote: FeaturedQuote;
+    accreditation: Accreditation;
   };
   collections: {
     pages: Page;
@@ -667,6 +668,21 @@ export interface Page {
         blockName?: string | null;
         blockType: 'featuredQuote';
       }
+    | {
+        title: string;
+        items?:
+          | {
+              name: string;
+              logo: number | Media;
+              url?: string | null;
+              id?: string | null;
+            }[]
+          | null;
+        bg: 'bg-light' | 'bg-lighter' | 'bg-dark' | 'bg-white';
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'accreditation';
+      }
   )[];
   meta?: {
     title?: string | null;
@@ -1154,6 +1170,25 @@ export interface FeaturedQuote {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "accreditation".
+ */
+export interface Accreditation {
+  title: string;
+  items?:
+    | {
+        name: string;
+        logo: number | Media;
+        url?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  bg: 'bg-light' | 'bg-lighter' | 'bg-dark' | 'bg-white';
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'accreditation';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "redirects".
  */
 export interface Redirect {
@@ -1555,6 +1590,22 @@ export interface PagesSelect<T extends boolean = true> {
               quote?: T;
               author?: T;
               source?: T;
+              bg?: T;
+              id?: T;
+              blockName?: T;
+            };
+        accreditation?:
+          | T
+          | {
+              title?: T;
+              items?:
+                | T
+                | {
+                    name?: T;
+                    logo?: T;
+                    url?: T;
+                    id?: T;
+                  };
               bg?: T;
               id?: T;
               blockName?: T;

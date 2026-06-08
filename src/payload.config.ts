@@ -36,6 +36,7 @@ import { LatestPost } from './blocks/LatestPost/config'
 import { Settings } from './Settings/config'
 import { nodemailerAdapter } from '@payloadcms/email-nodemailer'
 import { FeaturedQuote } from './blocks/FeaturedQuote/config'
+import { Accreditation } from './blocks/Accreditation/config'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -108,6 +109,7 @@ export default buildConfig({
     Philosophy,
     LatestPost,
     FeaturedQuote,
+    Accreditation,
   ],
   cors: [getServerSideURL()].filter(Boolean),
   globals: [Header, Footer, Settings],

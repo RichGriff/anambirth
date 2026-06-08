@@ -10,7 +10,7 @@ export const TestimonialsBlock = (props: TestimonialsBlockProps) => {
   const selectedTestimonials = (testimonials || []).filter(isPopulatedRelationship)
 
   return (
-    <SectionBackground bg={bg} className="px-6 py-24">
+    <SectionBackground bg={bg} showDivider className="px-6">
       <div className="mx-auto max-w-5xl">
         <InViewFade className="text-center">
           <h2 className="font-(family-name:--font-cormorant) text-3xl font-light md:text-4xl text-foreground">
