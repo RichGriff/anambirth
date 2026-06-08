@@ -31,7 +31,7 @@ export const OfferingSummary: React.FC<OfferingSummaryProps> = ({
 }) => {
   return (
     <SectionBackground bg={bg} className="px-6">
-      <div className="mx-auto max-w-5xl pb-12">
+      <div className="mx-auto max-w-6xl pb-12">
         <div className="text-center">
           <InViewFade>
             <h2 className="font-(family-name:--font-cormorant) text-3xl font-light md:text-4xl text-foreground">
@@ -42,7 +42,7 @@ export const OfferingSummary: React.FC<OfferingSummaryProps> = ({
         </div>
 
         {items && (
-          <StaggerInView staggerChildren={0.12} className="mt-16 grid gap-8 md:grid-cols-2">
+          <StaggerInView staggerChildren={0.12} className="mt-16 grid gap-8 md:grid-cols-3">
             {items.map((item, index) => (
               <StaggerItem
                 key={index}

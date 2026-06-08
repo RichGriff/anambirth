@@ -16,6 +16,11 @@ export const OfferingSummary: Block = {
     {
       name: 'items',
       type: 'array',
+      admin: {
+        components: {
+          RowLabel: '@/blocks/OfferingSummary/RowLabel#RowLabel',
+        },
+      },
       fields: [
         {
           name: 'title',
