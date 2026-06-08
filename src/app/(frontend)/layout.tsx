@@ -67,4 +67,13 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     creator: '@payloadcms',
   },
+  icons: {
+    icon: [
+      { url: '/favicon.ico' },
+      { url: '/icon-192x192.png', sizes: '192x192', type: 'image/png' }, // Android
+      { url: '/icon-512x512.png', sizes: '512x512', type: 'image/png' }, // Android HD
+    ],
+    shortcut: '/favicon.ico',
+    apple: '/apple-touch-icon.png', // iOS 180x180
+  },
 }
