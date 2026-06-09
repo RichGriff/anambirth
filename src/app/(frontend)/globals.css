@@ -354,15 +354,32 @@
     @apply text-muted-foreground leading-relaxed;
   } */
 
-  .richtext-site.prose ul {
+  .richtext-default.prose ul {
+    @apply list-disc pl-6;
+    columns: unset;
+    column-gap: unset;
+  }
+
+  .richtext-default.prose ul li {
+    @apply text-muted-foreground;
+    break-inside: auto;
+    padding-bottom: 0;
+  }
+
+  .richtext-default.prose ul li::marker {
+    color: currentColor;
+    font-size: 1em;
+  }
+
+  .richtext-offering.prose ul {
     @apply list-disc pl-6 md:columns-2 md:gap-10;
   }
 
-  .richtext-site.prose ul li {
+  .richtext-offering.prose ul li {
     @apply break-inside-avoid pb-1 text-muted-foreground;
   }
 
-  .richtext-site.prose ul li::marker {
+  .richtext-offering.prose ul li::marker {
     color: var(--color-accent) !important;
     font-size: 1.4rem !important;
   }

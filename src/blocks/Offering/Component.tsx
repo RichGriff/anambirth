@@ -114,10 +114,20 @@ export const Offering: React.FC<OfferingProps> = ({
 
         <InViewFade delay={0.06}>
           <div className="mt-10 grid items-start gap-8 lg:grid-cols-2 lg:gap-12">
-            <RichText className="max-w-none" data={leftColumn} enableGutter={false} />
+            <RichText
+              className="max-w-none"
+              data={leftColumn}
+              enableGutter={false}
+              listVariant="offering"
+            />
 
             {rightColumn && rightColumn.root.children.length > 0 && (
-              <RichText className="max-w-none" data={rightColumn} enableGutter={false} />
+              <RichText
+                className="max-w-none"
+                data={rightColumn}
+                enableGutter={false}
+                listVariant="offering"
+              />
             )}
           </div>
         </InViewFade>
@@ -154,6 +164,7 @@ export const Offering: React.FC<OfferingProps> = ({
                     className="mt-4 text-muted-foreground leading-relaxed"
                     data={whatsIncluded.content}
                     enableGutter={false}
+                    listVariant="offering"
                   />
                 )}
               </div>

@@ -15,6 +15,8 @@ import { draftMode } from 'next/headers'
 import { Geist } from 'next/font/google'
 import { Cormorant_Garamond } from 'next/font/google'
 
+import Script from 'next/script'
+
 import './globals.css'
 import { getServerSideURL } from '@/utilities/getURL'
 
@@ -53,6 +55,12 @@ export default async function RootLayout({ children }: { children: React.ReactNo
 
           <Header />
           {children}
+          <Script
+            async
+            src="https://analytics.soliths.cloud/script.js"
+            data-website-id="4cb5a416-8237-4a83-ae87-feed3d696ccc"
+            strategy="afterInteractive"
+          />
           <Footer />
         </Providers>
       </body>
