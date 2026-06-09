@@ -353,6 +353,23 @@
   /* .richtext-site.prose p {
     @apply text-muted-foreground leading-relaxed;
   } */
+
+  .richtext-site.prose ul {
+    @apply list-disc pl-6 md:columns-2 md:gap-10;
+  }
+
+  .richtext-site.prose ul li {
+    @apply break-inside-avoid pb-1 text-muted-foreground;
+  }
+
+  .richtext-site.prose ul li::marker {
+    color: var(--color-accent) !important;
+    font-size: 1.4rem !important;
+  }
+
+  .richtext-site.prose ol {
+    @apply pl-6;
+  }
 }
 
 html {

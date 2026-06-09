@@ -683,6 +683,7 @@ export interface Page {
         blockName?: string | null;
         blockType: 'accreditation';
       }
+    | Offering
   )[];
   meta?: {
     title?: string | null;
@@ -1034,6 +1035,63 @@ export interface LatestPost {
   id?: string | null;
   blockName?: string | null;
   blockType: 'latestPost';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Offering".
+ */
+export interface Offering {
+  eyebrowHeading?: string | null;
+  mainHeading: string;
+  subHeading?: string | null;
+  details: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  whatsIncluded?: {
+    heading?: string | null;
+    content?: {
+      root: {
+        type: string;
+        children: {
+          type: any;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
+      };
+      [k: string]: unknown;
+    } | null;
+  };
+  investment?: {
+    title?: string | null;
+    subtitle?: string | null;
+    items?: (number | Investment1)[] | null;
+  };
+  footnotes?:
+    | {
+        text: string;
+        id?: string | null;
+      }[]
+    | null;
+  bg: 'bg-light' | 'bg-lighter' | 'bg-dark' | 'bg-white';
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'offering';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1610,6 +1668,7 @@ export interface PagesSelect<T extends boolean = true> {
               id?: T;
               blockName?: T;
             };
+        offering?: T | OfferingSelect<T>;
       };
   meta?:
     | T
@@ -1653,6 +1712,38 @@ export interface LatestPostSelect<T extends boolean = true> {
   tagline?: T;
   heading?: T;
   limit?: T;
+  bg?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Offering_select".
+ */
+export interface OfferingSelect<T extends boolean = true> {
+  eyebrowHeading?: T;
+  mainHeading?: T;
+  subHeading?: T;
+  details?: T;
+  whatsIncluded?:
+    | T
+    | {
+        heading?: T;
+        content?: T;
+      };
+  investment?:
+    | T
+    | {
+        title?: T;
+        subtitle?: T;
+        items?: T;
+      };
+  footnotes?:
+    | T
+    | {
+        text?: T;
+        id?: T;
+      };
   bg?: T;
   id?: T;
   blockName?: T;

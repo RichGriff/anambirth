@@ -16,6 +16,7 @@ import {
   ValuesList as ValuesListProps,
   CallToAction as CallToActionProps,
   OfferingSummary as OfferingSummaryProps,
+  Offering as OfferingProps,
   TestimonialBlock as TestimonialsBlockProps,
   Philosophy as PhilosophyProps,
   FeaturedQuote as FeaturedQuoteProps,
@@ -41,6 +42,7 @@ import { CallToAction } from '@/blocks/CallToAction/Component'
 import { LatestPost } from '@/blocks/LatestPost/Component'
 import { FeaturedQuote } from './FeaturedQuote/Component'
 import { Accreditation } from './Accreditation/Component'
+import { Offering } from './Offering/Component'
 
 const blockComponents = {
   section: Section,
@@ -57,6 +59,7 @@ const blockComponents = {
   valuesList: ValuesList,
   cta: CallToAction,
   offeringSummary: OfferingSummary,
+  offering: Offering,
   testimonialBlock: TestimonialsBlock,
   philosophy: Philosophy,
   latestPost: LatestPost,

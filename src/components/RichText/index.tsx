@@ -40,7 +40,7 @@ const jsxConverters: JSXConvertersFunction<NodeTypes> = ({ defaultConverters }) 
   ...LinkJSXConverter({ internalDocToHref }),
   quote: ({ node }) => (
     <blockquote className="border-l-2 border-primary/10 pl-4">
-      <p className="font-(family-name:--font-cormorant) text-xl font-light italic leading-relaxed text-foreground">
+      <p className="font-(family-name:--font-cormorant) text-2xl font-light italic leading-relaxed text-foreground">
         {node.children?.map((child: any, index: number) => (
           <span key={index}>{child.text}</span>
         ))}

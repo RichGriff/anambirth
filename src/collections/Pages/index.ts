@@ -23,6 +23,7 @@ import { Philosophy } from '@/blocks/Philosophy/config'
 import { LatestPost } from '@/blocks/LatestPost/config'
 import { FeaturedQuote } from '@/blocks/FeaturedQuote/config'
 import { Accreditation } from '@/blocks/Accreditation/config'
+import { Offering } from '@/blocks/Offering/config'
 
 export const Pages: CollectionConfig<'pages'> = {
   slug: 'pages',
@@ -85,6 +86,7 @@ export const Pages: CollectionConfig<'pages'> = {
                 LatestPost,
                 FeaturedQuote,
                 Accreditation,
+                Offering,
               ],
               required: true,
               admin: {
