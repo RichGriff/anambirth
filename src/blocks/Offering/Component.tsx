@@ -1,6 +1,7 @@
 import RichText from '@/components/RichText'
 import { InViewFade, StaggerInViewList, StaggerListItem } from '@/components/animations/InView'
 import type { Offering as OfferingProps } from '@/payload-types'
+import { formatAnchor } from '@/utilities/anchors'
 import { isPopulatedRelationship } from '@/utilities/isPopulatedRelationship'
 import type { DefaultTypedEditorState } from '@payloadcms/richtext-lexical'
 import { HeartIcon, SparklesIcon } from 'lucide-react'
@@ -36,6 +37,7 @@ const splitDetailsIntoColumns = (details: DefaultTypedEditorState) => {
 export const Offering: React.FC<OfferingProps> = ({
   eyebrowHeading,
   mainHeading,
+  anchorId,
   subHeading,
   details,
   whatsIncluded,
@@ -46,6 +48,7 @@ export const Offering: React.FC<OfferingProps> = ({
   const selectedInvestments = (investment?.items || []).filter(isPopulatedRelationship)
   const safeFootnotes = footnotes || []
   const { leftColumn, rightColumn } = splitDetailsIntoColumns(details)
+  const sectionId = formatAnchor(anchorId)
 
   const renderPriceLabel = (option: (typeof selectedInvestments)[number]) => {
     if (option.paymentOption === 'monthly') {
@@ -88,7 +91,7 @@ export const Offering: React.FC<OfferingProps> = ({
     }[Math.min(selectedInvestments.length, 4)] ?? 'grid-cols-1'
 
   return (
-    <SectionBackground bg={bg} className="px-6">
+    <SectionBackground id={sectionId || undefined} bg={bg} className="px-6">
       <div className="mx-auto max-w-6xl">
         <InViewFade>
           <div>

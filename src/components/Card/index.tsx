@@ -140,6 +140,15 @@ export const Card: React.FC<{
               {excerptToUse && <p>{excerptToUse}</p>}
             </div>
           )}
+          {publishedAt && (
+            <div className="text-sm text-muted-foreground">
+              {new Date(publishedAt).toLocaleDateString(undefined, {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+              })}
+            </div>
+          )}
           {/* <Link href={href} ref={link.ref}>
             <p className="text-xs text-accent uppercase hover:underline">Read Story</p>
           </Link> */}

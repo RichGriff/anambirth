@@ -585,6 +585,10 @@ export interface Page {
               subtitle?: string | null;
               description?: string | null;
               priceFrom?: number | null;
+              /**
+               * Optional anchor on the destination page, for example "postpartum".
+               */
+              sectionAnchor?: string | null;
               links?:
                 | {
                     link: {
@@ -1043,6 +1047,10 @@ export interface LatestPost {
 export interface Offering {
   eyebrowHeading?: string | null;
   mainHeading: string;
+  /**
+   * Optional section anchor for direct links, for example "postpartum".
+   */
+  anchorId?: string | null;
   subHeading?: string | null;
   details: {
     root: {
@@ -1132,6 +1140,10 @@ export interface OfferingSummary {
         subtitle?: string | null;
         description?: string | null;
         priceFrom?: number | null;
+        /**
+         * Optional anchor on the destination page, for example "postpartum".
+         */
+        sectionAnchor?: string | null;
         links?:
           | {
               link: {
@@ -1580,6 +1592,7 @@ export interface PagesSelect<T extends boolean = true> {
                     subtitle?: T;
                     description?: T;
                     priceFrom?: T;
+                    sectionAnchor?: T;
                     links?:
                       | T
                       | {
@@ -1723,6 +1736,7 @@ export interface LatestPostSelect<T extends boolean = true> {
 export interface OfferingSelect<T extends boolean = true> {
   eyebrowHeading?: T;
   mainHeading?: T;
+  anchorId?: T;
   subHeading?: T;
   details?: T;
   whatsIncluded?:

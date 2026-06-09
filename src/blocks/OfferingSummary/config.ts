@@ -40,6 +40,13 @@ export const OfferingSummary: Block = {
           type: 'number',
           min: 0,
         },
+        {
+          name: 'sectionAnchor',
+          type: 'text',
+          admin: {
+            description: 'Optional anchor on the destination page, for example "postpartum".',
+          },
+        },
         linkGroup({
           appearances: false,
           overrides: {

@@ -32,6 +32,7 @@ export default async function Page() {
       publishedAt: true,
       guestBlogUrl: true,
     },
+    sort: '-publishedAt',
   })
 
   const postHeading = await payload.findGlobal({

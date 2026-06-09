@@ -22,6 +22,13 @@ export const Offering: Block = {
       required: true,
     },
     {
+      name: 'anchorId',
+      type: 'text',
+      admin: {
+        description: 'Optional section anchor for direct links, for example "postpartum".',
+      },
+    },
+    {
       name: 'subHeading',
       type: 'text',
     },

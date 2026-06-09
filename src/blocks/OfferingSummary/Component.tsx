@@ -5,22 +5,33 @@ import { ArrowRight, MoveRightIcon } from 'lucide-react'
 import type { OfferingSummary as OfferingSummaryProps } from '@/payload-types'
 import { Button } from '@/components/ui/button'
 import { InViewFade, StaggerInView, StaggerItem } from '@/components/animations/InView'
+import { formatAnchor } from '@/utilities/anchors'
 import { SectionBackground } from '../Section/SectionBackground'
 
 type OfferingSummaryLink = NonNullable<
   NonNullable<OfferingSummaryProps['items']>[number]['links']
 >[number]['link']
 
-const getHref = (link: OfferingSummaryLink) => {
+const getHref = (link: OfferingSummaryLink, sectionAnchor?: string | null) => {
+  const anchor = formatAnchor(sectionAnchor)
+
   if (
     link.type === 'reference' &&
     typeof link.reference?.value === 'object' &&
     link.reference.value.slug
   ) {
-    return `${link.reference.relationTo !== 'pages' ? `/${link.reference.relationTo}` : ''}/${link.reference.value.slug}`
+    const href = `${link.reference.relationTo !== 'pages' ? `/${link.reference.relationTo}` : ''}/${link.reference.value.slug}`
+
+    return anchor ? `${href}#${anchor}` : href
   }
 
-  return link.url || ''
+  const href = link.url || ''
+
+  if (!anchor || !href || href.includes('#')) {
+    return href
+  }
+
+  return `${href}#${anchor}`
 }
 
 export const OfferingSummary: React.FC<OfferingSummaryProps> = ({
@@ -71,7 +82,7 @@ export const OfferingSummary: React.FC<OfferingSummaryProps> = ({
                       size="icon"
                       className="rounded-full flex justify-center items-center"
                     >
-                      <Link href={getHref(item.links[0].link)}>
+                      <Link href={getHref(item.links[0].link, item.sectionAnchor)}>
                         {/* Learn more
                         <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-1" /> */}
                         <MoveRightIcon className="h-5 w-5 text-foreground-light transition-transform" />
