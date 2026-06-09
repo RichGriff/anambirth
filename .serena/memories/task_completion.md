@@ -1,0 +1,7 @@
+- For most code changes, run `pnpm lint` at minimum.
+- If Payload schema, blocks, globals, or collection config changed, also run `pnpm generate:types` and `pnpm generate:importmap` if admin/imported components are affected.
+- If logic covered by Vitest changed, run `pnpm test:int`.
+- If route behavior, browser interactions, or content publishing flows changed, run `pnpm test:e2e` when feasible.
+- For broad or risky changes, prefer full verification: `pnpm lint && pnpm test`.
+- If the task touches build/runtime wiring, also run `pnpm build`.
+- Note verification limits clearly when env-dependent steps are skipped (DB, S3, SMTP, Playwright browser runtime, etc.).

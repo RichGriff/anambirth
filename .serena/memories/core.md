@@ -1,0 +1,24 @@
+- Monorepo shape: single Next.js app with Payload CMS embedded; no package workspace structure.
+- Read `mem:tech_stack` for runtime/tooling versions, `mem:suggested_commands` for day-to-day commands, `mem:conventions` for file and config patterns, and `mem:task_completion` for verification expectations.
+- Source map:
+  - `src/payload.config.ts`: central Payload wiring for db, collections, globals, blocks, plugins, jobs, email, generated types.
+  - `src/app/(frontend)`: public Next App Router site.
+  - `src/app/(payload)`: Payload admin and API routes mounted into the same app.
+  - `src/collections`: Payload collections; each collection config is usually in `index.ts` under its folder, except simple single-file collections like `Categories.ts` and `Media.ts`.
+  - `src/blocks`: Payload block configs plus matching React render components.
+  - `src/Header`, `src/Footer`, `src/Settings`: globals and frontend renderers for shared site chrome.
+  - `src/plugins/index.ts`: Payload plugin composition; redirects, nested docs, SEO, form builder, search, S3 storage.
+  - `src/utilities`, `src/hooks`, `src/access`: shared helpers, revalidation hooks, access rules.
+  - `tests/int` and `tests/e2e`: Vitest integration tests and Playwright browser tests.
+- Runtime flow:
+  - Frontend page requests resolve through `src/app/(frontend)/...` pages, fetch content through Payload local API with `getPayload({ config: configPromise })`, and render via hero/block components.
+  - `src/app/(frontend)/page.tsx` is just the home-page alias for `src/app/(frontend)/[slug]/page.tsx`; home content is the page with slug `home`.
+  - Published/draft access is mostly controlled at collection level; frontend pages use `draftMode()` to switch Payload queries and live preview listeners.
+- Payload invariants:
+  - Authoritative DB config is Postgres via `@payloadcms/db-postgres`; current `docker-compose.yml` still points at an older Mongo/yarn template and should not be treated as the source of truth.
+  - Payload generates `src/payload-types.ts` from `src/payload.config.ts`; generated files are intentionally ignored by ESLint.
+  - Revalidation hooks are attached to pages, posts, redirects, header, and footer changes so frontend content stays fresh after admin edits.
+- Content model highlights:
+  - `pages` use a tabbed editor with hero + section-based block layout.
+  - `posts` use Lexical rich text with embedded content blocks, categories, related posts, authors, and SEO fields.
+  - Global navigation/footer data is managed through Payload globals, not hardcoded frontend config.

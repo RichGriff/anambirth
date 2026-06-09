@@ -74,26 +74,7 @@ type SectionColumns = SectionProps extends { columns?: infer T }
     : never
 
 export const RenderBlocks: React.FC<{
-  blocks:
-    | Page['content']
-    | SectionColumns
-    | ColumnProps['content']
-    | TextProps['blockType']
-    | EyebrowHeadingProps['blockType']
-    | InvestmentProps['blockType']
-    | FootnotesProps['blockType']
-    | InvitationListProps['blockType']
-    | IncludedItemsProps['blockType']
-    | FAQProps['blockType']
-    | FormBlockProps['blockType']
-    | ImgProps['blockType']
-    | ValuesListProps['blockType']
-    | CallToActionProps['blockType']
-    | OfferingSummaryProps['blockType']
-    | TestimonialsBlockProps['blockType']
-    | PhilosophyProps['blockType']
-    | FeaturedQuoteProps['blockType']
-    | AccreditationProps['blockType']
+  blocks: any
 }> = (props) => {
   const { blocks } = props
 

@@ -1,0 +1,16 @@
+- Language: TypeScript with `strict: true`; some JS config files remain (`postcss.config.js`, etc.).
+- App/runtime: Next.js 16 App Router, React 19, Payload CMS 3.85.
+- Database: Postgres through `@payloadcms/db-postgres`; connection comes from `DATABASE_URL`.
+- Package manager: pnpm (`pnpm-lock.yaml`, engines allow pnpm 9 or 10).
+- Node: `^18.20.2 || >=20.9.0`.
+- Styling/UI: Tailwind CSS 4, shadcn/ui registry config in `components.json`, Radix primitives, Geist + Google fonts, some SCSS for admin-related surfaces.
+- Rich text/editor: Payload Lexical editor (`@payloadcms/richtext-lexical`).
+- Media/storage: local Next image handling plus Payload media collection stored through `@payloadcms/storage-s3`.
+- Email: Nodemailer adapter configured in Payload config; SMTP creds from `SMTP_USER` / `SMTP_PASS`.
+- Search/SEO/plugins: Payload redirects, nested docs, SEO, search, form builder.
+- Testing: Vitest with jsdom for `tests/int/**/*.int.spec.ts`; Playwright for `tests/e2e` with local `pnpm dev` web server.
+- Linting/formatting: ESLint 9 flat config with Next presets; Prettier installed but no dedicated script.
+- Aliases:
+  - `@/*` -> `src/*`
+  - `@payload-config` -> `src/payload.config.ts`
+  - shadcn alias `utils` -> `@/utilities/ui`

@@ -1,0 +1,14 @@
+- Install deps: `pnpm install`
+- Start dev server: `pnpm dev`
+- Production build: `pnpm build`
+- Run production server after build: `pnpm start`
+- Rebuild and serve production locally: `pnpm dev:prod`
+- Lint: `pnpm lint`
+- Autofix lint issues: `pnpm lint:fix`
+- Generate Payload import map after admin/component config changes: `pnpm generate:importmap`
+- Generate Payload TS types after schema/config changes: `pnpm generate:types`
+- Run integration tests: `pnpm test:int`
+- Run browser tests: `pnpm test:e2e`
+- Run full test suite: `pnpm test`
+- Run Payload CLI directly: `pnpm payload <subcommand>`
+- Darwin note: repo scripts already use `cross-env`; use package scripts instead of manually reproducing `NODE_OPTIONS` flags.

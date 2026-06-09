@@ -1,0 +1,20 @@
+- Keep changes minimal and local; repo structure already separates Payload schema/config from frontend render components.
+- Naming/layout patterns:
+  - Collection configs usually export a PascalCase constant from `src/collections/<Name>/index.ts`.
+  - Block configs live in `src/blocks/<Block>/config.ts`; matching frontend renderer usually lives in `Component.tsx` in the same folder.
+  - Globals follow the same split: config in `config.ts`, renderer in `Component.tsx`, optional hooks in `hooks/`.
+  - Shared field definitions live under `src/fields`; shared access rules under `src/access`; reusable helpers under `src/utilities`.
+- Payload schema conventions:
+  - Use `slugField()` for slugged collections.
+  - Pages/posts use plugin SEO fields and preview URL helpers.
+  - Revalidation hooks are the normal way to propagate admin changes to frontend routes.
+  - Draft/live preview support is first-class; do not bypass `draftMode()` behavior when touching frontend content fetching.
+- Frontend conventions:
+  - App Router groups separate public site `(frontend)` from Payload/admin `(payload)` within one Next app.
+  - Frontend routes usually fetch through local Payload API with `getPayload({ config: configPromise })` and cache query helpers with `React.cache`.
+  - Home route is implemented by re-exporting the slug page instead of duplicating logic.
+- Type/lint conventions:
+  - TS strict mode is on.
+  - ESLint warns, not errors, for `any`, empty object types, ts-comment, and unused vars.
+  - Prefix intentionally unused params/locals with `_` (or `ignore` for caught errors) to satisfy lint rules.
+  - Generated `src/payload-types.ts` and `src/payload-generated-schema.ts` are not hand-edited.
