@@ -34,6 +34,7 @@ import { Error as Error_33c76d9df6d6c8bbe361be0d4f14d570 } from 'src/components/
 import { Icons as Icons_9c1a3ff8a9adb7b1e4b7a5cd42725bdb } from '../../../graphics/Icon/index.tsx'
 import { Logos as Logos_217937c36742cdefe571d11857c968fa } from '../../../graphics/Logo/index.tsx'
 import { S3ClientUploadHandler as S3ClientUploadHandler_f97aa6c64367fa259c5bc0567239ef24 } from '@payloadcms/storage-s3/client'
+import { default as default_299185d9dbf7369f494cd0aad6fd2363 } from '@/components/Dashboard/Analytics'
 import { CollectionCards as CollectionCards_f9c02e79a4aed9a3924487c0cd4cafb1 } from '@payloadcms/next/rsc'
 
 /** @type import('payload').ImportMap */
@@ -74,5 +75,6 @@ export const importMap = {
   "/graphics/Icon/index.tsx#Icons": Icons_9c1a3ff8a9adb7b1e4b7a5cd42725bdb,
   "/graphics/Logo/index.tsx#Logos": Logos_217937c36742cdefe571d11857c968fa,
   "@payloadcms/storage-s3/client#S3ClientUploadHandler": S3ClientUploadHandler_f97aa6c64367fa259c5bc0567239ef24,
+  "@/components/Dashboard/Analytics#default": default_299185d9dbf7369f494cd0aad6fd2363,
   "@payloadcms/next/rsc#CollectionCards": CollectionCards_f9c02e79a4aed9a3924487c0cd4cafb1
 }

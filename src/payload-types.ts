@@ -147,6 +147,7 @@ export interface Config {
   };
   locale: null;
   widgets: {
+    'analytics-summary': AnalyticsSummaryWidget;
     collections: CollectionsWidget;
   };
   user: User;
@@ -2525,6 +2526,16 @@ export interface SettingsSelect<T extends boolean = true> {
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "analytics-summary_widget".
+ */
+export interface AnalyticsSummaryWidget {
+  data?: {
+    [k: string]: unknown;
+  };
+  width: 'medium' | 'large' | 'x-large' | 'full';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

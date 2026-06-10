@@ -38,12 +38,33 @@ import { nodemailerAdapter } from '@payloadcms/email-nodemailer'
 import { FeaturedQuote } from './blocks/FeaturedQuote/config'
 import { Accreditation } from './blocks/Accreditation/config'
 import { MusicTracks } from './collections/MusicTracks'
+import { analyticsEndpoint } from './endpoints/analytics'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
 export default buildConfig({
   admin: {
+    dashboard: {
+      defaultLayout: [
+        {
+          widgetSlug: 'collections',
+          width: 'full',
+        },
+        {
+          widgetSlug: 'analytics-summary',
+          width: 'full',
+        },
+      ],
+      widgets: [
+        {
+          slug: 'analytics-summary',
+          Component: '@/components/Dashboard/Analytics',
+          minWidth: 'medium',
+          maxWidth: 'full',
+        },
+      ],
+    },
     components: {
       // The `BeforeLogin` component renders a message that you see while logging into your admin panel.
       // Feel free to delete this at any time. Simply remove the line below.
@@ -113,6 +134,7 @@ export default buildConfig({
     Accreditation,
   ],
   cors: [getServerSideURL()].filter(Boolean),
+  endpoints: [analyticsEndpoint],
   globals: [Header, Footer, Settings],
   plugins,
   secret: process.env.PAYLOAD_SECRET,
