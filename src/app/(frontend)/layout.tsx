@@ -63,7 +63,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           <Script
             async
             src="https://analytics.soliths.cloud/script.js"
-            data-website-id="4cb5a416-8237-4a83-ae87-feed3d696ccc"
+            data-website-id="c4c689e7-c44a-4896-807d-e54b1e10dc0d"
             strategy="afterInteractive"
           />
           <Footer />
