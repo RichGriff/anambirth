@@ -19,6 +19,8 @@ import Script from 'next/script'
 
 import './globals.css'
 import { getServerSideURL } from '@/utilities/getURL'
+import MusicPlayer from '@/components/MusicPlayer/MusicPlayer'
+import { getMusicTracks } from '@/lib/getMusicTracks'
 
 const geistSans = Geist({
   subsets: ['latin'],
@@ -33,6 +35,7 @@ const cormorant = Cormorant_Garamond({
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const { isEnabled } = await draftMode()
+  const tracks = await getMusicTracks()
 
   return (
     <html
@@ -55,6 +58,8 @@ export default async function RootLayout({ children }: { children: React.ReactNo
 
           <Header />
           {children}
+          {/* Music Player */}
+          {tracks.length > 0 && <MusicPlayer tracks={tracks} />}
           <Script
             async
             src="https://analytics.soliths.cloud/script.js"

@@ -37,6 +37,7 @@ import { Settings } from './Settings/config'
 import { nodemailerAdapter } from '@payloadcms/email-nodemailer'
 import { FeaturedQuote } from './blocks/FeaturedQuote/config'
 import { Accreditation } from './blocks/Accreditation/config'
+import { MusicTracks } from './collections/MusicTracks'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -89,7 +90,7 @@ export default buildConfig({
       connectionString: process.env.DATABASE_URL || '',
     },
   }),
-  collections: [Pages, Posts, Investments, Media, Categories, Users, Testimonials],
+  collections: [Pages, Posts, Investments, Media, Categories, Users, Testimonials, MusicTracks],
   blocks: [
     Text,
     Column,

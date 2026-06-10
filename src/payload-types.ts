@@ -94,6 +94,7 @@ export interface Config {
     categories: Category;
     users: User;
     testimonials: Testimonial;
+    'music-tracks': MusicTrack;
     redirects: Redirect;
     forms: Form;
     'form-submissions': FormSubmission;
@@ -118,6 +119,7 @@ export interface Config {
     categories: CategoriesSelect<false> | CategoriesSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
     testimonials: TestimonialsSelect<false> | TestimonialsSelect<true>;
+    'music-tracks': MusicTracksSelect<false> | MusicTracksSelect<true>;
     redirects: RedirectsSelect<false> | RedirectsSelect<true>;
     forms: FormsSelect<false> | FormsSelect<true>;
     'form-submissions': FormSubmissionsSelect<false> | FormSubmissionsSelect<true>;
@@ -1258,6 +1260,29 @@ export interface Accreditation {
   blockType: 'accreditation';
 }
 /**
+ * Relaxation and meditation tracks for the music player
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "music-tracks".
+ */
+export interface MusicTrack {
+  id: number;
+  title: string;
+  artist?: string | null;
+  category?: ('relaxation' | 'meditation' | 'sleep' | 'breathwork' | 'ambient') | null;
+  audioFile: number | Media;
+  /**
+   * Optional - shown as thumbnail in the playlist
+   */
+  coverImage?: (number | null) | Media;
+  /**
+   * Lower numbers appear first in the playlist
+   */
+  order?: number | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "redirects".
  */
@@ -1474,6 +1499,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'testimonials';
         value: number | Testimonial;
+      } | null)
+    | ({
+        relationTo: 'music-tracks';
+        value: number | MusicTrack;
       } | null)
     | ({
         relationTo: 'redirects';
@@ -1959,6 +1988,20 @@ export interface TestimonialsSelect<T extends boolean = true> {
   offering?: T;
   quote?: T;
   avatar?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "music-tracks_select".
+ */
+export interface MusicTracksSelect<T extends boolean = true> {
+  title?: T;
+  artist?: T;
+  category?: T;
+  audioFile?: T;
+  coverImage?: T;
+  order?: T;
   updatedAt?: T;
   createdAt?: T;
 }
