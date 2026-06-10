@@ -87,6 +87,7 @@ export default function MusicPlayer({ tracks }: { tracks: MusicTrackProps[] }) {
   const [duration, setDuration] = useState(0)
   const [volume, setVolume] = useState(0.8)
   const [isMuted, setIsMuted] = useState(false)
+  const [isFooterVisible, setIsFooterVisible] = useState(false)
 
   const audioRef = useRef<HTMLAudioElement>(null)
   const playerRef = useRef<HTMLDivElement>(null)
@@ -144,6 +145,27 @@ export default function MusicPlayer({ tracks }: { tracks: MusicTrackProps[] }) {
     return () => document.removeEventListener('mousedown', handleClick)
   }, [isOpen])
 
+  // Lift the floating player when the footer is onscreen so it does not block footer actions.
+  useEffect(() => {
+    const footerActions = document.getElementById('footer-actions')
+    if (!footerActions) return
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsFooterVisible(entry?.isIntersecting ?? false)
+      },
+      {
+        threshold: 0.1,
+      },
+    )
+
+    observer.observe(footerActions)
+
+    return () => {
+      observer.disconnect()
+    }
+  }, [])
+
   // ── Controls ────────────────────────────────────────────────────────────
 
   const handlePlayPause = useCallback(async () => {
@@ -200,7 +222,12 @@ export default function MusicPlayer({ tracks }: { tracks: MusicTrackProps[] }) {
   const coverUrl = currentCover?.url
 
   return (
-    <div ref={playerRef} className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-3">
+    <div
+      ref={playerRef}
+      className={`fixed right-6 z-50 flex flex-col items-end gap-3 transition-[bottom] duration-300 ${
+        isFooterVisible ? 'bottom-16' : 'bottom-6'
+      }`}
+    >
       {/* Hidden native audio element */}
       <audio ref={audioRef} preload="metadata">
         {currentAudio?.url && (
@@ -381,9 +408,9 @@ export default function MusicPlayer({ tracks }: { tracks: MusicTrackProps[] }) {
                     </span>
                     {/* Cover thumbnail */}
                     {isMedia(track.coverImage) && track.coverImage.url ? (
-                       <img
-                         src={track.coverImage.url}
-                         alt=""
+                      <img
+                        src={track.coverImage.url}
+                        alt=""
                         className="w-8 h-8 rounded-md object-cover shrink-0"
                         aria-hidden="true"
                       />

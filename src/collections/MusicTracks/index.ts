@@ -1,5 +1,7 @@
 import { CollectionConfig } from 'payload'
 
+import { revalidateMusicTracks, revalidateMusicTracksDelete } from './hooks/revalidateMusicTracks'
+
 export const MusicTracks: CollectionConfig = {
   slug: 'music-tracks',
   labels: {
@@ -12,6 +14,10 @@ export const MusicTracks: CollectionConfig = {
     defaultColumns: ['title', 'artist', 'category', 'updatedAt'],
   },
   access: { read: () => true },
+  hooks: {
+    afterChange: [revalidateMusicTracks],
+    afterDelete: [revalidateMusicTracksDelete],
+  },
   fields: [
     {
       name: 'title',

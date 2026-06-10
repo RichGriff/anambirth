@@ -75,7 +75,10 @@ export async function Footer() {
         </div>
       </div>
 
-      <div className="border-t border-border/10 py-4 container flex flex-col md:flex-row items-center justify-between gap-4">
+      <div
+        id="footer-actions"
+        className="border-t border-border/10 py-4 container flex flex-col md:flex-row items-center justify-between gap-4"
+      >
         {/* Mobile Footer Logo */}
         <Link className="flex sm:hidden items-start md:col-span-3 my-2" href="/">
           <Logo loading="eager" priority="high" imagePath="/logo-icon-dark.svg" className="w-16" />

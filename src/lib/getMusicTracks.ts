@@ -1,4 +1,5 @@
 import type { MusicTrack as MusicTrackProps } from '@/payload-types'
+import { getServerSideURL } from '@/utilities/getURL'
 
 /**
  * Fetch music tracks from Payload CMS.
@@ -9,11 +10,11 @@ import type { MusicTrack as MusicTrackProps } from '@/payload-types'
  *   const tracks = await getMusicTracks()
  */
 export async function getMusicTracks(): Promise<MusicTrackProps[]> {
-  const baseUrl = process.env.NEXT_PUBLIC_SERVER_URL ?? 'http://localhost:3000'
+  const baseUrl = getServerSideURL()
 
   const res = await fetch(`${baseUrl}/api/music-tracks?sort=order&limit=50&depth=1`, {
     // Revalidate every hour, or use { cache: 'no-store' } for always-fresh
-    next: { revalidate: 3600 },
+    next: { revalidate: 3600, tags: ['music-tracks'] },
   })
 
   if (!res.ok) {
