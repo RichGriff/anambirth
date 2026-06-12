@@ -8,17 +8,17 @@ import { HeartIcon, SparklesIcon } from 'lucide-react'
 
 import { SectionBackground } from '../Section/SectionBackground'
 
-const splitDetailsIntoColumns = (details: DefaultTypedEditorState) => {
+const splitDetailsIntoColumns = (details: DefaultTypedEditorState, columnCount: number) => {
   const children = details.root.children ?? []
 
-  if (children.length <= 3) {
+  if (columnCount <= 1 || children.length <= 1) {
     return {
       leftColumn: details,
       rightColumn: null,
     }
   }
 
-  const splitIndex = Math.max(3, Math.ceil(children.length / 2))
+  const splitIndex = Math.ceil(children.length / columnCount)
 
   const createColumnState = (columnChildren: typeof children): DefaultTypedEditorState => ({
     ...details,
@@ -28,9 +28,11 @@ const splitDetailsIntoColumns = (details: DefaultTypedEditorState) => {
     },
   })
 
+  const rightColumnChildren = children.slice(splitIndex)
+
   return {
     leftColumn: createColumnState(children.slice(0, splitIndex)),
-    rightColumn: createColumnState(children.slice(splitIndex)),
+    rightColumn: rightColumnChildren.length > 0 ? createColumnState(rightColumnChildren) : null,
   }
 }
 
@@ -47,7 +49,7 @@ export const Offering: React.FC<OfferingProps> = ({
 }) => {
   const selectedInvestments = (investment?.items || []).filter(isPopulatedRelationship)
   const safeFootnotes = footnotes || []
-  const { leftColumn, rightColumn } = splitDetailsIntoColumns(details)
+  const { leftColumn, rightColumn } = splitDetailsIntoColumns(details, 2)
   const sectionId = formatAnchor(anchorId)
 
   const renderPriceLabel = (option: (typeof selectedInvestments)[number]) => {
@@ -84,7 +86,7 @@ export const Offering: React.FC<OfferingProps> = ({
 
   const investmentGridCols =
     {
-      1: 'grid-cols-1',
+      1: 'grid-cols-1 sm:grid-cols-2',
       2: 'grid-cols-1 sm:grid-cols-2',
       3: 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3',
       4: 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-4',
@@ -113,7 +115,16 @@ export const Offering: React.FC<OfferingProps> = ({
         </InViewFade>
 
         <InViewFade delay={0.06}>
-          <div className="mt-10 grid items-start gap-8 lg:grid-cols-2 lg:gap-12">
+          <div className="mt-10 lg:hidden">
+            <RichText
+              className="max-w-none"
+              data={details}
+              enableGutter={false}
+              listVariant="offering"
+            />
+          </div>
+
+          <div className="mt-10 hidden items-start gap-8 lg:grid lg:grid-cols-2 lg:gap-12">
             <RichText
               className="max-w-none"
               data={leftColumn}

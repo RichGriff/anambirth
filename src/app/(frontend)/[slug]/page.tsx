@@ -3,8 +3,8 @@ import type { Metadata } from 'next'
 import { PayloadRedirects } from '@/components/PayloadRedirects'
 import configPromise from '@payload-config'
 import { getPayload, type RequiredDataFromCollectionSlug } from 'payload'
+import { unstable_cache } from 'next/cache'
 import { draftMode } from 'next/headers'
-import React, { cache } from 'react'
 
 import { RenderBlocks } from '@/blocks/RenderBlocks'
 import { RenderHero } from '@/heros/RenderHero'
@@ -85,18 +85,49 @@ export async function generateMetadata({ params: paramsPromise }: Args): Promise
   return generateMeta({ doc: page })
 }
 
-const queryPageBySlug = cache(async ({ slug }: { slug: string }) => {
+const getCachedPageBySlug = (slug: string) =>
+  unstable_cache(
+    async () => {
+      const payload = await getPayload({ config: configPromise })
+
+      const result = await payload.find({
+        collection: 'pages',
+        draft: false,
+        depth: 3,
+        limit: 1,
+        overrideAccess: false,
+        pagination: false,
+        where: {
+          slug: {
+            equals: slug,
+          },
+        },
+      })
+
+      return result.docs?.[0] || null
+    },
+    ['page', slug],
+    {
+      tags: [`page_${slug}`],
+    },
+  )
+
+const queryPageBySlug = async ({ slug }: { slug: string }) => {
   const { isEnabled: draft } = await draftMode()
+
+  if (!draft) {
+    return getCachedPageBySlug(slug)()
+  }
 
   const payload = await getPayload({ config: configPromise })
 
   const result = await payload.find({
     collection: 'pages',
-    draft,
+    draft: true,
     depth: 3,
     limit: 1,
     pagination: false,
-    overrideAccess: draft,
+    overrideAccess: true,
     where: {
       slug: {
         equals: slug,
@@ -105,4 +136,4 @@ const queryPageBySlug = cache(async ({ slug }: { slug: string }) => {
   })
 
   return result.docs?.[0] || null
-})
+}

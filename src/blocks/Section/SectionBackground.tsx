@@ -34,7 +34,7 @@ export const SectionBackground = ({
   return (
     <section id={id} className={cn(resolvedBackground, 'py-16', className)}>
       {children}
-      {showDivider && <div className="mx-auto mt-26 h-px w-full max-w-xs bg-border" />}
+      {showDivider && <div className="mx-auto mt-8 h-px w-full max-w-xs bg-border" />}
     </section>
   )
 }

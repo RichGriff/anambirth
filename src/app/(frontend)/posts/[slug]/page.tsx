@@ -4,8 +4,8 @@ import { RelatedPosts } from '@/blocks/RelatedPosts/Component'
 import { PayloadRedirects } from '@/components/PayloadRedirects'
 import configPromise from '@payload-config'
 import { getPayload } from 'payload'
+import { unstable_cache } from 'next/cache'
 import { draftMode } from 'next/headers'
-import React, { cache } from 'react'
 import RichText from '@/components/RichText'
 
 import type { Post } from '@/payload-types'
@@ -136,16 +136,46 @@ export async function generateMetadata({ params: paramsPromise }: Args): Promise
   return generateMeta({ doc: post })
 }
 
-const queryPostBySlug = cache(async ({ slug }: { slug: string }) => {
+const getCachedPostBySlug = (slug: string) =>
+  unstable_cache(
+    async () => {
+      const payload = await getPayload({ config: configPromise })
+
+      const result = await payload.find({
+        collection: 'posts',
+        draft: false,
+        limit: 1,
+        overrideAccess: false,
+        pagination: false,
+        where: {
+          slug: {
+            equals: slug,
+          },
+        },
+      })
+
+      return result.docs?.[0] || null
+    },
+    ['post', slug],
+    {
+      tags: [`post_${slug}`],
+    },
+  )
+
+const queryPostBySlug = async ({ slug }: { slug: string }) => {
   const { isEnabled: draft } = await draftMode()
+
+  if (!draft) {
+    return getCachedPostBySlug(slug)()
+  }
 
   const payload = await getPayload({ config: configPromise })
 
   const result = await payload.find({
     collection: 'posts',
-    draft,
+    draft: true,
     limit: 1,
-    overrideAccess: draft,
+    overrideAccess: true,
     pagination: false,
     where: {
       slug: {
@@ -155,4 +185,4 @@ const queryPostBySlug = cache(async ({ slug }: { slug: string }) => {
   })
 
   return result.docs?.[0] || null
-})
+}

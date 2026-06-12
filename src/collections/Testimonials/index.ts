@@ -2,6 +2,10 @@ import type { CollectionConfig } from 'payload'
 
 import { anyone } from '../../access/anyone'
 import { authenticated } from '../../access/authenticated'
+import {
+  revalidateTestimonials,
+  revalidateTestimonialsDelete,
+} from './hooks/revalidateTestimonials'
 
 export const Testimonials: CollectionConfig = {
   slug: 'testimonials',
@@ -15,6 +19,10 @@ export const Testimonials: CollectionConfig = {
     defaultColumns: ['name', 'quote', 'paymentOption', 'oneOffCost', 'monthlyCost', 'updatedAt'],
     useAsTitle: 'name',
   },
+  hooks: {
+    afterChange: [revalidateTestimonials],
+    afterDelete: [revalidateTestimonialsDelete],
+  },
   fields: [
     {
       name: 'name',
@@ -22,9 +30,12 @@ export const Testimonials: CollectionConfig = {
       required: true,
     },
     {
-      name: 'offering',
+      name: 'shortDescription',
       type: 'text',
       required: true,
+      admin: {
+        description: 'This could be business, service, social link, etc.',
+      },
     },
     {
       name: 'quote',

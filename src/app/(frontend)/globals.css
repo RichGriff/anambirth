@@ -372,7 +372,7 @@
   }
 
   .richtext-offering.prose ul {
-    @apply list-disc pl-6 md:columns-2 md:gap-10;
+    @apply list-disc pl-6;
   }
 
   .richtext-offering.prose ul li {

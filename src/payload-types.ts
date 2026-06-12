@@ -1024,7 +1024,10 @@ export interface Form {
 export interface Testimonial {
   id: number;
   name: string;
-  offering: string;
+  /**
+   * This could be business, service, social link, etc.
+   */
+  shortDescription: string;
   quote: string;
   avatar?: (number | null) | Media;
   updatedAt: string;
@@ -1986,7 +1989,7 @@ export interface UsersSelect<T extends boolean = true> {
  */
 export interface TestimonialsSelect<T extends boolean = true> {
   name?: T;
-  offering?: T;
+  shortDescription?: T;
   quote?: T;
   avatar?: T;
   updatedAt?: T;

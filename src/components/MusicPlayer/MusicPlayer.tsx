@@ -224,7 +224,7 @@ export default function MusicPlayer({ tracks }: { tracks: MusicTrackProps[] }) {
   return (
     <div
       ref={playerRef}
-      className={`fixed right-6 z-50 flex flex-col items-end gap-3 transition-[bottom] duration-300 ${
+      className={`pointer-events-none fixed right-6 z-50 flex flex-col items-end gap-3 transition-[bottom] duration-300 ${
         isFooterVisible ? 'bottom-16' : 'bottom-6'
       }`}
     >
@@ -238,7 +238,7 @@ export default function MusicPlayer({ tracks }: { tracks: MusicTrackProps[] }) {
       {/* ── Expanded Panel ── */}
       <div
         className={`
-          w-80 rounded-2xl shadow-2xl overflow-hidden
+          pointer-events-auto w-80 rounded-2xl shadow-2xl overflow-hidden
           bg-white/95 backdrop-blur-md
           transition-all duration-500 ease-in-out origin-bottom-right
           ${
@@ -448,7 +448,7 @@ export default function MusicPlayer({ tracks }: { tracks: MusicTrackProps[] }) {
       <button
         onClick={() => setIsOpen((o) => !o)}
         className={`
-          relative w-14 h-14 rounded-full shadow-lg flex items-center justify-center
+          pointer-events-auto relative w-14 h-14 rounded-full shadow-lg flex items-center justify-center
           bg-primary border border-primary text-white
           hover:scale-105 active:scale-95 transition-all duration-200
           focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent
