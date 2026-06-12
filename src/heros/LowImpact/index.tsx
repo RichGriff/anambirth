@@ -12,7 +12,7 @@ export const LowImpactHero: React.FC<Page['hero']> = ({
 }) => {
   return (
     <div className="bg-[#FCF9F2]">
-      <div className="container w-full flex flex-col justify-center items-center text-center min-h-[calc(100svh-24rem)]">
+      <div className="container w-full flex flex-col justify-center items-center text-center py-12 sm:py-24">
         <div className="max-w-3xl">
           {eyebrowHeading && (
             <div className="mb-4 text-sm uppercase tracking-[0.3em] text-accent">
@@ -20,7 +20,7 @@ export const LowImpactHero: React.FC<Page['hero']> = ({
             </div>
           )}
           {heading && (
-            <h1 className="font-(family-name:--font-cormorant) text-4xl font-light leading-tight tracking-tight md:text-5xl lg:text-6xl text-foreground text-balance">
+            <h1 className="font-(family-name:--font-cormorant) text-5xl font-light leading-tight tracking-tight lg:text-6xl text-foreground text-balance">
               {heading}
             </h1>
           )}
