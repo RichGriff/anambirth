@@ -37,6 +37,9 @@ import { Settings } from './Settings/config'
 import { nodemailerAdapter } from '@payloadcms/email-nodemailer'
 import { FeaturedQuote } from './blocks/FeaturedQuote/config'
 import { Accreditation } from './blocks/Accreditation/config'
+import { TextOnly } from './blocks/TextOnly/config'
+import { TextWithImage } from './blocks/TextWithImage/config'
+import { Checklist } from './blocks/Checklist/config'
 import { MusicTracks } from './collections/MusicTracks'
 import { analyticsEndpoint } from './endpoints/analytics'
 
@@ -132,6 +135,9 @@ export default buildConfig({
     LatestPost,
     FeaturedQuote,
     Accreditation,
+    TextOnly,
+    TextWithImage,
+    Checklist,
   ],
   cors: [getServerSideURL()].filter(Boolean),
   endpoints: [analyticsEndpoint],

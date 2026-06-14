@@ -8,6 +8,7 @@ import {
 } from '@payloadcms/richtext-lexical'
 
 import { linkGroup } from '../../fields/linkGroup'
+import { backgroundColorField } from '@/fields/backgroundColor'
 
 export const CallToAction: Block = {
   slug: 'cta',
@@ -28,6 +29,7 @@ export const CallToAction: Block = {
         maxRows: 2,
       },
     }),
+    backgroundColorField(),
     // {
     //   name: 'richText',
     //   type: 'richText',

@@ -3,26 +3,25 @@ import React from 'react'
 import type { CallToAction as CallToActionProps } from '@/payload-types'
 
 import { CMSLink } from '@/components/Link'
+import { SectionBackground } from '../Section/SectionBackground'
 
-export const CallToAction: React.FC<CallToActionProps> = ({ heading, description, links }) => {
+export const CallToAction: React.FC<CallToActionProps> = ({ heading, description, links, bg }) => {
   return (
-    <div className="relative isolate overflow-hidden">
-      <div className="px-6 py-24 sm:py-32 lg:px-8">
-        <div className="mx-auto max-w-2xl text-center">
-          <h2 className="font-(family-name:--font-cormorant) text-4xl font-light leading-tight tracking-tight md:text-5xl lg:text-5xl text-balance">
-            {heading}
-          </h2>
-          <p className="mt-6 text-lg leading-relaxed opacity-50 md:text-xl lg:mx-0 mx-auto w-full">
-            {description}
-          </p>
-          {!!links?.length && (
-            <div className="mt-10 flex items-center justify-center gap-x-6">
-              {links.map(({ link }, i) => (
-                <CMSLink key={i} size="lg" className="w-full sm:w-auto rounded-full" {...link} />
-              ))}
-            </div>
-          )}
-        </div>
+    <SectionBackground bg={bg} className="relative isolate overflow-hidden px-6 py-24 sm:py-32 lg:px-8">
+      <div className="mx-auto max-w-2xl text-center">
+        <h2 className="font-(family-name:--font-cormorant) text-4xl font-light leading-tight tracking-tight md:text-5xl lg:text-5xl text-balance">
+          {heading}
+        </h2>
+        <p className="mt-6 text-lg leading-relaxed opacity-50 md:text-xl lg:mx-0 mx-auto w-full">
+          {description}
+        </p>
+        {!!links?.length && (
+          <div className="mt-10 flex items-center justify-center gap-x-6">
+            {links.map(({ link }, i) => (
+              <CMSLink key={i} size="lg" className="w-full sm:w-auto rounded-full" {...link} />
+            ))}
+          </div>
+        )}
       </div>
       {/* <svg
         viewBox="0 0 1024 1024"
@@ -43,6 +42,6 @@ export const CallToAction: React.FC<CallToActionProps> = ({ heading, description
           </radialGradient>
         </defs>
       </svg> */}
-    </div>
+    </SectionBackground>
   )
 }

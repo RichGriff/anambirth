@@ -1,6 +1,7 @@
 import type { TextFieldSingleValidation } from 'payload'
 import {
   BoldFeature,
+  BlocksFeature,
   ItalicFeature,
   LinkFeature,
   OrderedListFeature,
@@ -10,6 +11,7 @@ import {
   UnderlineFeature,
   type LinkFields,
 } from '@payloadcms/richtext-lexical'
+import { Image } from '@/blocks/Image/config'
 
 export const defaultLexical = lexicalEditor({
   features: [
@@ -19,6 +21,7 @@ export const defaultLexical = lexicalEditor({
     UnderlineFeature(),
     BoldFeature(),
     ItalicFeature(),
+    BlocksFeature({ blocks: [Image] }),
     LinkFeature({
       enabledCollections: ['pages', 'posts'],
       fields: ({ defaultFields }) => {

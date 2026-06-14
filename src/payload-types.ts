@@ -85,6 +85,9 @@ export interface Config {
     latestPost: LatestPost;
     featuredQuote: FeaturedQuote;
     accreditation: Accreditation;
+    textOnly: TextOnly;
+    textWithImage: TextWithImage;
+    checklist: Checklist;
   };
   collections: {
     pages: Page;
@@ -521,6 +524,7 @@ export interface CallToAction {
         id?: string | null;
       }[]
     | null;
+  bg: 'bg-light' | 'bg-lighter' | 'bg-dark' | 'bg-white';
   id?: string | null;
   blockName?: string | null;
   blockType: 'cta';
@@ -691,6 +695,10 @@ export interface Page {
         blockType: 'accreditation';
       }
     | Offering
+    | CallToAction
+    | TextOnly
+    | TextWithImage
+    | Checklist
   )[];
   meta?: {
     title?: string | null;
@@ -1106,6 +1114,104 @@ export interface Offering {
   id?: string | null;
   blockName?: string | null;
   blockType: 'offering';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TextOnly".
+ */
+export interface TextOnly {
+  eyebrow?: string | null;
+  heading: string;
+  intro?: string | null;
+  /**
+   * Optional section anchor for direct links, for example "philosophy".
+   */
+  anchorId?: string | null;
+  textWidth: 'narrow' | 'standard' | 'wide';
+  textColumns: '1' | '2' | '3';
+  body: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  bg: 'bg-light' | 'bg-lighter' | 'bg-dark' | 'bg-white';
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'textOnly';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TextWithImage".
+ */
+export interface TextWithImage {
+  eyebrow?: string | null;
+  heading: string;
+  intro?: string | null;
+  /**
+   * Optional section anchor for direct links, for example "story".
+   */
+  anchorId?: string | null;
+  body: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  image: number | Media;
+  caption?: string | null;
+  imagePosition: 'left' | 'right';
+  imageStyle: 'portrait' | 'square' | 'landscape';
+  bg: 'bg-light' | 'bg-lighter' | 'bg-dark' | 'bg-white';
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'textWithImage';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Checklist".
+ */
+export interface Checklist {
+  heading: string;
+  intro?: string | null;
+  displayStyle: 'card' | 'plain';
+  items: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  bg: 'bg-light' | 'bg-lighter' | 'bg-dark' | 'bg-white';
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'checklist';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1715,6 +1821,10 @@ export interface PagesSelect<T extends boolean = true> {
               blockName?: T;
             };
         offering?: T | OfferingSelect<T>;
+        cta?: T | CallToActionSelect<T>;
+        textOnly?: T | TextOnlySelect<T>;
+        textWithImage?: T | TextWithImageSelect<T>;
+        checklist?: T | ChecklistSelect<T>;
       };
   meta?:
     | T
@@ -1791,6 +1901,79 @@ export interface OfferingSelect<T extends boolean = true> {
         text?: T;
         id?: T;
       };
+  bg?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CallToAction_select".
+ */
+export interface CallToActionSelect<T extends boolean = true> {
+  heading?: T;
+  description?: T;
+  links?:
+    | T
+    | {
+        link?:
+          | T
+          | {
+              type?: T;
+              newTab?: T;
+              reference?: T;
+              url?: T;
+              label?: T;
+              appearance?: T;
+            };
+        id?: T;
+      };
+  bg?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TextOnly_select".
+ */
+export interface TextOnlySelect<T extends boolean = true> {
+  eyebrow?: T;
+  heading?: T;
+  intro?: T;
+  anchorId?: T;
+  textWidth?: T;
+  textColumns?: T;
+  body?: T;
+  bg?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TextWithImage_select".
+ */
+export interface TextWithImageSelect<T extends boolean = true> {
+  eyebrow?: T;
+  heading?: T;
+  intro?: T;
+  anchorId?: T;
+  body?: T;
+  image?: T;
+  caption?: T;
+  imagePosition?: T;
+  imageStyle?: T;
+  bg?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Checklist_select".
+ */
+export interface ChecklistSelect<T extends boolean = true> {
+  heading?: T;
+  intro?: T;
+  displayStyle?: T;
+  items?: T;
   bg?: T;
   id?: T;
   blockName?: T;

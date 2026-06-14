@@ -24,6 +24,10 @@ import { LatestPost } from '@/blocks/LatestPost/config'
 import { FeaturedQuote } from '@/blocks/FeaturedQuote/config'
 import { Accreditation } from '@/blocks/Accreditation/config'
 import { Offering } from '@/blocks/Offering/config'
+import { CallToAction } from '@/blocks/CallToAction/config'
+import { TextOnly } from '@/blocks/TextOnly/config'
+import { TextWithImage } from '@/blocks/TextWithImage/config'
+import { Checklist } from '@/blocks/Checklist/config'
 
 export const Pages: CollectionConfig<'pages'> = {
   slug: 'pages',
@@ -87,6 +91,10 @@ export const Pages: CollectionConfig<'pages'> = {
                 FeaturedQuote,
                 Accreditation,
                 Offering,
+                CallToAction,
+                TextOnly,
+                TextWithImage,
+                Checklist,
               ],
               required: true,
               admin: {

@@ -1,28 +1,5 @@
 import React, { Fragment } from 'react'
 
-import {
-  Page,
-  Section as SectionProps,
-  Column as ColumnProps,
-  TextBlock as TextProps,
-  EyebrowHeading as EyebrowHeadingProps,
-  Investment as InvestmentProps,
-  Footnotes as FootnotesProps,
-  InvitationList as InvitationListProps,
-  IncludedItems as IncludedItemsProps,
-  Faq as FAQProps,
-  FormBlock as FormBlockProps,
-  Image as ImgProps,
-  ValuesList as ValuesListProps,
-  CallToAction as CallToActionProps,
-  OfferingSummary as OfferingSummaryProps,
-  Offering as OfferingProps,
-  TestimonialBlock as TestimonialsBlockProps,
-  Philosophy as PhilosophyProps,
-  FeaturedQuote as FeaturedQuoteProps,
-  Accreditation as AccreditationProps,
-} from '@/payload-types'
-
 import { Section } from '@/blocks/Section/Component'
 import { Text } from '@/blocks/Text/Component'
 import { Column } from '@/blocks/Column/Component'
@@ -43,6 +20,9 @@ import { LatestPost } from '@/blocks/LatestPost/Component'
 import { FeaturedQuote } from './FeaturedQuote/Component'
 import { Accreditation } from './Accreditation/Component'
 import { Offering } from './Offering/Component'
+import { TextOnly } from './TextOnly/Component'
+import { TextWithImage } from './TextWithImage/Component'
+import { Checklist } from './Checklist/Component'
 
 const blockComponents = {
   section: Section,
@@ -65,16 +45,13 @@ const blockComponents = {
   latestPost: LatestPost,
   featuredQuote: FeaturedQuote,
   accreditation: Accreditation,
+  textOnly: TextOnly,
+  textWithImage: TextWithImage,
+  checklist: Checklist,
 }
 
 const isBlockComponentKey = (key: unknown): key is keyof typeof blockComponents =>
   typeof key === 'string' && key in blockComponents
-
-type SectionColumns = SectionProps extends { columns?: infer T }
-  ? T
-  : SectionProps extends { column?: infer U }
-    ? U
-    : never
 
 export const RenderBlocks: React.FC<{
   blocks: any
