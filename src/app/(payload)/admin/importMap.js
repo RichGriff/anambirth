@@ -29,8 +29,6 @@ import { ReindexButton as ReindexButton_aead06e4cbf6b2620c5c51c9ab283634 } from 
 import { FolderTypeField as FolderTypeField_2b8867833a34864a02ddf429b0728a40 } from '@payloadcms/next/client'
 import { RowLabel as RowLabel_ec255a65fa6fa8d1faeb09cf35284224 } from '@/Header/RowLabel'
 import { RowLabel as RowLabel_1f6ff6ff633e3695d348f4f3c58f1466 } from '@/Footer/RowLabel'
-import { default as default_a5bcb2677d9b6ea4efc01e1370828e82 } from 'src/collections/fields/ColumnWidth.tsx'
-import { Error as Error_33c76d9df6d6c8bbe361be0d4f14d570 } from 'src/components/Admin/Fields/Error.tsx'
 import { Icons as Icons_9c1a3ff8a9adb7b1e4b7a5cd42725bdb } from '../../../graphics/Icon/index.tsx'
 import { Logos as Logos_217937c36742cdefe571d11857c968fa } from '../../../graphics/Logo/index.tsx'
 import { S3ClientUploadHandler as S3ClientUploadHandler_f97aa6c64367fa259c5bc0567239ef24 } from '@payloadcms/storage-s3/client'
@@ -70,8 +68,6 @@ export const importMap = {
   "@payloadcms/next/client#FolderTypeField": FolderTypeField_2b8867833a34864a02ddf429b0728a40,
   "@/Header/RowLabel#RowLabel": RowLabel_ec255a65fa6fa8d1faeb09cf35284224,
   "@/Footer/RowLabel#RowLabel": RowLabel_1f6ff6ff633e3695d348f4f3c58f1466,
-  "src/collections/fields/ColumnWidth.tsx#default": default_a5bcb2677d9b6ea4efc01e1370828e82,
-  "src/components/Admin/Fields/Error.tsx#Error": Error_33c76d9df6d6c8bbe361be0d4f14d570,
   "/graphics/Icon/index.tsx#Icons": Icons_9c1a3ff8a9adb7b1e4b7a5cd42725bdb,
   "/graphics/Logo/index.tsx#Logos": Logos_217937c36742cdefe571d11857c968fa,
   "@payloadcms/storage-s3/client#S3ClientUploadHandler": S3ClientUploadHandler_f97aa6c64367fa259c5bc0567239ef24,

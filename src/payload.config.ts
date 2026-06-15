@@ -16,18 +16,8 @@ import { Header } from './Header/config'
 import { plugins } from './plugins'
 import { defaultLexical } from '@/fields/defaultLexical'
 import { getServerSideURL } from './utilities/getURL'
-import { EyebrowHeading } from './blocks/EyebrowHeading/config'
-import { Section } from './blocks/Section/config'
-import { Column } from './blocks/Column/config'
-import { Text } from './blocks/Text/config'
-import { Row } from './blocks/Row/config'
-import { Investment } from './blocks/Investment/config'
-import { Footnotes } from './blocks/Footnotes/config'
-import { InvitationList } from './blocks/InvitationList/config'
-import { IncludedItems } from './blocks/IncludedItems/config'
 import { FAQ } from './blocks/FAQ/config'
 import { Image } from './blocks/Image/config'
-import { ValuesList } from './blocks/ValuesList/config'
 import { CallToAction } from './blocks/CallToAction/config'
 import { OfferingSummary } from './blocks/OfferingSummary/config'
 import { TestimonialsBlock } from './blocks/TestimonialsBlock/config'
@@ -116,18 +106,8 @@ export default buildConfig({
   }),
   collections: [Pages, Posts, Investments, Media, Categories, Users, Testimonials, MusicTracks],
   blocks: [
-    Text,
-    Column,
-    EyebrowHeading,
-    Section,
-    Row,
-    Investment,
-    Footnotes,
-    InvitationList,
-    IncludedItems,
     FAQ,
     Image,
-    ValuesList,
     CallToAction,
     OfferingSummary,
     TestimonialsBlock,

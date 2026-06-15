@@ -1,17 +1,8 @@
 import React, { Fragment } from 'react'
 
-import { Section } from '@/blocks/Section/Component'
-import { Text } from '@/blocks/Text/Component'
-import { Column } from '@/blocks/Column/Component'
-import { EyebrowHeading } from '@/blocks/EyebrowHeading/Component'
-import { Investment } from '@/blocks/Investment/Component'
-import { Footnotes } from '@/blocks/Footnotes/Component'
-import { InvitationList } from '@/blocks/InvitationList/Component'
-import { IncludedItems } from '@/blocks/IncludedItems/Component'
 import { FAQ } from '@/blocks/FAQ/Component'
 import { FormBlock as FormBlockComponent } from '@/blocks/Form/Component'
 import { Img } from '@/blocks/Image/Component'
-import { ValuesList } from '@/blocks/ValuesList/Component'
 import { OfferingSummary } from './OfferingSummary/Component'
 import { TestimonialsBlock } from './TestimonialsBlock/Component'
 import { Philosophy } from '@/blocks/Philosophy/Component'
@@ -25,18 +16,9 @@ import { TextWithImage } from './TextWithImage/Component'
 import { Checklist } from './Checklist/Component'
 
 const blockComponents = {
-  section: Section,
-  column: Column,
-  textBlock: Text,
-  eyebrowHeading: EyebrowHeading,
-  investment: Investment,
-  footnotes: Footnotes,
-  invitationList: InvitationList,
-  includedItems: IncludedItems,
   faq: FAQ,
   formBlock: FormBlockComponent,
   image: Img,
-  valuesList: ValuesList,
   cta: CallToAction,
   offeringSummary: OfferingSummary,
   offering: Offering,

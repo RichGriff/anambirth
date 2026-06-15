@@ -16,7 +16,6 @@ import {
   OverviewField,
   PreviewField,
 } from '@payloadcms/plugin-seo/fields'
-import { Section } from '@/blocks/Section/config'
 import { OfferingSummary } from '@/blocks/OfferingSummary/config'
 import { TestimonialsBlock } from '@/blocks/TestimonialsBlock/config'
 import { Philosophy } from '@/blocks/Philosophy/config'
@@ -99,8 +98,7 @@ export const Pages: CollectionConfig<'pages'> = {
               ],
               required: true,
               admin: {
-                description:
-                  'Build the page with sections. Each section supports background color, column widths, and nested content blocks.',
+                description: 'Build the page with flexible top-level content blocks.',
                 initCollapsed: true,
               },
             },

@@ -66,18 +66,8 @@ export interface Config {
     users: UserAuthOperations;
   };
   blocks: {
-    textBlock: TextBlock;
-    column: Column;
-    eyebrowHeading: EyebrowHeading;
-    section: Section;
-    row: Row;
-    investment: Investment;
-    footnotes: Footnotes;
-    invitationList: InvitationList;
-    includedItems: IncludedItems;
     faq: Faq;
     image: Image;
-    valuesList: ValuesList;
     cta: CallToAction;
     offeringSummary: OfferingSummary;
     testimonialBlock: TestimonialBlock;
@@ -92,7 +82,7 @@ export interface Config {
   collections: {
     pages: Page;
     posts: Post;
-    investments: Investment1;
+    investments: Investment;
     media: Media;
     categories: Category;
     users: User;
@@ -185,138 +175,33 @@ export interface UserAuthOperations {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "textBlock".
+ * via the `definition` "faq".
  */
-export interface TextBlock {
-  text: {
-    root: {
-      type: string;
-      children: {
-        type: any;
+export interface Faq {
+  heading?: string | null;
+  items: {
+    question: string;
+    answer: {
+      root: {
+        type: string;
+        children: {
+          type: any;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
         version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
+      };
+      [k: string]: unknown;
     };
-    [k: string]: unknown;
-  };
+    id?: string | null;
+  }[];
+  bg: 'bg-light' | 'bg-lighter' | 'bg-dark' | 'bg-white';
   id?: string | null;
   blockName?: string | null;
-  blockType: 'textBlock';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "column".
- */
-export interface Column {
-  /**
-   * Choose the content blocks for this column.
-   */
-  content: (
-    | TextBlock
-    | EyebrowHeading
-    | Investment
-    | Footnotes
-    | InvitationList
-    | IncludedItems
-    | Image
-    | ValuesList
-    | CallToAction
-  )[];
-  columnWidth: 'auto' | '4/5' | '3/4' | '2/3' | '1/2' | '1/3' | '1/4' | '1/5';
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'column';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "eyebrowHeading".
- */
-export interface EyebrowHeading {
-  eyebrow?: string | null;
-  heading: string;
-  subheading: string;
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'eyebrowHeading';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "investment".
- */
-export interface Investment {
-  title: string;
-  description: string;
-  investments: (number | Investment1)[];
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'investment';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "investments".
- */
-export interface Investment1 {
-  id: number;
-  name: string;
-  description: string;
-  paymentOption: 'oneOff' | 'monthly';
-  oneOffCost?: number | null;
-  monthlyCost?: number | null;
-  monthlyCommitmentMonths?: number | null;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "footnotes".
- */
-export interface Footnotes {
-  footnotes?:
-    | {
-        text: string;
-        id?: string | null;
-      }[]
-    | null;
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'footnotes';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "invitationList".
- */
-export interface InvitationList {
-  title: string;
-  items?:
-    | {
-        text: string;
-        id?: string | null;
-      }[]
-    | null;
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'invitationList';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "includedItems".
- */
-export interface IncludedItems {
-  title: string;
-  items?:
-    | {
-        icon: 'phone' | 'heart' | 'sparkles' | 'location' | 'gift' | 'check' | 'message';
-        text: string;
-        id?: string | null;
-      }[]
-    | null;
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'includedItems';
+  blockType: 'faq';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -449,22 +334,6 @@ export interface FolderInterface {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "valuesList".
- */
-export interface ValuesList {
-  title?: string | null;
-  values?:
-    | {
-        value?: string | null;
-        id?: string | null;
-      }[]
-    | null;
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'valuesList';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "CallToAction".
  */
 export interface CallToAction {
@@ -538,7 +407,7 @@ export interface Page {
     media?: (number | null) | Media;
   };
   /**
-   * Build the page with sections. Each section supports background color, column widths, and nested content blocks.
+   * Build the page with flexible top-level content blocks.
    */
   content: (
     | FormBlock
@@ -1087,7 +956,7 @@ export interface Offering {
   investment?: {
     title?: string | null;
     subtitle?: string | null;
-    items?: (number | Investment1)[] | null;
+    items?: (number | Investment)[] | null;
   };
   footnotes?:
     | {
@@ -1099,6 +968,21 @@ export interface Offering {
   id?: string | null;
   blockName?: string | null;
   blockType: 'offering';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "investments".
+ */
+export interface Investment {
+  id: number;
+  name: string;
+  description: string;
+  paymentOption: 'oneOff' | 'monthly';
+  oneOffCost?: number | null;
+  monthlyCost?: number | null;
+  monthlyCommitmentMonths?: number | null;
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1197,62 +1081,6 @@ export interface Checklist {
   id?: string | null;
   blockName?: string | null;
   blockType: 'checklist';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "section".
- */
-export interface Section {
-  /**
-   * Add one or more columns, then choose each column width and its content blocks.
-   */
-  column: Column[];
-  bg: 'bg-primary' | 'bg-secondary' | 'bg-black' | 'bg-light' | 'bg-lighter' | 'bg-dark' | 'bg-white';
-  showDivider?: boolean | null;
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'section';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "row".
- */
-export interface Row {
-  totalWidth?: string | null;
-  columns?: Column[] | null;
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'row';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "faq".
- */
-export interface Faq {
-  heading?: string | null;
-  items: {
-    question: string;
-    answer: {
-      root: {
-        type: string;
-        children: {
-          type: any;
-          version: number;
-          [k: string]: unknown;
-        }[];
-        direction: ('ltr' | 'rtl') | null;
-        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-        indent: number;
-        version: number;
-      };
-      [k: string]: unknown;
-    };
-    id?: string | null;
-  }[];
-  bg: 'bg-light' | 'bg-lighter' | 'bg-dark' | 'bg-white';
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'faq';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1607,7 +1435,7 @@ export interface PayloadLockedDocument {
       } | null)
     | ({
         relationTo: 'investments';
-        value: number | Investment1;
+        value: number | Investment;
       } | null)
     | ({
         relationTo: 'media';
