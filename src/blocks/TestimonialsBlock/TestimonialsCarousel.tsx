@@ -56,7 +56,7 @@ export const TestimonialsCarousel = ({ testimonials }: TestimonialsCarouselProps
                     &ldquo;{testimonial.quote}&rdquo;
                   </p>
                   <footer className="mt-8 flex gap-3 pt-2">
-                    {testimonial.avatar ? (
+                    {/* {testimonial.avatar ? (
                       <Media
                         imgClassName="h-[48px] w-[48px] rounded-full object-cover object-middle"
                         resource={testimonial.avatar}
@@ -68,9 +68,10 @@ export const TestimonialsCarousel = ({ testimonials }: TestimonialsCarouselProps
                     )}
                     <div className="text-left">
                       <p className="font-medium text-foreground">{testimonial.name}</p>
-                      <p className="text-sm text-muted-foreground">
-                        {testimonial.shortDescription}
-                      </p>
+                      <p className="text-sm text-muted-foreground">{testimonial.shortDescription}</p>
+                    </div> */}
+                    <div className="mb-4 flex items-center text-sm uppercase tracking-[0.3em] text-accent before:mr-3 before:block before:h-px before:w-8 before:bg-current">
+                      {testimonial.name}
                     </div>
                   </footer>
                 </blockquote>
