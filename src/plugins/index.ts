@@ -4,7 +4,7 @@ import { redirectsPlugin } from '@payloadcms/plugin-redirects'
 import { seoPlugin } from '@payloadcms/plugin-seo'
 import { searchPlugin } from '@payloadcms/plugin-search'
 import { s3Storage } from '@payloadcms/storage-s3'
-import { Plugin } from 'payload'
+import { Plugin, type Payload } from 'payload'
 import { deepMergeWithSourceArrays } from 'payload'
 import { revalidateRedirects } from '@/hooks/revalidateRedirects'
 import { GenerateTitle, GenerateURL } from '@payloadcms/plugin-seo/types'
@@ -18,9 +18,39 @@ import {
 import { searchFields } from '@/search/fieldOverrides'
 import { beforeSyncWithSearch } from '@/search/beforeSync'
 
-import { Page, Post } from '@/payload-types'
+import { Form, FormSubmission, Page, Post } from '@/payload-types'
 import { getServerSideURL } from '@/utilities/getURL'
 import { sendConfirmationEmail } from '@/email/sendConfirmation'
+
+const contactFormTitle = 'Contact Form'
+
+type SubmissionDataItem = NonNullable<FormSubmission['submissionData']>[number]
+
+const getSubmissionValue = (
+  submissionData: FormSubmission['submissionData'],
+  fieldName: string,
+): string | undefined => {
+  return submissionData?.find(({ field }) => field === fieldName)?.value
+}
+
+const getFormDocument = async (
+  result: FormSubmission,
+  payload: Payload,
+): Promise<Form | null> => {
+  if (typeof result.form === 'object' && result.form) {
+    return result.form
+  }
+
+  if (!result.form) {
+    return null
+  }
+
+  return payload.findByID({
+    collection: 'forms',
+    id: result.form,
+    overrideAccess: true,
+  })
+}
 
 const generateTitle: GenerateTitle<Post | Page> = ({ doc }) => {
   return doc?.title ? `${doc.title} | Anam Birth` : 'Anam Birth'
@@ -129,6 +159,28 @@ export const plugins: Plugin[] = [
           async ({ operation, result, req }) => {
             if (operation === 'create') {
               await sendConfirmationEmail(req.payload, result.submissionData)
+
+              const form = await getFormDocument(result, req.payload)
+
+              if (form?.title === contactFormTitle) {
+                await req.payload.create({
+                  collection: 'enquiries',
+                  data: {
+                    status: 'new',
+                    name: getSubmissionValue(result.submissionData, 'name'),
+                    email: getSubmissionValue(result.submissionData, 'emailAddress'),
+                    journey: getSubmissionValue(result.submissionData, 'journey'),
+                    details: getSubmissionValue(result.submissionData, 'details'),
+                    form: form.id,
+                    formSubmissionID: result.id,
+                    submissionData: result.submissionData?.map((entry: SubmissionDataItem) => ({
+                      field: entry.field,
+                      value: entry.value,
+                    })),
+                  },
+                  overrideAccess: true,
+                })
+              }
             }
           },
         ],

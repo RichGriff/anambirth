@@ -88,6 +88,7 @@ export interface Config {
     users: User;
     testimonials: Testimonial;
     'music-tracks': MusicTrack;
+    enquiries: Enquiry;
     redirects: Redirect;
     forms: Form;
     'form-submissions': FormSubmission;
@@ -113,6 +114,7 @@ export interface Config {
     users: UsersSelect<false> | UsersSelect<true>;
     testimonials: TestimonialsSelect<false> | TestimonialsSelect<true>;
     'music-tracks': MusicTracksSelect<false> | MusicTracksSelect<true>;
+    enquiries: EnquiriesSelect<false> | EnquiriesSelect<true>;
     redirects: RedirectsSelect<false> | RedirectsSelect<true>;
     forms: FormsSelect<false> | FormsSelect<true>;
     'form-submissions': FormSubmissionsSelect<false> | FormSubmissionsSelect<true>;
@@ -1237,6 +1239,29 @@ export interface MusicTrack {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "enquiries".
+ */
+export interface Enquiry {
+  id: number;
+  status: 'new' | 'contacted' | 'booked' | 'declined';
+  name?: string | null;
+  email?: string | null;
+  journey?: string | null;
+  details?: string | null;
+  form?: (number | null) | Form;
+  formSubmissionID?: number | null;
+  submissionData?:
+    | {
+        field: string;
+        value?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "redirects".
  */
 export interface Redirect {
@@ -1456,6 +1481,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'music-tracks';
         value: number | MusicTrack;
+      } | null)
+    | ({
+        relationTo: 'enquiries';
+        value: number | Enquiry;
       } | null)
     | ({
         relationTo: 'redirects';
@@ -2038,6 +2067,28 @@ export interface MusicTracksSelect<T extends boolean = true> {
   audioFile?: T;
   coverImage?: T;
   order?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "enquiries_select".
+ */
+export interface EnquiriesSelect<T extends boolean = true> {
+  status?: T;
+  name?: T;
+  email?: T;
+  journey?: T;
+  details?: T;
+  form?: T;
+  formSubmissionID?: T;
+  submissionData?:
+    | T
+    | {
+        field?: T;
+        value?: T;
+        id?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
 }

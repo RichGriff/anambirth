@@ -11,6 +11,7 @@ import { Posts } from './collections/Posts'
 import { Users } from './collections/Users'
 import { Investments } from './collections/Investments'
 import { Testimonials } from './collections/Testimonials'
+import { Enquiries } from './collections/Enquiries'
 import { Footer } from './Footer/config'
 import { Header } from './Header/config'
 import { plugins } from './plugins'
@@ -104,7 +105,7 @@ export default buildConfig({
       connectionString: process.env.DATABASE_URL || '',
     },
   }),
-  collections: [Pages, Posts, Investments, Media, Categories, Users, Testimonials, MusicTracks],
+  collections: [Pages, Posts, Investments, Media, Categories, Users, Testimonials, MusicTracks, Enquiries],
   blocks: [
     FAQ,
     Image,
