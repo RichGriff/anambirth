@@ -1,5 +1,6 @@
 import { backgroundColorField } from '@/fields/backgroundColor'
 import {
+  AlignFeature,
   BlockquoteFeature,
   FixedToolbarFeature,
   InlineToolbarFeature,
@@ -45,6 +46,7 @@ export const TextWithImage: Block = {
           FixedToolbarFeature(),
           InlineToolbarFeature(),
           BlockquoteFeature(),
+          AlignFeature(),
         ],
       }),
     },

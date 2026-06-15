@@ -5,6 +5,7 @@ import {
   InlineToolbarFeature,
   UnorderedListFeature,
   lexicalEditor,
+  AlignFeature,
 } from '@payloadcms/richtext-lexical'
 import { Block } from 'payload'
 
@@ -42,6 +43,7 @@ export const Offering: Block = {
           BlockquoteFeature(),
           FixedToolbarFeature(),
           InlineToolbarFeature(),
+          AlignFeature(),
         ],
       }),
     },

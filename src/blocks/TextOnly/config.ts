@@ -6,6 +6,7 @@ import {
   OrderedListFeature,
   UnorderedListFeature,
   lexicalEditor,
+  AlignFeature,
 } from '@payloadcms/richtext-lexical'
 import type { Block } from 'payload'
 
@@ -68,6 +69,7 @@ export const TextOnly: Block = {
           FixedToolbarFeature(),
           InlineToolbarFeature(),
           BlockquoteFeature(),
+          AlignFeature(),
         ],
       }),
     },
