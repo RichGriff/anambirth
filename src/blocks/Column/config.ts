@@ -16,7 +16,6 @@ export const Column: Block = {
         'footnotes',
         'invitationList',
         'includedItems',
-        'faq',
         'image',
         'valuesList',
         'cta',

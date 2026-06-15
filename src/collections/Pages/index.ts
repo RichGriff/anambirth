@@ -28,6 +28,7 @@ import { CallToAction } from '@/blocks/CallToAction/config'
 import { TextOnly } from '@/blocks/TextOnly/config'
 import { TextWithImage } from '@/blocks/TextWithImage/config'
 import { Checklist } from '@/blocks/Checklist/config'
+import { FAQ } from '@/blocks/FAQ/config'
 
 export const Pages: CollectionConfig<'pages'> = {
   slug: 'pages',
@@ -82,7 +83,6 @@ export const Pages: CollectionConfig<'pages'> = {
               label: 'Page Sections',
               type: 'blocks',
               blocks: [
-                Section,
                 FormBlock,
                 OfferingSummary,
                 TestimonialsBlock,
@@ -95,6 +95,7 @@ export const Pages: CollectionConfig<'pages'> = {
                 TextOnly,
                 TextWithImage,
                 Checklist,
+                FAQ,
               ],
               required: true,
               admin: {

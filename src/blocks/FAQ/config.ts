@@ -1,3 +1,4 @@
+import { backgroundColorField } from '@/fields/backgroundColor'
 import { Block } from 'payload'
 
 export const FAQ: Block = {
@@ -27,5 +28,6 @@ export const FAQ: Block = {
         },
       ],
     },
+    backgroundColorField(),
   ],
 }

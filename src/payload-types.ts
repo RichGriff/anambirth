@@ -222,7 +222,6 @@ export interface Column {
     | Footnotes
     | InvitationList
     | IncludedItems
-    | Faq
     | Image
     | ValuesList
     | CallToAction
@@ -318,35 +317,6 @@ export interface IncludedItems {
   id?: string | null;
   blockName?: string | null;
   blockType: 'includedItems';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "faq".
- */
-export interface Faq {
-  heading?: string | null;
-  items: {
-    question: string;
-    answer: {
-      root: {
-        type: string;
-        children: {
-          type: any;
-          version: number;
-          [k: string]: unknown;
-        }[];
-        direction: ('ltr' | 'rtl') | null;
-        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-        indent: number;
-        version: number;
-      };
-      [k: string]: unknown;
-    };
-    id?: string | null;
-  }[];
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'faq';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -571,17 +541,6 @@ export interface Page {
    * Build the page with sections. Each section supports background color, column widths, and nested content blocks.
    */
   content: (
-    | {
-        /**
-         * Add one or more columns, then choose each column width and its content blocks.
-         */
-        column: Column[];
-        bg: 'bg-primary' | 'bg-secondary' | 'bg-black' | 'bg-light' | 'bg-lighter' | 'bg-dark' | 'bg-white';
-        showDivider?: boolean | null;
-        id?: string | null;
-        blockName?: string | null;
-        blockType: 'section';
-      }
     | FormBlock
     | {
         heading?: string | null;
@@ -699,6 +658,32 @@ export interface Page {
     | TextOnly
     | TextWithImage
     | Checklist
+    | {
+        heading?: string | null;
+        items: {
+          question: string;
+          answer: {
+            root: {
+              type: string;
+              children: {
+                type: any;
+                version: number;
+                [k: string]: unknown;
+              }[];
+              direction: ('ltr' | 'rtl') | null;
+              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+              indent: number;
+              version: number;
+            };
+            [k: string]: unknown;
+          };
+          id?: string | null;
+        }[];
+        bg: 'bg-light' | 'bg-lighter' | 'bg-dark' | 'bg-white';
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'faq';
+      }
   )[];
   meta?: {
     title?: string | null;
@@ -1241,6 +1226,36 @@ export interface Row {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "faq".
+ */
+export interface Faq {
+  heading?: string | null;
+  items: {
+    question: string;
+    answer: {
+      root: {
+        type: string;
+        children: {
+          type: any;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
+      };
+      [k: string]: unknown;
+    };
+    id?: string | null;
+  }[];
+  bg: 'bg-light' | 'bg-lighter' | 'bg-dark' | 'bg-white';
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'faq';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "offeringSummary".
  */
 export interface OfferingSummary {
@@ -1709,15 +1724,6 @@ export interface PagesSelect<T extends boolean = true> {
   content?:
     | T
     | {
-        section?:
-          | T
-          | {
-              column?: T | {};
-              bg?: T;
-              showDivider?: T;
-              id?: T;
-              blockName?: T;
-            };
         formBlock?: T | FormBlockSelect<T>;
         offeringSummary?:
           | T
@@ -1825,6 +1831,21 @@ export interface PagesSelect<T extends boolean = true> {
         textOnly?: T | TextOnlySelect<T>;
         textWithImage?: T | TextWithImageSelect<T>;
         checklist?: T | ChecklistSelect<T>;
+        faq?:
+          | T
+          | {
+              heading?: T;
+              items?:
+                | T
+                | {
+                    question?: T;
+                    answer?: T;
+                    id?: T;
+                  };
+              bg?: T;
+              id?: T;
+              blockName?: T;
+            };
       };
   meta?:
     | T
