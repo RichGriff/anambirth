@@ -23,28 +23,55 @@ export const OfferingSummary: Block = {
       },
       fields: [
         {
+          name: 'offering',
+          type: 'relationship',
+          relationTo: 'offerings',
+          validate: (
+            value: unknown,
+            { siblingData }: { siblingData?: { title?: string | null } },
+          ) => {
+            if (value || siblingData?.title) {
+              return true
+            }
+
+            return 'Select an offering.'
+          },
+        },
+        {
           name: 'title',
           type: 'text',
+          admin: {
+            condition: () => false,
+          },
         },
         {
           name: 'subtitle',
           type: 'text',
+          admin: {
+            condition: () => false,
+          },
         },
         {
           name: 'description',
           type: 'textarea',
+          admin: {
+            condition: () => false,
+          },
         },
         {
           name: 'priceFrom',
           label: 'Price from',
           type: 'number',
           min: 0,
+          admin: {
+            condition: () => false,
+          },
         },
         {
           name: 'sectionAnchor',
           type: 'text',
           admin: {
-            description: 'Optional anchor on the destination page, for example "postpartum".',
+            condition: () => false,
           },
         },
         linkGroup({

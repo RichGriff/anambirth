@@ -1,6 +1,6 @@
 import RichText from '@/components/RichText'
 import { InViewFade, StaggerInViewList, StaggerListItem } from '@/components/animations/InView'
-import type { Offering as OfferingProps } from '@/payload-types'
+import type { OfferingBlock as OfferingBlockProps, Offering as OfferingDocument } from '@/payload-types'
 import { formatAnchor } from '@/utilities/anchors'
 import { isPopulatedRelationship } from '@/utilities/isPopulatedRelationship'
 import type { DefaultTypedEditorState } from '@payloadcms/richtext-lexical'
@@ -36,17 +36,33 @@ const splitDetailsIntoColumns = (details: DefaultTypedEditorState, columnCount: 
   }
 }
 
-export const Offering: React.FC<OfferingProps> = ({
-  eyebrowHeading,
-  mainHeading,
-  anchorId,
-  subHeading,
-  details,
-  whatsIncluded,
-  investment,
-  footnotes,
+export const Offering: React.FC<OfferingBlockProps> = ({
+  offering,
+  eyebrowHeading: legacyEyebrowHeading,
+  mainHeading: legacyMainHeading,
+  anchorId: legacyAnchorId,
+  subHeading: legacySubHeading,
+  details: legacyDetails,
+  whatsIncluded: legacyWhatsIncluded,
+  investment: legacyInvestment,
+  footnotes: legacyFootnotes,
   bg,
 }) => {
+  const selectedOffering = isPopulatedRelationship<OfferingDocument>(offering) ? offering : null
+
+  const eyebrowHeading = selectedOffering?.eyebrowHeading ?? legacyEyebrowHeading
+  const mainHeading = selectedOffering?.mainHeading ?? legacyMainHeading
+  const anchorId = selectedOffering?.anchorId ?? legacyAnchorId
+  const subHeading = selectedOffering?.subHeading ?? legacySubHeading
+  const details = selectedOffering?.details ?? legacyDetails
+  const whatsIncluded = selectedOffering?.whatsIncluded ?? legacyWhatsIncluded
+  const investment = selectedOffering?.investment ?? legacyInvestment
+  const footnotes = selectedOffering?.footnotes ?? legacyFootnotes
+
+  if (!mainHeading || !details) {
+    return null
+  }
+
   const selectedInvestments = (investment?.items || []).filter(isPopulatedRelationship)
   const safeFootnotes = footnotes || []
   const { leftColumn, rightColumn } = splitDetailsIntoColumns(details, 2)

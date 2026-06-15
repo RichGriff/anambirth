@@ -6,8 +6,8 @@ import { RowLabelProps, useRowLabel } from '@payloadcms/ui'
 export const RowLabel: React.FC<RowLabelProps> = () => {
   const data = useRowLabel<NonNullable<OfferingSummary['items']>[number]>()
 
-  if (data?.data?.title) {
-    return <div>{data.data.title}</div>
+  if (data?.data?.offering && typeof data.data.offering === 'object' && 'mainHeading' in data.data.offering) {
+    return <div>{data.data.offering.mainHeading}</div>
   }
 
   const itemNumber = data?.rowNumber !== undefined ? data.rowNumber + 1 : ''

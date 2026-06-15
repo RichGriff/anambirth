@@ -83,6 +83,7 @@ export interface Config {
     pages: Page;
     posts: Post;
     investments: Investment;
+    offerings: Offering;
     media: Media;
     categories: Category;
     users: User;
@@ -109,6 +110,7 @@ export interface Config {
     pages: PagesSelect<false> | PagesSelect<true>;
     posts: PostsSelect<false> | PostsSelect<true>;
     investments: InvestmentsSelect<false> | InvestmentsSelect<true>;
+    offerings: OfferingsSelect<false> | OfferingsSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     categories: CategoriesSelect<false> | CategoriesSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
@@ -418,13 +420,11 @@ export interface Page {
         description?: string | null;
         items?:
           | {
+              offering?: (number | null) | Offering;
               title?: string | null;
               subtitle?: string | null;
               description?: string | null;
               priceFrom?: number | null;
-              /**
-               * Optional anchor on the destination page, for example "postpartum".
-               */
               sectionAnchor?: string | null;
               links?:
                 | {
@@ -524,7 +524,7 @@ export interface Page {
         blockName?: string | null;
         blockType: 'accreditation';
       }
-    | Offering
+    | OfferingBlock
     | CallToAction
     | TextOnly
     | TextWithImage
@@ -883,38 +883,10 @@ export interface Form {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "testimonials".
- */
-export interface Testimonial {
-  id: number;
-  name: string;
-  /**
-   * This could be business, service, social link, etc.
-   */
-  shortDescription: string;
-  quote: string;
-  avatar?: (number | null) | Media;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "LatestPost".
- */
-export interface LatestPost {
-  tagline?: string | null;
-  heading?: string | null;
-  limit: number;
-  bg: 'bg-light' | 'bg-lighter' | 'bg-dark' | 'bg-white';
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'latestPost';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "Offering".
+ * via the `definition` "offerings".
  */
 export interface Offering {
+  id: number;
   eyebrowHeading?: string | null;
   mainHeading: string;
   /**
@@ -966,10 +938,12 @@ export interface Offering {
         id?: string | null;
       }[]
     | null;
-  bg: 'bg-light' | 'bg-lighter' | 'bg-dark' | 'bg-white';
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'offering';
+  /**
+   * Optional summary copy for offering cards. If left empty, the summary card uses the first three body sections from the offering details.
+   */
+  summaryDescription?: string | null;
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -985,6 +959,97 @@ export interface Investment {
   monthlyCommitmentMonths?: number | null;
   updatedAt: string;
   createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "testimonials".
+ */
+export interface Testimonial {
+  id: number;
+  name: string;
+  /**
+   * This could be business, service, social link, etc.
+   */
+  shortDescription: string;
+  quote: string;
+  avatar?: (number | null) | Media;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "LatestPost".
+ */
+export interface LatestPost {
+  tagline?: string | null;
+  heading?: string | null;
+  limit: number;
+  bg: 'bg-light' | 'bg-lighter' | 'bg-dark' | 'bg-white';
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'latestPost';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "OfferingBlock".
+ */
+export interface OfferingBlock {
+  /**
+   * Select the offering document to render in this section.
+   */
+  offering?: (number | null) | Offering;
+  eyebrowHeading?: string | null;
+  mainHeading?: string | null;
+  anchorId?: string | null;
+  subHeading?: string | null;
+  details?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  whatsIncluded?: {
+    heading?: string | null;
+    content?: {
+      root: {
+        type: string;
+        children: {
+          type: any;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
+      };
+      [k: string]: unknown;
+    } | null;
+  };
+  investment?: {
+    title?: string | null;
+    subtitle?: string | null;
+    items?: (number | Investment)[] | null;
+  };
+  footnotes?:
+    | {
+        text: string;
+        id?: string | null;
+      }[]
+    | null;
+  bg: 'bg-light' | 'bg-lighter' | 'bg-dark' | 'bg-white';
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'offering';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1093,13 +1158,11 @@ export interface OfferingSummary {
   description?: string | null;
   items?:
     | {
+        offering?: (number | null) | Offering;
         title?: string | null;
         subtitle?: string | null;
         description?: string | null;
         priceFrom?: number | null;
-        /**
-         * Optional anchor on the destination page, for example "postpartum".
-         */
         sectionAnchor?: string | null;
         links?:
           | {
@@ -1463,6 +1526,10 @@ export interface PayloadLockedDocument {
         value: number | Investment;
       } | null)
     | ({
+        relationTo: 'offerings';
+        value: number | Offering;
+      } | null)
+    | ({
         relationTo: 'media';
         value: number | Media;
       } | null)
@@ -1590,6 +1657,7 @@ export interface PagesSelect<T extends boolean = true> {
               items?:
                 | T
                 | {
+                    offering?: T;
                     title?: T;
                     subtitle?: T;
                     description?: T;
@@ -1683,7 +1751,7 @@ export interface PagesSelect<T extends boolean = true> {
               id?: T;
               blockName?: T;
             };
-        offering?: T | OfferingSelect<T>;
+        offering?: T | OfferingBlockSelect<T>;
         cta?: T | CallToActionSelect<T>;
         textOnly?: T | TextOnlySelect<T>;
         textWithImage?: T | TextWithImageSelect<T>;
@@ -1752,9 +1820,10 @@ export interface LatestPostSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "Offering_select".
+ * via the `definition` "OfferingBlock_select".
  */
-export interface OfferingSelect<T extends boolean = true> {
+export interface OfferingBlockSelect<T extends boolean = true> {
+  offering?: T;
   eyebrowHeading?: T;
   mainHeading?: T;
   anchorId?: T;
@@ -1903,6 +1972,39 @@ export interface InvestmentsSelect<T extends boolean = true> {
   oneOffCost?: T;
   monthlyCost?: T;
   monthlyCommitmentMonths?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "offerings_select".
+ */
+export interface OfferingsSelect<T extends boolean = true> {
+  eyebrowHeading?: T;
+  mainHeading?: T;
+  anchorId?: T;
+  subHeading?: T;
+  details?: T;
+  whatsIncluded?:
+    | T
+    | {
+        heading?: T;
+        content?: T;
+      };
+  investment?:
+    | T
+    | {
+        title?: T;
+        subtitle?: T;
+        items?: T;
+      };
+  footnotes?:
+    | T
+    | {
+        text?: T;
+        id?: T;
+      };
+  summaryDescription?: T;
   updatedAt?: T;
   createdAt?: T;
 }

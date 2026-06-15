@@ -1,42 +1,67 @@
 import { backgroundColorField } from '@/fields/backgroundColor'
 import {
+  AlignFeature,
   BlockquoteFeature,
   FixedToolbarFeature,
   InlineToolbarFeature,
   UnorderedListFeature,
   lexicalEditor,
-  AlignFeature,
 } from '@payloadcms/richtext-lexical'
 import { Block } from 'payload'
 
 export const Offering: Block = {
   slug: 'offering',
-  interfaceName: 'Offering',
+  interfaceName: 'OfferingBlock',
   fields: [
+    {
+      name: 'offering',
+      type: 'relationship',
+      relationTo: 'offerings',
+      admin: {
+        description: 'Select the offering document to render in this section.',
+      },
+      validate: (
+        value: unknown,
+        { siblingData }: { siblingData?: { mainHeading?: string | null } },
+      ) => {
+        if (value || siblingData?.mainHeading) {
+          return true
+        }
+
+        return 'Select an offering.'
+      },
+    },
     {
       name: 'eyebrowHeading',
       type: 'text',
+      admin: {
+        condition: () => false,
+      },
     },
     {
       name: 'mainHeading',
       type: 'text',
-      required: true,
+      admin: {
+        condition: () => false,
+      },
     },
     {
       name: 'anchorId',
       type: 'text',
       admin: {
-        description: 'Optional section anchor for direct links, for example "postpartum".',
+        condition: () => false,
       },
     },
     {
       name: 'subHeading',
       type: 'text',
+      admin: {
+        condition: () => false,
+      },
     },
     {
       name: 'details',
       type: 'richText',
-      required: true,
       editor: lexicalEditor({
         features: ({ rootFeatures }) => [
           ...rootFeatures,
@@ -46,10 +71,16 @@ export const Offering: Block = {
           AlignFeature(),
         ],
       }),
+      admin: {
+        condition: () => false,
+      },
     },
     {
       name: 'whatsIncluded',
       type: 'group',
+      admin: {
+        condition: () => false,
+      },
       fields: [
         {
           name: 'heading',
@@ -72,6 +103,9 @@ export const Offering: Block = {
     {
       name: 'investment',
       type: 'group',
+      admin: {
+        condition: () => false,
+      },
       fields: [
         {
           name: 'title',
@@ -92,6 +126,9 @@ export const Offering: Block = {
     {
       name: 'footnotes',
       type: 'array',
+      admin: {
+        condition: () => false,
+      },
       fields: [
         {
           name: 'text',
