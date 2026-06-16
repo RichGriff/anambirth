@@ -3,6 +3,7 @@ import sharp from 'sharp'
 import path from 'path'
 import { buildConfig, PayloadRequest } from 'payload'
 import { fileURLToPath } from 'url'
+import * as Sentry from '@sentry/nextjs'
 
 import { Categories } from './collections/Categories'
 import { Media } from './collections/Media'
@@ -106,7 +107,18 @@ export default buildConfig({
       connectionString: process.env.DATABASE_URL || '',
     },
   }),
-  collections: [Pages, Posts, Investments, Offerings, Media, Categories, Users, Testimonials, MusicTracks, Enquiries],
+  collections: [
+    Pages,
+    Posts,
+    Investments,
+    Offerings,
+    Media,
+    Categories,
+    Users,
+    Testimonials,
+    MusicTracks,
+    Enquiries,
+  ],
   blocks: [
     FAQ,
     Image,
@@ -161,4 +173,28 @@ export default buildConfig({
       },
     },
   }),
+  hooks: {
+    afterError: [
+      async ({ error, req }) => {
+        Sentry.captureException(error, {
+          tags: {
+            area: 'payload',
+          },
+          extra: {
+            url: req?.url,
+            method: req?.method,
+            user: req?.user?.id,
+          },
+        })
+
+        Sentry.logger.error('Payload error', {
+          url: req?.url,
+          method: req?.method,
+          userId: req?.user?.id,
+          errorName: error?.name,
+          errorMessage: error?.message,
+        })
+      },
+    ],
+  },
 })
