@@ -33,10 +33,7 @@ const getSubmissionValue = (
   return submissionData?.find(({ field }) => field === fieldName)?.value
 }
 
-const getFormDocument = async (
-  result: FormSubmission,
-  payload: Payload,
-): Promise<Form | null> => {
+const getFormDocument = async (result: FormSubmission, payload: Payload): Promise<Form | null> => {
   if (typeof result.form === 'object' && result.form) {
     return result.form
   }
@@ -167,16 +164,14 @@ export const plugins: Plugin[] = [
                   collection: 'enquiries',
                   data: {
                     status: 'new',
+                    priority: 'medium',
                     name: getSubmissionValue(result.submissionData, 'name'),
                     email: getSubmissionValue(result.submissionData, 'emailAddress'),
                     journey: getSubmissionValue(result.submissionData, 'journey'),
                     details: getSubmissionValue(result.submissionData, 'details'),
+                    source: 'Connection Call Form',
                     form: form.id,
                     formSubmissionID: result.id,
-                    submissionData: result.submissionData?.map((entry: SubmissionDataItem) => ({
-                      field: entry.field,
-                      value: entry.value,
-                    })),
                   },
                   overrideAccess: true,
                 })

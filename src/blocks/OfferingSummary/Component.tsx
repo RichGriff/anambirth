@@ -13,34 +13,6 @@ type OfferingSummaryLink = NonNullable<
   NonNullable<OfferingSummaryProps['items']>[number]['links']
 >[number]['link']
 
-type RichTextNode = {
-  text?: string
-  children?: RichTextNode[]
-}
-
-const getNodeText = (node: RichTextNode): string => {
-  const ownText = typeof node.text === 'string' ? node.text : ''
-  const childText = (node.children || []).map(getNodeText).join(' ')
-
-  return `${ownText} ${childText}`.replace(/\s+/g, ' ').trim()
-}
-
-const getDetailsSummary = (offering: Offering) => {
-  const customSummary = offering.summaryDescription?.trim()
-
-  if (customSummary) {
-    return customSummary
-  }
-
-  const bodyLines = (offering.details?.root?.children || [])
-    .map((node) => getNodeText(node as RichTextNode))
-    .map((line) => line.trim())
-    .filter(Boolean)
-    .slice(0, 3)
-
-  return bodyLines.length > 0 ? bodyLines.join(' ') : null
-}
-
 const getFromPrice = (offering: Offering) => {
   const investments = (offering.investment?.items || []).filter(isPopulatedRelationship<Investment>)
   const prices = investments
@@ -104,9 +76,13 @@ export const OfferingSummary: React.FC<OfferingSummaryProps> = ({
                 : null
               const title = selectedOffering?.mainHeading ?? item.title
               const subtitle = selectedOffering?.subHeading ?? item.subtitle
-              const summary = selectedOffering ? getDetailsSummary(selectedOffering) : item.description
+              const summary = selectedOffering
+                ? selectedOffering.summaryDescription?.trim() || null
+                : item.description
               const anchorId = selectedOffering?.anchorId ?? item.sectionAnchor
-              const priceFrom = selectedOffering ? getFromPrice(selectedOffering) : item.priceFrom ?? null
+              const priceFrom = selectedOffering
+                ? getFromPrice(selectedOffering)
+                : (item.priceFrom ?? null)
 
               if (!title) {
                 return null
@@ -121,13 +97,11 @@ export const OfferingSummary: React.FC<OfferingSummaryProps> = ({
                     <h3 className="font-(family-name:--font-cormorant) text-3xl font-light text-foreground">
                       {title}
                     </h3>
-                    {subtitle && (
-                      <p className="mt-1 text-sm italic text-accent">{subtitle}</p>
-                    )}
+                    {subtitle && <p className="mt-1 text-sm italic text-accent">{subtitle}</p>}
                   </div>
-                  {summary && (
-                    <p className="text-muted-foreground leading-relaxed">{summary}</p>
-                  )}
+                  <div className="min-h-32">
+                    {summary && <p className="text-muted-foreground leading-relaxed">{summary}</p>}
+                  </div>
                   <div className="mt-6 flex items-center justify-between border-t border-border pt-4">
                     <div className="flex flex-col">
                       <span className="text-[10px] uppercase font-light text-muted-foreground letter-spacing-wide">

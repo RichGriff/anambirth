@@ -1307,19 +1307,23 @@ export interface MusicTrack {
 export interface Enquiry {
   id: number;
   status: 'new' | 'contacted' | 'booked' | 'declined';
+  priority: 'low' | 'medium' | 'high';
+  nextFollowUpDate?: string | null;
+  archived?: boolean | null;
   name?: string | null;
   email?: string | null;
-  journey?: string | null;
-  details?: string | null;
+  phoneNumber?: string | null;
+  preferredContactMethod?: ('email' | 'phone' | 'text') | null;
+  /**
+   * For example: Due 12 Aug 2026 or Baby due in September.
+   */
+  dueDateOrBirthMonth?: string | null;
+  source?: string | null;
+  notes?: string | null;
   form?: (number | null) | Form;
   formSubmissionID?: number | null;
-  submissionData?:
-    | {
-        field: string;
-        value?: string | null;
-        id?: string | null;
-      }[]
-    | null;
+  journey?: string | null;
+  details?: string | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -2178,19 +2182,20 @@ export interface MusicTracksSelect<T extends boolean = true> {
  */
 export interface EnquiriesSelect<T extends boolean = true> {
   status?: T;
+  priority?: T;
+  nextFollowUpDate?: T;
+  archived?: T;
   name?: T;
   email?: T;
-  journey?: T;
-  details?: T;
+  phoneNumber?: T;
+  preferredContactMethod?: T;
+  dueDateOrBirthMonth?: T;
+  source?: T;
+  notes?: T;
   form?: T;
   formSubmissionID?: T;
-  submissionData?:
-    | T
-    | {
-        field?: T;
-        value?: T;
-        id?: T;
-      };
+  journey?: T;
+  details?: T;
   updatedAt?: T;
   createdAt?: T;
 }
