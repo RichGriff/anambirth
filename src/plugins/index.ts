@@ -151,6 +151,9 @@ export const plugins: Plugin[] = [
     // redirectRelationships: ['pages'],
     defaultToEmail: 'hello@anambirth.com',
     formSubmissionOverrides: {
+      access: {
+        create: ({ req: { user } }) => !!user,
+      },
       hooks: {
         afterOperation: [
           async ({ operation, result, req }) => {
