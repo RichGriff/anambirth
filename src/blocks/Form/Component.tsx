@@ -32,6 +32,7 @@ type TurnstileAPI = {
 
 const TURNSTILE_SCRIPT_ID = 'cloudflare-turnstile-script'
 const TURNSTILE_SCRIPT_SRC = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit'
+const HONEYPOT_FIELD_NAME = 'website'
 
 declare global {
   interface Window {
@@ -86,6 +87,7 @@ export const FormBlock: React.FC<
   const [isTurnstileReady, setIsTurnstileReady] = useState(false)
   const [turnstileToken, setTurnstileToken] = useState<string>()
   const router = useRouter()
+  const honeypotRef = useRef<HTMLInputElement | null>(null)
   const turnstileContainerRef = useRef<HTMLDivElement | null>(null)
   const turnstileWidgetIDRef = useRef<string | undefined>(undefined)
   const fieldBgClassName =
@@ -188,6 +190,7 @@ export const FormBlock: React.FC<
           const req = await fetch(`${getClientSideURL()}/api/forms/submit`, {
             body: JSON.stringify({
               form: formID,
+              honeypot: honeypotRef.current?.value ?? '',
               submissionData: dataToSend,
               turnstileToken,
             }),
@@ -329,14 +332,26 @@ export const FormBlock: React.FC<
                       return null
                     })}
 
-                  <div className="w-full space-y-3 pt-2">
+                  <div
+                    className="pointer-events-none absolute left-[-9999px] top-auto h-px w-px overflow-hidden"
+                    aria-hidden="true"
+                  >
+                    <label htmlFor={`${formID}-${HONEYPOT_FIELD_NAME}`}>
+                      Leave this field empty
+                    </label>
+                    <input
+                      ref={honeypotRef}
+                      id={`${formID}-${HONEYPOT_FIELD_NAME}`}
+                      name={HONEYPOT_FIELD_NAME}
+                      tabIndex={-1}
+                      autoComplete="off"
+                      type="text"
+                    />
+                  </div>
+
+                  <div className="w-full space-y-3">
                     {turnstileSiteKey ? (
-                      <>
-                        <div ref={turnstileContainerRef} />
-                        <p className="text-sm text-muted-foreground-light">
-                          Please complete the verification step before submitting.
-                        </p>
-                      </>
+                      <div ref={turnstileContainerRef} />
                     ) : (
                       <div className="rounded-2xl border border-destructive/20 bg-destructive/5 px-5 py-4 text-sm text-destructive">
                         Form protection is not configured. Please try again later.
