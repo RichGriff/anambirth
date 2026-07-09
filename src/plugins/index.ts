@@ -4,6 +4,7 @@ import { redirectsPlugin } from '@payloadcms/plugin-redirects'
 import { seoPlugin } from '@payloadcms/plugin-seo'
 import { searchPlugin } from '@payloadcms/plugin-search'
 import { s3Storage } from '@payloadcms/storage-s3'
+import { payloadCmdk } from '@veiag/payload-cmdk'
 import { Plugin, type Payload } from 'payload'
 import { deepMergeWithSourceArrays } from 'payload'
 import { revalidateRedirects } from '@/hooks/revalidateRedirects'
@@ -206,6 +207,65 @@ export const plugins: Plugin[] = [
       },
       endpoint: process.env.S3_ENDPOINT!,
       region: 'auto',
+    },
+  }),
+  payloadCmdk({
+    blurBg: false,
+    searchButton: {
+      position: 'actions',
+    },
+    shortcut: ['meta+k', 'ctrl+k'],
+    slugsToIgnore: ['users', 'payload-kv', 'redirects', 'form-submissions', 'search'],
+    customItems: [
+      {
+        type: 'group',
+        title: 'Actions',
+        items: [
+          {
+            type: 'item',
+            label: 'Create new Page',
+            slug: 'create-page',
+            icon: 'Plus',
+            action: {
+              type: 'link',
+              href: '/admin/collections/pages/create',
+            },
+          },
+          {
+            type: 'item',
+            label: 'Create new Post',
+            slug: 'create-post',
+            icon: 'Plus',
+            action: {
+              type: 'link',
+              href: '/admin/collections/posts/create',
+            },
+          },
+        ],
+      },
+    ],
+    submenu: {
+      enabled: true,
+      shortcut: 'enter',
+      icons: {
+        posts: 'FileText',
+      },
+    },
+    icons: {
+      collections: {
+        posts: 'FileText',
+        investments: 'Package',
+        offerings: 'Sparkle',
+        'music-tracks': 'Music',
+        media: 'Images',
+        enquiries: 'MessageCircle',
+        forms: 'Form',
+        categories: 'Package',
+        testimonials: 'MessageSquareQuote',
+      },
+      globals: {
+        settings: 'Settings',
+      },
     },
   }),
 ]
