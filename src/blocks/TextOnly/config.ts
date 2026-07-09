@@ -7,6 +7,7 @@ import {
   UnorderedListFeature,
   lexicalEditor,
   AlignFeature,
+  HeadingFeature,
 } from '@payloadcms/richtext-lexical'
 import type { Block } from 'payload'
 
@@ -64,6 +65,7 @@ export const TextOnly: Block = {
       editor: lexicalEditor({
         features: ({ rootFeatures }) => [
           ...rootFeatures,
+          HeadingFeature(),
           UnorderedListFeature(),
           OrderedListFeature(),
           FixedToolbarFeature(),
