@@ -69,6 +69,7 @@ export const hero: Field = {
     //   label: 'Rich Text',
     // },
     linkGroup({
+      appearances: ['default', 'outline', 'link'],
       overrides: {
         maxRows: 2,
       },

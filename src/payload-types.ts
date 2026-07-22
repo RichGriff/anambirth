@@ -403,7 +403,7 @@ export interface Page {
             /**
              * Choose how the link should be rendered.
              */
-            appearance?: ('default' | 'outline') | null;
+            appearance?: ('default' | 'outline' | 'link') | null;
           };
           id?: string | null;
         }[]

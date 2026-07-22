@@ -91,7 +91,7 @@ export const OfferingSummary: React.FC<OfferingSummaryProps> = ({
               return (
                 <StaggerItem
                   key={selectedOffering?.id ?? item.id ?? index}
-                  className="group relative overflow-hidden rounded-2xl border border-border/50 bg-card p-8 transition-all hover:border-primary/30"
+                  className="group relative overflow-hidden rounded-2xl border border-border/50 bg-card p-8 transition-colors hover:border-primary/30"
                 >
                   <div className="mb-4">
                     <h3 className="font-(family-name:--font-cormorant) text-3xl font-light text-foreground">

@@ -1,4 +1,5 @@
 import React from 'react'
+import { MoveRightIcon } from 'lucide-react'
 
 import type { Page } from '@/payload-types'
 
@@ -6,7 +7,6 @@ import { CMSLink } from '@/components/Link'
 import { Media } from '@/components/Media'
 import RichText from '@/components/RichText'
 import { InViewFade, StaggerInViewList, StaggerListItem } from '@/components/animations/InView'
-import { Button } from '@/components/ui/button'
 
 export const MediumImpactHero: React.FC<Page['hero']> = ({
   links,
@@ -45,17 +45,29 @@ export const MediumImpactHero: React.FC<Page['hero']> = ({
 
             {Array.isArray(links) && links.length > 0 && (
               <StaggerInViewList
-                className="flex gap-4"
+                className="flex flex-wrap items-center gap-4"
                 delayChildren={0.12}
                 staggerChildren={0.1}
                 mobileStaggerChildren={0.06}
               >
                 {links.map(({ link }, i) => {
+                  const appearance = link.appearance ?? (i === 0 ? 'default' : 'link')
+                  const isSecondaryLink = appearance === 'link'
+
                   return (
-                    <StaggerListItem key={i} className="mt-8">
-                      <Button asChild size="lg" className="rounded-full px-8">
-                        <CMSLink {...link} className="" />
-                      </Button>
+                    <StaggerListItem key={i} className="mt-8 flex items-center">
+                      <CMSLink
+                        {...link}
+                        appearance={appearance}
+                        className={
+                          isSecondaryLink
+                            ? 'h-11 px-1 text-foreground-light/80 hover:text-foreground-light hover:no-underline [&_svg]:transition-transform hover:[&_svg]:translate-x-1'
+                            : 'rounded-full px-8'
+                        }
+                        size={isSecondaryLink ? undefined : 'lg'}
+                      >
+                        {isSecondaryLink && <MoveRightIcon />}
+                      </CMSLink>
                     </StaggerListItem>
                   )
                 })}
