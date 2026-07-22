@@ -10,6 +10,13 @@ import { Media } from '@/components/Media'
 import { hero } from '@/heros/config'
 import { ImageIcon, MoveRightIcon } from 'lucide-react'
 
+const publishedDateFormat = new Intl.DateTimeFormat('en-GB', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+  timeZone: 'UTC',
+})
+
 export type CardPostData = Pick<
   Post,
   | 'slug'
@@ -142,11 +149,7 @@ export const Card: React.FC<{
           )}
           {publishedAt && (
             <div className="text-sm text-muted-foreground">
-              {new Date(publishedAt).toLocaleDateString(undefined, {
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric',
-              })}
+              {publishedDateFormat.format(new Date(publishedAt))}
             </div>
           )}
           {/* <Link href={href} ref={link.ref}>
