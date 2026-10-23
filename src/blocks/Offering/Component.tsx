@@ -1,6 +1,9 @@
 import RichText from '@/components/RichText'
 import { InViewFade, StaggerInViewList, StaggerListItem } from '@/components/animations/InView'
-import type { OfferingBlock as OfferingBlockProps, Offering as OfferingDocument } from '@/payload-types'
+import type {
+  OfferingBlock as OfferingBlockProps,
+  Offering as OfferingDocument,
+} from '@/payload-types'
 import { formatAnchor } from '@/utilities/anchors'
 import { isPopulatedRelationship } from '@/utilities/isPopulatedRelationship'
 import type { DefaultTypedEditorState } from '@payloadcms/richtext-lexical'

@@ -24,7 +24,6 @@ export const Investments: CollectionConfig = {
     {
       name: 'description',
       type: 'textarea',
-      required: true,
     },
     {
       name: 'paymentOption',

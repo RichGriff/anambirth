@@ -83,7 +83,30 @@ export async function Footer() {
         <Link className="flex sm:hidden items-start md:col-span-3 my-2" href="/">
           <Logo loading="eager" priority="high" imagePath="/logo-icon-dark.svg" className="w-16" />
         </Link>
-        <p className="text-sm text-muted-foreground-light">© 2026 All rights reserved.</p>
+        <div className="flex flex-col space-y-1">
+          <p className="text-sm text-muted-foreground-light">
+            Photography by{' '}
+            <a
+              href="https://not-so-corporate.co.uk/"
+              target="_blank"
+              className="hover:text-accent hover:underline"
+            >
+              Not So Corporate
+            </a>
+            <span className="text-muted-foreground mx-2">|</span>
+            Website by{' '}
+            <a
+              href="https://richgriffiths.me.uk"
+              target="_blank"
+              className="hover:text-accent hover:underline"
+            >
+              Rich Griffiths
+            </a>
+          </p>
+          <p className="text-sm text-muted-foreground-light">
+            Anam Birth® is a registered trademark. © 2026 All rights reserved.
+          </p>
+        </div>
         <div className="flex items-center gap-4 py-2">
           <ShareButton
             title="Anam Birth | Soul-led Doula Support"
