@@ -58,8 +58,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
 
           <Header />
           {children}
-          {/* Music Player */}
-          {tracks.length > 0 && <MusicPlayer tracks={tracks} />}
+          {/* {tracks.length > 0 && <MusicPlayer tracks={tracks} />} */}
           <Script
             async
             src="https://analytics.soliths.cloud/script.js"

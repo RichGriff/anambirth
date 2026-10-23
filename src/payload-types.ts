@@ -952,7 +952,7 @@ export interface Offering {
 export interface Investment {
   id: number;
   name: string;
-  description: string;
+  description?: string | null;
   paymentOption: 'oneOff' | 'monthly';
   oneOffCost?: number | null;
   monthlyCost?: number | null;
