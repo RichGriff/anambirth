@@ -12,7 +12,7 @@ export const LowImpactHero: React.FC<Page['hero']> = ({
 }) => {
   return (
     <div className="bg-[#FCF9F2]">
-      <div className="container w-full flex flex-col justify-center items-center text-center py-12 sm:py-24">
+      <div className="container w-full flex flex-col justify-center items-center text-center py-12 sm:py-12">
         <div className="max-w-3xl">
           {eyebrowHeading && (
             <div className="mb-4 text-sm uppercase tracking-[0.3em] text-accent">

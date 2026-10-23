@@ -162,23 +162,6 @@ export const Offering: React.FC<OfferingBlockProps> = ({
           </div>
         </InViewFade>
 
-        {safeFootnotes.length > 0 && (
-          <StaggerInViewList
-            className="mt-8 space-y-3 text-sm text-muted-foreground"
-            staggerChildren={0.06}
-          >
-            {safeFootnotes.map((footnote, index) => (
-              <StaggerListItem
-                key={footnote.id ?? index}
-                className="flex items-center gap-2 list-none"
-              >
-                <SparklesIcon className="h-4 w-4 shrink-0 text-accent" />
-                {footnote.text}
-              </StaggerListItem>
-            ))}
-          </StaggerInViewList>
-        )}
-
         <div className="mt-12 space-y-8">
           {(whatsIncluded?.heading || whatsIncluded?.content) && (
             <InViewFade>
@@ -248,6 +231,23 @@ export const Offering: React.FC<OfferingBlockProps> = ({
                 </StaggerInViewList>
               )}
             </div>
+          )}
+
+          {safeFootnotes.length > 0 && (
+            <StaggerInViewList
+              className="mt-8 space-y-3 text-sm text-muted-foreground"
+              staggerChildren={0.06}
+            >
+              {safeFootnotes.map((footnote, index) => (
+                <StaggerListItem
+                  key={footnote.id ?? index}
+                  className="flex items-center gap-2 list-none"
+                >
+                  <SparklesIcon className="h-4 w-4 shrink-0 text-accent" />
+                  {footnote.text}
+                </StaggerListItem>
+              ))}
+            </StaggerInViewList>
           )}
         </div>
       </div>
