@@ -84,6 +84,7 @@ export async function generateMetadata({ params: paramsPromise }: Args): Promise
         image: settings?.postPageMeta?.image,
       },
     } as any,
+    pathname: `/posts/page/${pageNumber}`,
   })
 }
 

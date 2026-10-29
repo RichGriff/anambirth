@@ -112,5 +112,6 @@ export async function generateMetadata(): Promise<Metadata> {
         image: settings?.postPageMeta?.image,
       },
     } as any,
+    pathname: '/posts',
   })
 }

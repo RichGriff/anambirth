@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 
 import type { Media, Page, Post, Config } from '../payload-types'
 
-import { mergeOpenGraph } from './mergeOpenGraph'
+import { defaultMetaDescription, defaultSocialImagePath, mergeOpenGraph } from './mergeOpenGraph'
 import { getServerSideURL } from './getURL'
 
 const getImageURL = (image?: Media | Config['db']['defaultIDType'] | null): string => {
@@ -12,7 +12,7 @@ const getImageURL = (image?: Media | Config['db']['defaultIDType'] | null): stri
     const ogUrl = image.sizes?.og?.url
     const url = ogUrl ?? image.url
 
-    if (!url) return `${serverUrl}/website-template-OG.webp`
+    if (!url) return `${serverUrl}${defaultSocialImagePath}`
 
     // Already absolute (S3, CDN, etc.)
     if (url.startsWith('http')) return url
@@ -20,32 +20,47 @@ const getImageURL = (image?: Media | Config['db']['defaultIDType'] | null): stri
     return `${serverUrl}${url}`
   }
 
-  return `${serverUrl}/website-template-OG.webp`
+  return `${serverUrl}${defaultSocialImagePath}`
 }
 
 export const generateMeta = async (args: {
   doc: Partial<Page> | Partial<Post> | null
+  pathname: string
 }): Promise<Metadata> => {
-  const { doc } = args
+  const { doc, pathname } = args
 
   const ogImage = getImageURL(doc?.meta?.image)
+  const canonicalURL = new URL(pathname, `${getServerSideURL()}/`).toString()
+  const excerpt = doc && 'excerpt' in doc ? doc.excerpt : undefined
 
-  const title = doc?.meta?.title ? doc?.meta?.title : 'Anam Birth'
+  const title = doc?.meta?.title || doc?.title || 'Anam Birth'
+  const description = doc?.meta?.description || excerpt || defaultMetaDescription
 
   return {
-    description: doc?.meta?.description,
+    alternates: {
+      canonical: canonicalURL,
+    },
+    description,
     openGraph: mergeOpenGraph({
-      description: doc?.meta?.description || '',
+      description,
       images: ogImage
         ? [
             {
               url: ogImage,
+              width: 1200,
+              height: 630,
             },
           ]
         : undefined,
       title,
-      url: Array.isArray(doc?.slug) ? doc?.slug.join('/') : '/',
+      url: canonicalURL,
     }),
     title,
+    twitter: {
+      card: 'summary_large_image',
+      description,
+      images: [ogImage],
+      title,
+    },
   }
 }

@@ -1,12 +1,19 @@
 import type { Metadata } from 'next'
 import { getServerSideURL } from './getURL'
 
+export const defaultMetaDescription =
+  'Soul-led doula support through conception, pregnancy, birth, postpartum, loss, and matrescence.'
+export const defaultSocialImagePath = '/media/hero-1200x630.png'
+
 const defaultOpenGraph: Metadata['openGraph'] = {
   type: 'website',
-  description: 'An open-source website built with Payload and Next.js.',
+  description: defaultMetaDescription,
   images: [
     {
-      url: `${getServerSideURL()}/website-template-OG.webp`,
+      url: `${getServerSideURL()}${defaultSocialImagePath}`,
+      width: 1200,
+      height: 630,
+      alt: 'Anam Birth doula support',
     },
   ],
   siteName: 'Anam Birth',
