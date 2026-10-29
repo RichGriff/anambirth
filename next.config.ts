@@ -7,18 +7,13 @@ import { fileURLToPath } from 'url'
 const __filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(__filename)
 import { redirects } from './redirects'
+import { isIndexingEnabled } from './src/utilities/isIndexingEnabled'
 
 const NEXT_PUBLIC_SERVER_URL = process.env.VERCEL_PROJECT_PRODUCTION_URL
   ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
   : process.env.__NEXT_PRIVATE_ORIGIN || 'http://localhost:3000'
 
-const allowIndexing = process.env.ALLOW_INDEXING
-const isProductionDeployment =
-  allowIndexing === 'true'
-    ? true
-    : allowIndexing === 'false'
-      ? false
-      : process.env.APP_ENV === 'production' || process.env.VERCEL_ENV === 'production'
+const isProductionDeployment = isIndexingEnabled()
 
 const nextConfig: NextConfig = {
   // Temporarily required on Windows until Next.js fixes Turbopack Sass resolution.
