@@ -44,7 +44,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       {
         '@id': `${siteURL}/#organization`,
         '@type': 'Organization',
-        logo: `${siteURL}/web-app-manifest-512x512.png`,
+        logo: `${siteURL}/favicon-512x512.png`,
         name: 'Anam Birth',
         url: siteURL,
       },
@@ -70,8 +70,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       <head>
         <InitTheme />
         <JsonLd data={siteStructuredData} />
-        <link href="/favicon-theme.svg" rel="icon" type="image/svg+xml" />
-        <link href="/favicon.ico" rel="icon" sizes="32x32" />
+        <link href="/favicon-32x32.png" rel="icon" sizes="32x32" type="image/png" />
       </head>
       <body>
         <Providers>
@@ -105,11 +104,11 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [
-      { url: '/favicon.ico' },
-      { url: '/web-app-manifest-192x192.png', sizes: '192x192', type: 'image/png' }, // Android
-      { url: '/web-app-manifest-512x512.png', sizes: '512x512', type: 'image/png' }, // Android HD
+      { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
+      { url: '/favicon-192x192.png', sizes: '192x192', type: 'image/png' },
+      { url: '/favicon-512x512.png', sizes: '512x512', type: 'image/png' },
     ],
-    shortcut: '/favicon.ico',
+    shortcut: '/favicon-32x32.png',
     apple: '/apple-touch-icon.png', // iOS 180x180
   },
 }
