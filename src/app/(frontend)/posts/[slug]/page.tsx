@@ -14,11 +14,12 @@ import { PostHero } from '@/heros/PostHero'
 import { generateMeta } from '@/utilities/generateMeta'
 import PageClient from './page.client'
 import { LivePreviewListener } from '@/components/LivePreviewListener'
-import { Separator } from '@radix-ui/react-select'
-import Image from 'next/image'
 import { Media } from '@/components/Media'
-import { BookmarkIcon, Share2Icon, User2Icon } from 'lucide-react'
+import { User2Icon } from 'lucide-react'
 import ShareButton from '@/components/ui/share-button'
+import { permanentRedirect } from 'next/navigation'
+import { JsonLd } from '@/components/JsonLd'
+import { getServerSideURL } from '@/utilities/getURL'
 
 export async function generateStaticParams() {
   const payload = await getPayload({ config: configPromise })
@@ -32,6 +33,11 @@ export async function generateStaticParams() {
       slug: true,
     },
     depth: 3,
+    where: {
+      guestBlog: {
+        not_equals: true,
+      },
+    },
   })
 
   const params = posts.docs.map(({ slug }) => {
@@ -56,9 +62,75 @@ export default async function Post({ params: paramsPromise }: Args) {
   const post = await queryPostBySlug({ slug: decodedSlug })
 
   if (!post) return <PayloadRedirects url={url} />
+  if (!draft && post.guestBlog && post.guestBlogUrl) permanentRedirect(post.guestBlogUrl)
+
+  const siteURL = getServerSideURL().replace(/\/$/, '')
+  const canonicalURL = `${siteURL}${url}`
+  const imageResource =
+    post.meta?.image && typeof post.meta.image === 'object'
+      ? post.meta.image
+      : post.heroImage && typeof post.heroImage === 'object'
+        ? post.heroImage
+        : undefined
+  const imagePath = imageResource?.sizes?.og?.url || imageResource?.url
+  const imageURL = imagePath
+    ? imagePath.startsWith('http')
+      ? imagePath
+      : `${siteURL}${imagePath}`
+    : undefined
+  const authorName = post.populatedAuthors?.[0]?.name
+  const postStructuredData = {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@id': `${canonicalURL}#article`,
+        '@type': 'BlogPosting',
+        author: authorName
+          ? {
+              '@type': 'Person',
+              name: authorName,
+            }
+          : undefined,
+        dateModified: post.updatedAt,
+        datePublished: post.publishedAt,
+        description: post.meta?.description || post.excerpt,
+        headline: post.meta?.title || post.title,
+        image: imageURL,
+        mainEntityOfPage: canonicalURL,
+        publisher: {
+          '@id': `${siteURL}/#organization`,
+        },
+      },
+      {
+        '@id': `${canonicalURL}#breadcrumb`,
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          {
+            '@type': 'ListItem',
+            item: siteURL,
+            name: 'Home',
+            position: 1,
+          },
+          {
+            '@type': 'ListItem',
+            item: `${siteURL}/posts`,
+            name: 'Blog',
+            position: 2,
+          },
+          {
+            '@type': 'ListItem',
+            item: canonicalURL,
+            name: post.title,
+            position: 3,
+          },
+        ],
+      },
+    ],
+  }
 
   return (
     <article className="pt-16">
+      <JsonLd data={postStructuredData} />
       <PageClient />
 
       {/* Allows redirects for valid pages too */}

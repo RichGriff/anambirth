@@ -86,6 +86,10 @@ export default async function Page({ searchParams: searchParamsPromise }: Args) 
 
 export function generateMetadata(): Metadata {
   return {
-    title: `Anam Birth Search`,
+    robots: {
+      follow: true,
+      index: false,
+    },
+    title: 'Anam Birth Search',
   }
 }

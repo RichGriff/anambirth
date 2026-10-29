@@ -2,8 +2,9 @@ import type React from 'react'
 import type { Page, Post } from '@/payload-types'
 
 import { getCachedDocument } from '@/utilities/getDocument'
+import { getDocumentPath } from '@/utilities/getDocumentPath'
 import { getCachedRedirects } from '@/utilities/getRedirects'
-import { notFound, redirect } from 'next/navigation'
+import { notFound, permanentRedirect } from 'next/navigation'
 
 interface Props {
   disableNotFound?: boolean
@@ -18,28 +19,32 @@ export const PayloadRedirects: React.FC<Props> = async ({ disableNotFound, url }
 
   if (redirectItem) {
     if (redirectItem.to?.url) {
-      redirect(redirectItem.to.url)
+      permanentRedirect(redirectItem.to.url)
     }
 
-    let redirectUrl: string
+    let redirectUrl = ''
+    const collection = redirectItem.to?.reference?.relationTo
 
-    if (typeof redirectItem.to?.reference?.value === 'string') {
-      const collection = redirectItem.to?.reference?.relationTo
+    if (
+      (collection === 'pages' || collection === 'posts') &&
+      (typeof redirectItem.to?.reference?.value === 'string' ||
+        typeof redirectItem.to?.reference?.value === 'number')
+    ) {
       const id = redirectItem.to?.reference?.value
 
-      const document = (await getCachedDocument(collection, id)()) as Page | Post
-      redirectUrl = `${redirectItem.to?.reference?.relationTo !== 'pages' ? `/${redirectItem.to?.reference?.relationTo}` : ''}/${
-        document?.slug
-      }`
-    } else {
-      redirectUrl = `${redirectItem.to?.reference?.relationTo !== 'pages' ? `/${redirectItem.to?.reference?.relationTo}` : ''}/${
-        typeof redirectItem.to?.reference?.value === 'object'
-          ? redirectItem.to?.reference?.value?.slug
-          : ''
-      }`
+      const document = (await getCachedDocument(collection, String(id))()) as Page | Post
+      redirectUrl = getDocumentPath({ collection, slug: document?.slug })
+    } else if (collection === 'pages' || collection === 'posts') {
+      redirectUrl = getDocumentPath({
+        collection,
+        slug:
+          typeof redirectItem.to?.reference?.value === 'object'
+            ? redirectItem.to?.reference?.value?.slug
+            : '',
+      })
     }
 
-    if (redirectUrl) redirect(redirectUrl)
+    if (redirectUrl) permanentRedirect(redirectUrl)
   }
 
   if (disableNotFound) return null

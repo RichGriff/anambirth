@@ -21,6 +21,7 @@ import './globals.css'
 import { getServerSideURL } from '@/utilities/getURL'
 import MusicPlayer from '@/components/MusicPlayer/MusicPlayer'
 import { getMusicTracks } from '@/lib/getMusicTracks'
+import { JsonLd } from '@/components/JsonLd'
 
 const geistSans = Geist({
   subsets: ['latin'],
@@ -36,6 +37,29 @@ const cormorant = Cormorant_Garamond({
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const { isEnabled } = await draftMode()
   const tracks = await getMusicTracks()
+  const siteURL = getServerSideURL().replace(/\/$/, '')
+  const siteStructuredData = {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@id': `${siteURL}/#organization`,
+        '@type': 'Organization',
+        logo: `${siteURL}/web-app-manifest-512x512.png`,
+        name: 'Anam Birth',
+        url: siteURL,
+      },
+      {
+        '@id': `${siteURL}/#website`,
+        '@type': 'WebSite',
+        inLanguage: 'en-GB',
+        name: 'Anam Birth',
+        publisher: {
+          '@id': `${siteURL}/#organization`,
+        },
+        url: siteURL,
+      },
+    ],
+  }
 
   return (
     <html
@@ -45,6 +69,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
     >
       <head>
         <InitTheme />
+        <JsonLd data={siteStructuredData} />
         <link href="/favicon-theme.svg" rel="icon" type="image/svg+xml" />
         <link href="/favicon.ico" rel="icon" sizes="32x32" />
       </head>

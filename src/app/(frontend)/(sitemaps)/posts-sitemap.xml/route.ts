@@ -21,6 +21,9 @@ const getPostsSitemap = unstable_cache(
         _status: {
           equals: 'published',
         },
+        guestBlog: {
+          not_equals: true,
+        },
       },
       select: {
         slug: true,

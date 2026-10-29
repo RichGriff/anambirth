@@ -88,7 +88,7 @@ describe('sitemaps', () => {
     expect(response.status).toBe(200)
     expect(xml).toContain('<loc>https://anam.example/</loc>')
     expect(xml).toContain('<loc>https://anam.example/about</loc>')
-    expect(xml).toContain('<loc>https://anam.example/search</loc>')
+    expect(xml).not.toContain('<loc>https://anam.example/search</loc>')
     expect(xml).toContain('<loc>https://anam.example/posts</loc>')
     expect(find).toHaveBeenCalledWith(
       expect.objectContaining({
@@ -122,6 +122,9 @@ describe('sitemaps', () => {
         where: {
           _status: {
             equals: 'published',
+          },
+          guestBlog: {
+            not_equals: true,
           },
         },
       }),

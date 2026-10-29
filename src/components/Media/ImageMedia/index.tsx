@@ -68,7 +68,7 @@ export const ImageMedia: React.FC<MediaProps> = (props) => {
 
     width = fullWidth!
     height = fullHeight!
-    alt = altFromResource || ''
+    alt = altFromProps ?? altFromResource ?? ''
 
     const cacheTag = resource.updatedAt
 
@@ -87,7 +87,7 @@ export const ImageMedia: React.FC<MediaProps> = (props) => {
   return (
     <picture className={cn(pictureClassName)}>
       <NextImage
-        alt={alt || 'Image Placeholder Text'}
+        alt={alt ?? ''}
         className={cn(imgClassName)}
         fill={fill}
         height={!fill ? height : undefined}

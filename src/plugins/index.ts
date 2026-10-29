@@ -22,6 +22,7 @@ import { beforeSyncWithSearch } from '@/search/beforeSync'
 import { Form, FormSubmission, Page, Post } from '@/payload-types'
 import { getServerSideURL } from '@/utilities/getURL'
 import { sendConfirmationEmail } from '@/email/sendConfirmation'
+import { getDocumentPath } from '@/utilities/getDocumentPath'
 
 const contactFormTitle = 'Contact Form'
 
@@ -54,10 +55,13 @@ const generateTitle: GenerateTitle<Post | Page> = ({ doc }) => {
   return doc?.title ? `${doc.title} | Anam Birth` : 'Anam Birth'
 }
 
-const generateURL: GenerateURL<Post | Page> = ({ doc }) => {
+const generateURL: GenerateURL<Post | Page> = ({ collectionConfig, doc }) => {
   const url = getServerSideURL()
+  const collection = collectionConfig?.slug
 
-  return doc?.slug ? `${url}/${doc.slug}` : url
+  if ((collection !== 'pages' && collection !== 'posts') || !doc?.slug) return url
+
+  return `${url}${getDocumentPath({ collection, slug: doc.slug })}`
 }
 
 export const plugins: Plugin[] = [
